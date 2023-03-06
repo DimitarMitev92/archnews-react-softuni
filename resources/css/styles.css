@@ -1,8 +1,0 @@
-body {
-    font-family: 'Lora', serif;
-}
-
-.form-control:focus {
-    border-color: grey; /* Тук можете да посочите желания от вас цвят */
-    box-shadow: 0 0 0 0.2rem rgba(128, 128, 128, 0.4); /* Тук можете да посочите желания от вас ефект на сянка */
-}
