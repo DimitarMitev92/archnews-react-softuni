@@ -24,7 +24,7 @@ export const Details = () => {
                         <div className="d-flex justify-content-center">
                             <a href="/" className="btn btn-success m-2">Like</a>
                             <a href="/" className="btn btn-danger m-2">Dislike</a>
-                            <a href="/" className="btn btn-success m-2">Edit</a>
+                            <a href="/edit/:postId" className="btn btn-success m-2">Edit</a>
                             <a href="/" className="btn btn-danger m-2">Delete</a>
                         </div>
                     </div>

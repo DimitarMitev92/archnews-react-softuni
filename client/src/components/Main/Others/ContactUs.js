@@ -18,30 +18,37 @@ export const ContactUs = () => {
                                     <form>
 
                                         <div className="form-outline mb-2">
-                                            <input type="text" id="nameInput" className="form-control form-control-lg" />
                                             <label className="form-label" htmlFor="nameInput">Your Name</label>
+                                            <input type="text" id="nameInput" className="form-control form-control-lg is-valid" />
+                                            <div className="valid-feedback">
+                                                Look Good!
+                                            </div>
                                         </div>
 
                                         <div className="form-outline mb-2">
-                                            <input type="text" id="emailInput" className="form-control form-control-lg" />
                                             <label className="form-label" htmlFor="emailInput">Your Email</label>
+                                            <input type="text" id="emailInput" className="form-control form-control-lg is-invalid" />
+                                            <div className="invalid-feedback">
+                                                Please enter Your Username
+                                            </div>
                                         </div>
 
                                         <div className="form-outline mb-2">
-                                            <input type="text" id="phoneInput" className="form-control form-control-lg" />
                                             <label className="form-label" htmlFor="phoneInput">Your Phone</label>
+                                            <input type="text" id="phoneInput" className="form-control form-control-lg" />
                                         </div>
 
                                         <div className="form-outline mb-2">
                                             <div className="form-group">
+                                                <label htmlFor="messageTextarea1">Your Message</label>
                                                 <textarea className="form-control" id="messageTextarea1"
                                                     rows="3"></textarea>
-                                                <label htmlFor="messageTextarea1">Your Message</label>
                                             </div>
                                         </div>
 
                                         <div className="d-flex justify-content-center">
-                                            <button type="button" className="btn btn-secondary btn-lg">Submit</button>
+                                            <button type="button" className="btn btn-secondary btn-lg m-3">Send</button>
+                                            <button type="button" className="btn btn-secondary btn-lg m-3">Cancel</button>
                                         </div>
 
 

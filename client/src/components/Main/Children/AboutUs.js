@@ -12,7 +12,7 @@ export const AboutUs = () => {
             <img src={background} alt="background" className="w-100" />
             <div className="position-absolute top-50 start-50 translate-middle text-center">
                 <h1>OUR TEAM</h1>
-                <a className="btn btn-secondary border border-2 border-light" href="/contactUs.html">Contact Us <ion-icon
+                <a className="btn btn-secondary border border-2 border-light" href="/contact-us">Contact Us <ion-icon
                     name="call-outline"></ion-icon></a>
 
                 <div className="row d-none d-lg-block">

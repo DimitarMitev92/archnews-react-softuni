@@ -28,16 +28,16 @@ export const Footer = () => {
                                 USEFUL LINKS
                             </h6>
                             <p>
-                                <a href="/" className="text-reset">News</a>
+                                <a href="/posts" className="text-reset">Posts</a>
                             </p>
                             <p>
-                                <a href="/" className="text-reset">Login</a>
+                                <a href="/login" className="text-reset">Login</a>
                             </p>
                             <p>
-                                <a href="/" className="text-reset">Register</a>
+                                <a href="/register" className="text-reset">Register</a>
                             </p>
                             <p>
-                                <a href="/" className="text-reset">Help</a>
+                                <a href="/contact-us" className="text-reset">Contact Us</a>
                             </p>
                         </div>
                         {/* Grid column  */}

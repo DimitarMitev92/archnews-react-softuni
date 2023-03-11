@@ -54,7 +54,7 @@ export const Register = () => {
                                         </div>
 
                                         <p className="text-center text-muted m-3">Have already an account? <a
-                                            href="/" className="fw-bold text-body"><u>Login here</u></a></p>
+                                            href="/login" className="fw-bold text-body"><u>Login here</u></a></p>
 
                                     </form>
 

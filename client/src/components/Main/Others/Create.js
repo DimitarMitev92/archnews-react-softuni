@@ -14,31 +14,32 @@ export const Create = () => {
                                     <form>
 
                                         <div className="form-outline mb-2">
-                                            <input type="text" id="titleInput" className="form-control form-control-lg" />
                                             <label className="form-label" htmlFor="titleInput">Title</label>
+                                            <input type="text" id="titleInput" className="form-control form-control-lg is-valid" />
+                                            <div className="valid-feedback">
+                                                Look Good!
+                                            </div>
                                         </div>
 
                                         <div className="form-outline mb-2">
-                                            <input type="text" id="locationInput"
-                                                className="form-control form-control-lg" />
                                             <label className="form-label" htmlFor="locationInput">Location</label>
+                                            <input type="text" id="locationInput"
+                                                className="form-control form-control-lg is-invalid" />
+                                            <div className="invalid-feedback">
+                                                Please enter Your Username
+                                            </div>
                                         </div>
 
                                         <div className="form-outline mb-2">
-                                            <input type="text" id="imageInput" className="form-control form-control-lg" />
                                             <label className="form-label" htmlFor="imageInput">Image Link</label>
-                                        </div>
-
-                                        <div className="form-outline mb-2">
-                                            <input type="date" id="dateInput" className="form-control form-control-lg" />
-                                            <label className="form-label" htmlFor="dateInput">Date Of Creation</label>
+                                            <input type="text" id="imageInput" className="form-control form-control-lg" />
                                         </div>
 
                                         <div className="form-outline mb-2">
                                             <div className="form-group">
+                                                <label htmlFor="exampleFormControlTextarea1">Your Post</label>
                                                 <textarea className="form-control" id="exampleFormControlTextarea1"
                                                     rows="3"></textarea>
-                                                <label htmlFor="exampleFormControlTextarea1">Your Post</label>
                                             </div>
                                         </div>
 
@@ -46,7 +47,8 @@ export const Create = () => {
 
 
                                         <div className="d-flex justify-content-center">
-                                            <button type="button" className="btn btn-secondary btn-lg">Create</button>
+                                            <button type="button" className="btn btn-secondary btn-lg m-3">Create</button>
+                                            <button type="button" className="btn btn-secondary btn-lg m-3">Cancel</button>
                                         </div>
 
                                     </form>
