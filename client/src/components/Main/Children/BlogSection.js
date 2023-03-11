@@ -65,8 +65,12 @@ export const BlogSection = () => {
                         impedit architecto aliquid cum culpa perferendis? Voluptate, consectetur!</article>
                     <a href="/details.html" className="btn btn-light mt-2">Read More &larr;</a>
                 </div>
-            </div>;
+            </div>
             {/* <!-- End: Current Post --> */}
+            <div className="d-flex align-items-center justify-content-center" style={{ height: "100px" }}>
+                <a href="/catalog.html" className="btn btn-light btn-lg">Load More &larr;</a>
+            </div>
+
         </ section>
     );
 };

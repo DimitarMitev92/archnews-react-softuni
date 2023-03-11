@@ -15,30 +15,30 @@ export const Edit = () => {
 
                                         <div className="form-outline mb-2">
                                             <input type="text" id="titleInput" className="form-control form-control-lg" />
-                                            <label className="form-label" for="titleInput">Title</label>
+                                            <label className="form-label" htmlFor="titleInput">Title</label>
                                         </div>
 
                                         <div className="form-outline mb-2">
                                             <input type="text" id="locationInput"
                                                 className="form-control form-control-lg" />
-                                            <label className="form-label" for="locationInput">Location</label>
+                                            <label className="form-label" htmlFor="locationInput">Location</label>
                                         </div>
 
                                         <div className="form-outline mb-2">
                                             <input type="text" id="imageInput" className="form-control form-control-lg" />
-                                            <label className="form-label" for="imageInput">Image Link</label>
+                                            <label className="form-label" htmlFor="imageInput">Image Link</label>
                                         </div>
 
                                         <div className="form-outline mb-2">
                                             <input type="date" id="dateInput" className="form-control form-control-lg" />
-                                            <label className="form-label" for="dateInput">Date Of Creation</label>
+                                            <label className="form-label" htmlFor="dateInput">Date Of Creation</label>
                                         </div>
 
                                         <div className="form-outline mb-2">
                                             <div className="form-group">
                                                 <textarea className="form-control" id="exampleFormControlTextarea1"
                                                     rows="3"></textarea>
-                                                <label for="exampleFormControlTextarea1">Your Post</label>
+                                                <label htmlFor="exampleFormControlTextarea1">Your Post</label>
                                             </div>
                                         </div>
 

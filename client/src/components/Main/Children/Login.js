@@ -10,12 +10,12 @@ export const Login = () => {
                         <form>
                             <div className="form-outline m-4">
                                 <input type="email" id="emailInput" className="form-control form-control-lg" />
-                                <label className="form-label" for="emailInput">Your Email</label>
+                                <label className="form-label" htmlFor="emailInput">Your Email</label>
                             </div>
 
                             <div className="form-outline m-4">
                                 <input type="password" id="passwordInput" className="form-control form-control-lg" />
-                                <label className="form-label" for="passwordInput">Password</label>
+                                <label className="form-label" htmlFor="passwordInput">Password</label>
                             </div>
 
                             <div className="d-flex justify-content-center">

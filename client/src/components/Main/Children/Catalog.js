@@ -67,7 +67,6 @@ export const Catalog = () => {
                 </div>
             </div>
             {/* End: Current Post  */}
-
         </section>
     );
 };

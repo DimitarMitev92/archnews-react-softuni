@@ -14,42 +14,39 @@ export const Register = () => {
                                     <form>
 
                                         <div className="form-outline mb-2">
-                                            <input type="text" id="nameInput" className="form-control form-control-lg" />
                                             <label className="form-label" htmlFor="nameInput">Your Name</label>
+                                            <input type="text" id="nameInput" className="form-control form-control-lg is-valid" />
+                                            <div className="valid-feedback">
+                                                Look Good!
+                                            </div>
                                         </div>
 
                                         <div className="form-outline mb-2">
-                                            <input type="email" id="usernameInput"
-                                                className="form-control form-control-lg" />
                                             <label className="form-label" htmlFor="usernameInput">Your
                                                 Username</label>
+                                            <input type="email" id="usernameInput"
+                                                className="form-control form-control-lg is-invalid" />
+                                            <div className="invalid-feedback">
+                                                Please enter Your Username
+                                            </div>
                                         </div>
 
                                         <div className="form-outline mb-2">
-                                            <input type="email" id="emailInput" className="form-control form-control-lg" />
                                             <label className="form-label" htmlFor="emailInput">Your Email</label>
+                                            <input type="email" id="emailInput" className="form-control form-control-lg" />
                                         </div>
 
                                         <div className="form-outline mb-2">
+                                            <label className="form-label" htmlFor="passwordInput">Password</label>
                                             <input type="password" id="passwordInput"
                                                 className="form-control form-control-lg" />
-                                            <label className="form-label" htmlFor="passwordInput">Password</label>
                                         </div>
 
                                         <div className="form-outline mb-2">
-                                            <input type="password" id="rePasswordInput"
-                                                className="form-control form-control-lg" />
                                             <label className="form-label" htmlFor="rePasswordInput">Repeat your
                                                 password</label>
-                                        </div>
-
-                                        <div className="form-check d-flex justify-content-center mb-3">
-                                            <input className="form-check-input me-2" type="checkbox" value=""
-                                                id="checkInput" />
-                                            <label className="form-check-label" htmlFor="checkInput">
-                                                I agree all statements in <a href="/" className="text-body"><u>Terms of
-                                                    service</u></a>
-                                            </label>
+                                            <input type="password" id="rePasswordInput"
+                                                className="form-control form-control-lg" />
                                         </div>
 
                                         <div className="d-flex justify-content-center">
@@ -66,7 +63,7 @@ export const Register = () => {
                         </div>
                     </div>
                 </div>
-            </div>
-        </section>
+            </div >
+        </section >
     );
 };

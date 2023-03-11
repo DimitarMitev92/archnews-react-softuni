@@ -22,7 +22,8 @@ export const Details = () => {
                             eveniet, obcaecati amet tempora, asperiores unde eligendi adipisci dolorum doloremque.
                         </article>
                         <div className="d-flex justify-content-center">
-                            <a href="/" className="btn btn-secondary m-2">Like</a>
+                            <a href="/" className="btn btn-success m-2">Like</a>
+                            <a href="/" className="btn btn-danger m-2">Dislike</a>
                             <a href="/" className="btn btn-success m-2">Edit</a>
                             <a href="/" className="btn btn-danger m-2">Delete</a>
                         </div>
