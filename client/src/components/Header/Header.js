@@ -16,13 +16,10 @@ export const Header = () => {
                             <a className="btn btn-secondary" href="/">Home</a>
                         </li>
                         <li className="nav-item p-1">
-                            <a className="btn btn-secondary" href="/">News</a>
+                            <a className="btn btn-secondary" href="/">Posts</a>
                         </li>
                         <li className="nav-item p-1">
                             <a className="btn btn-secondary" href="/">Contact Us</a>
-                        </li>
-                        <li className="nav-item p-1">
-                            <a className="btn btn-secondary" href="/">About Us</a>
                         </li>
                         <li className="nav-item p-1">
                             <a className="btn btn-secondary" href="/">Create Post</a>

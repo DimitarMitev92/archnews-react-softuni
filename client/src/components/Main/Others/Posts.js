@@ -2,7 +2,7 @@ import postImage1 from '../../../assets/images/catalog/post-image-1.jpg';
 import postImage2 from '../../../assets/images/catalog/post-image-2.jpg';
 import postImage3 from '../../../assets/images/catalog/post-image-3.jpg';
 
-export const Catalog = () => {
+export const Posts = () => {
     return (
         <section className="container bg-secondary  m-5 mx-auto">
             <div className="row bg-black">
