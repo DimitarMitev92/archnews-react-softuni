@@ -46,7 +46,6 @@ export const Edit = () => {
 
                                         <div className="d-flex justify-content-center">
                                             <button type="button" className="btn btn-secondary btn-lg m-3">Edit</button>
-                                            <button type="button" className="btn btn-secondary btn-lg m-3">Cancel</button>
                                         </div>
 
                                     </form>
