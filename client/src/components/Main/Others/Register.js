@@ -176,7 +176,7 @@ export const Register = () => {
                                         </div>
 
                                         <div className="d-flex justify-content-center">
-                                            <button type="submit" className="btn btn-secondary btn-lg">Register</button>
+                                            <button type="submit" className={`btn btn-secondary btn-lg ${!(validName && validUsername && validEmail && validPassword && validRepeatPassword) ? 'disabled' : ''}`}>Register</button>
                                         </div>
 
                                         <p className="text-center text-muted m-3">Have already an account? <a

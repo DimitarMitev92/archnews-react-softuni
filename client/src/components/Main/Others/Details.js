@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+
 export const Details = () => {
     return (
         <section className="vh-auto">
@@ -20,10 +22,10 @@ export const Details = () => {
                             eveniet, obcaecati amet tempora, asperiores unde eligendi adipisci dolorum doloremque.
                         </article>
                         <div className="d-flex justify-content-center">
-                            <a href="/" className="btn btn-success m-2">Like</a>
-                            <a href="/" className="btn btn-danger m-2">Dislike</a>
-                            <a href="/edit/:postId" className="btn btn-success m-2">Edit</a>
-                            <a href="/" className="btn btn-danger m-2">Delete</a>
+                            <Link to="/" className="btn btn-success m-2">Like</Link>
+                            <Link to="/" className="btn btn-danger m-2">Dislike</Link>
+                            <Link to="/edit/:postId" className="btn btn-success m-2">Edit</Link>
+                            <Link to="/" className="btn btn-danger m-2">Delete</Link>
                         </div>
                     </div>
                     <div className="col-sm-6 px-0 d-none d-sm-block">

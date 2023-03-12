@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+
 export const Footer = () => {
     return (
         // Start: Footer
@@ -28,16 +30,16 @@ export const Footer = () => {
                                 USEFUL LINKS
                             </h6>
                             <p>
-                                <a href="/posts" className="text-reset">Posts</a>
+                                <Link to="/posts" className="text-reset">Posts</Link>
                             </p>
                             <p>
-                                <a href="/login" className="text-reset">Login</a>
+                                <Link to="/login" className="text-reset">Login</Link>
                             </p>
                             <p>
-                                <a href="/register" className="text-reset">Register</a>
+                                <Link to="/register" className="text-reset">Register</Link>
                             </p>
                             <p>
-                                <a href="/contact-us" className="text-reset">Contact Us</a>
+                                <Link to="/contact-us" className="text-reset">Contact Us</Link>
                             </p>
                         </div>
                         {/* Grid column  */}
@@ -64,7 +66,7 @@ export const Footer = () => {
             {/* Copyright  */}
             <div className="text-center p-4" style={{ backgroundColor: 'rgba(0, 0, 0, 0.025)' }}>
                 © 2023 Copyright:
-                <a className="text-reset fw-bold" href="/">ARCHNEWS.com</a>
+                <Link className="text-reset fw-bold" to="/">ARCHNEWS.com</Link>
             </div>
             {/* Copyright  */}
         </footer >

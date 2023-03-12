@@ -25,6 +25,9 @@ export const Header = () => {
                             <Link className="btn btn-secondary" to="/create">Create Post</Link>
                         </li>
                         <li className="nav-item p-1">
+                            <Link className="btn btn-secondary" to="/my-profile">My Profile</Link>
+                        </li>
+                        <li className="nav-item p-1">
                             <Link className="btn btn-secondary" to="/register">Register</Link>
                         </li>
                         <li className="nav-item p-1">

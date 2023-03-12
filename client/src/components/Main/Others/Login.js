@@ -1,7 +1,6 @@
 import { useState } from 'react';
 
-import { useNavigate } from 'react-router-dom';
-
+import { useNavigate, Link } from 'react-router-dom';
 
 import { login } from '../../../services/auth.js';
 
@@ -88,11 +87,11 @@ export const Login = () => {
                             </div>
 
                             <div className="d-flex justify-content-center">
-                                <button type="submit" className="btn btn-secondary btn-lg">Login</button>
+                                <button type="submit" className={`btn btn-secondary btn-lg ${!(validEmail && validPassword) ? 'disabled' : ''}`}>Login</button>
                             </div>
 
-                            <p className="text-center text-muted mt-5 mb-0">Don't have an account? <a href="/register"
-                                className="fw-bold text-body"><u>Register here</u></a></p>
+                            <p className="text-center text-muted mt-5 mb-0">Don't have an account? <Link to="/register"
+                                className="fw-bold text-body"><u>Register here</u></Link></p>
 
                         </form>
                     </div>

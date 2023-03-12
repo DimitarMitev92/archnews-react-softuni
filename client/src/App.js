@@ -12,6 +12,7 @@ import { Details } from './components/Main/Others/Details.js';
 import { Edit } from './components/Main/Others/Edit.js';
 import { Posts } from './components/Main/Others/Posts.js';
 import { ContactUs } from './components/Main/Others/ContactUs.js';
+import { MyProfile } from './components/Main/Others/MyProfile.js';
 
 import { Routes, Route } from 'react-router-dom';
 import { NotFound } from './components/Main/Others/NotFound.js';
@@ -24,6 +25,7 @@ function App() {
 
       <Routes>
         <Route path="/" element={<Main />} />
+        <Route path="/my-profile" element={<MyProfile />} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
         <Route path="/create" element={<Create />} />

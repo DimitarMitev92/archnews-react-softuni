@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+
 export const BlogSection = () => {
     return (
         < section className="container bg-secondary  m-5 mx-auto" >
@@ -19,7 +21,7 @@ export const BlogSection = () => {
                         molestias
                         voluptatibus
                         impedit architecto aliquid cum culpa perferendis? Voluptate, consectetur!</article>
-                    <a href="/details/:postId" className="btn btn-light mt-2">Read More &larr;</a>
+                    <Link to="/details/:postId" className="btn btn-light mt-2">Read More &larr;</Link>
                 </div>
             </div>;
             {/* <!-- End: Current Post --> */}
@@ -40,7 +42,7 @@ export const BlogSection = () => {
                         molestias
                         voluptatibus
                         impedit architecto aliquid cum culpa perferendis? Voluptate, consectetur!</article>
-                    <a href="/details/:postId" className="btn btn-light mt-2">Read More &larr;</a>
+                    <Link to="/details/:postId" className="btn btn-light mt-2">Read More &larr;</Link>
                 </div>
             </div>;
             {/* <!-- End: Current Post --> */}
@@ -59,12 +61,12 @@ export const BlogSection = () => {
                         molestias
                         voluptatibus
                         impedit architecto aliquid cum culpa perferendis? Voluptate, consectetur!</article>
-                    <a href="/details/:postId" className="btn btn-light mt-2">Read More &larr;</a>
+                    <Link to="/details/:postId" className="btn btn-light mt-2">Read More &larr;</Link>
                 </div>
             </div>
             {/* <!-- End: Current Post --> */}
             <div className="d-flex align-items-center justify-content-center" style={{ height: "100px" }}>
-                <a href="/posts" className="btn btn-light btn-lg">Load More &larr;</a>
+                <Link to="/posts" className="btn btn-light btn-lg">Load More &larr;</Link>
             </div>
 
         </ section>

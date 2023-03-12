@@ -1,10 +1,12 @@
 import { Link } from 'react-router-dom';
 
-export const Posts = () => {
+export const MyProfile = () => {
     return (
         <section className="container bg-secondary  m-5 mx-auto">
             <div className="row bg-black">
-                <h2 className="text-center p-4 text-light ">ARCHITECTURE NEWS</h2>
+                <h2 className="text-center pt-4 text-light ">YOUR PROFILE</h2>
+                <h3 className="text-center pb-1 pt-4 text-light ">Dimitar Mitev</h3>
+                <h4 className="text-center p-1 text-light">Posts: 3</h4>
             </div>
 
             {/* Start: Current Post */}
@@ -17,11 +19,14 @@ export const Posts = () => {
                     <h3 className="text-light">Most Visited Products of Wallcovering </h3>
                     <h5 className="text-light"><i><ion-icon name="location-outline"></ion-icon></i> Milano</h5>
                     <h5 className="text-light"><i><ion-icon name="calendar-outline"></ion-icon></i> 22.02.2023</h5>
+                    <h5 className="text-light"><i><ion-icon name="heart-outline"></ion-icon></i> Likes: 10</h5>
+
                     <article className="text-light">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Iusto facere
                         molestias
                         voluptatibus
                         impedit architecto aliquid cum culpa perferendis? Voluptate, consectetur!</article>
-                    <Link to="/details/:postId" className="btn btn-light mt-2">Read More &larr;</Link>
+                    <Link href="/edit/:postId" className="btn btn-success m-2">Edit</Link>
+                    <Link href="/" className="btn btn-danger m-2">Delete</Link>
                 </div>
             </div>
             {/* End: Current Post  */}
@@ -38,11 +43,14 @@ export const Posts = () => {
                     <h3 className="text-light">Most Visited Products of Wallcovering </h3>
                     <h5 className="text-light"><i><ion-icon name="location-outline"></ion-icon></i>Dubai</h5>
                     <h5 className="text-light"><i><ion-icon name="calendar-outline"></ion-icon></i> 20.02.2023</h5>
+                    <h5 className="text-light"><i><ion-icon name="heart-outline"></ion-icon></i> Likes: 10</h5>
+
                     <article className="text-light">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Iusto facere
                         molestias
                         voluptatibus
                         impedit architecto aliquid cum culpa perferendis? Voluptate, consectetur!</article>
-                    <Link to="/details/:postId" className="btn btn-light mt-2">Read More &larr;</Link>
+                    <Link href="/edit/:postId" className="btn btn-success m-2">Edit</Link>
+                    <Link href="/" className="btn btn-danger m-2">Delete</Link>
                 </div>
             </div>
             {/* End: Current Post  */}
@@ -57,11 +65,14 @@ export const Posts = () => {
                     <h3 className="text-light">Most Visited Products of Wallcovering </h3>
                     <h5 className="text-light"><i><ion-icon name="location-outline"></ion-icon></i>Sidney</h5>
                     <h5 className="text-light"><i><ion-icon name="calendar-outline"></ion-icon></i> 12.02.2023</h5>
+                    <h5 className="text-light"><i><ion-icon name="heart-outline"></ion-icon></i> Likes: 10</h5>
+
                     <article className="text-light">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Iusto facere
                         molestias
                         voluptatibus
                         impedit architecto aliquid cum culpa perferendis? Voluptate, consectetur!</article>
-                    <Link to="/details/:postId" className="btn btn-light mt-2">Read More &larr;</Link>
+                    <Link href="/edit/:postId" className="btn btn-success m-2">Edit</Link>
+                    <Link href="/" className="btn btn-danger m-2">Delete</Link>
                 </div>
             </div>
             {/* End: Current Post  */}

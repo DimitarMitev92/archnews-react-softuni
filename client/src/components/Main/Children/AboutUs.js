@@ -1,11 +1,13 @@
+import { Link } from 'react-router-dom';
+
 export const AboutUs = () => {
     return (
         <section className="position-relative" id="aboutUs">
             <img src="https://lh3.googleusercontent.com/pw/AMWts8A1hXNSfNF0-KT9Y9ZzxcqSoWXEhaAWaWxo_AqNpX9GGZhoEHWneseLIZ8G3g8bItxqd6rtnlRzt5eb8VH5TVLQM4bB-uhIx3MYXO2QPM5kvIiJfmo7FvRzdVTsEEsBsalMeJGJiOyxWPFIv5ymSwdH=w1500-h1000-no?authuser=0" alt="background" className="w-100" />
             <div className="position-absolute top-50 start-50 translate-middle text-center">
                 <h1>OUR TEAM</h1>
-                <a className="btn btn-secondary border border-2 border-light" href="/contact-us">Contact Us <ion-icon
-                    name="call-outline"></ion-icon></a>
+                <Link className="btn btn-secondary border border-2 border-light" to="/contact-us">Contact Us <ion-icon
+                    name="call-outline"></ion-icon></Link>
 
                 <div className="row d-none d-lg-block">
                     <div className="row row-cols-md-3 g-4">
