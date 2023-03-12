@@ -14,6 +14,7 @@ import { Posts } from './components/Main/Others/Posts.js';
 import { ContactUs } from './components/Main/Others/ContactUs.js';
 
 import { Routes, Route } from 'react-router-dom';
+import { NotFound } from './components/Main/Others/NotFound.js';
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
         <Route path="/edit/:postId" element={<Edit />} />
         <Route path="/posts" element={<Posts />} />
         <Route path="/contact-us" element={<ContactUs />} />
+        <Route path="/*" element={<NotFound />} />
       </Routes>
 
       <Footer />
