@@ -27,7 +27,7 @@ export const Details = () => {
                         </div>
                     </div>
                     <div className="col-sm-6 px-0 d-none d-sm-block">
-                        <img className="img-fluid" src="https://lh3.googleusercontent.com/juc_3HiSmoIFi6N8h99L5piKjZb7bUM4Z63C4A2G11szs2R3Di59VsGZa76jDKKW4HshPr1kI7dHWnHDeHNrCg1UenfBExRnJisuxgw4I3PK3M_dCX3oB8Y11TMCeUip2b7gO6seAoxy9xhIR0V-zGXOhy3qbIZuuX4lbuYsoC-QuYdaSOZErAKpp4jYPOzDt9usq08xP-Hoq_jaLllTNjjg-G2IzAJOx-RZALnlfkOceR96zRwsvqgxhFaMScgKPg2Gx0N5nwkcw3Us7F8shTta06_T0prKjxFfTdCxhODdM1iOrXPA8r0ceMOeKhWiFS2afl2bYmKQz6J-vK9O6jReNSsa1lhoHlNq4Rm5tDjDyTOp5df29ym8DekE41xgWB0ZmCU3fJ-obSHIe15Ygiqcs_MLNMnz9RNkXwyRRUi2Qe3hGjkyR0AAuqWPhXreUQ2twvriJeGsQw2_0WNu0kqkjVwbDwOojamlb3pIeqbpKPB5Xu2FAS-6rQNX2Ct-YyqJwZ6Kypi_z-8lwTytZHxGllHKWj786JGUsqbZeuDdS9ry3_5CSBPV7-J6MJUovifm4IR9XcTRtevajNeHl1zYGgcf_b16nVkjUBogz_fvUZXDUsBnSM8rZQv2Ff6AMUA5mlqx57lyWKuCrTSaQYnB46JqCNOYJPGBtyBO34Kk2iPUEfQwloMEbzt8Fiim1R1oirCbsj-rDxlsDvbuADTzGwxMDLLhtLXomgAaC1nilFNcvfsQy-6f0PHFhchokO4vcqpRT1hJI8Sk0OFbQMpqWj-EqLs0kHGOwGM_kncbyHoa9g0khff9kPCjmrij4KQbYuPULTIHZcW1uX5YQa69WxbsHL3Qioap71bBGVhVRGpjsAnWneILcz3WZ-WAu3E0D_2ET1pTphhgoFoIHUU_zABxAxkXqElMvJ9RUXIJ=w2120-h1413-no?authuser=0" alt="post"
+                        <img className="img-fluid" src="https://lh3.googleusercontent.com/pw/AMWts8CSJQZw5TziHGvx-rIGHyUOwF_dZoermaBARiy4QjMWXIAgsokJNd5-sXk-pC04dckew_r7yn9wcRdER4LBIvGHm0qDswpiqjWB3eKTT6pAbYPsMPGTgC1uXkPf-Hyl9msfC3u4g0o-RYVXsN_CtcBt=w2120-h1413-no?authuser=0" alt="post"
                             style={{ objectFit: "cover", objectPosition: "left" }} />
                     </div>
                 </div>
