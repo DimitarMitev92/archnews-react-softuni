@@ -1,29 +1,94 @@
+import { useState } from 'react';
+
+import { useNavigate } from 'react-router-dom';
+
+
+import { login } from '../../../services/auth.js';
+
 export const Login = () => {
+
+    const navigate = useNavigate();
+
+    const [email, setEmail] = useState('');
+    const [password, setPasword] = useState('');
+
+    const [validEmail, setValidEmail] = useState(false);
+    const [validPassword, setValidPassword] = useState(false);
+
+    const [authToken, setAuthToken] = useState(null);
+
+    const changeEmailHandler = (e) => {
+        setEmail(e.target.value);
+        const regex = /^[a-z]{3,}@[a-z]{2,}\.[a-z]{1,}$/gm;
+        setValidEmail(previousState => previousState = regex.test(e.target.value.trim()));
+    };
+
+    const changePasswordHandler = (e) => {
+        setPasword(e.target.value);
+        if (e.target.value.trim().length > 5) {
+            setValidPassword(previousState => previousState = true);
+        } else {
+            setValidPassword(previousState => previousState = false);
+        }
+    };
+
+
+    const loginSubmitHandler = (e) => {
+        e.preventDefault();
+        if (validEmail && validPassword) {
+            try {
+                const response = login(email, password)
+                    .then(token => {
+                        console.log(token);
+                        setAuthToken(previousState => previousState = token);
+                        navigate('/');
+                    });
+            } catch (error) {
+                console.log(error.message);
+            }
+        }
+    };
+
+
     return (
         <section className="vh-100">
             <div className="container-fluid">
                 <div className="row">
                     <div className="col-sm-6 text-black d-flex justify-content-center align-items-center flex-md-column">
                         <h2 className="text-uppercase text-center m-5">LOGIN</h2>
-                        <form>
+                        <form onSubmit={loginSubmitHandler}>
                             <div className="form-outline m-4">
                                 <label className="form-label" htmlFor="emailInput">Your Email</label>
-                                <input type="email" id="emailInput" className="form-control form-control-lg is-valid" />
+                                <input type="email" id="emailInput"
+                                    className={`form-control form-control-lg ${validEmail ? 'is-valid' : 'is-invalid'}`}
+                                    value={email}
+                                    onChange={changeEmailHandler}
+                                    onBlur={changeEmailHandler} />
                                 <div className="valid-feedback">
-                                    Look Good!
+                                    Right Email.
+                                </div>
+                                <div className="invalid-feedback">
+                                    Enter your email. Must be like this <strong>example@email.com</strong> .
                                 </div>
                             </div>
 
                             <div className="form-outline m-4">
                                 <label className="form-label" htmlFor="passwordInput">Password</label>
-                                <input type="password" id="passwordInput" className="form-control form-control-lg is-invalid" />
+                                <input type="password" id="passwordInput"
+                                    className={`form-control form-control-lg ${validPassword ? 'is-valid' : 'is-invalid'}`}
+                                    value={password}
+                                    onChange={changePasswordHandler}
+                                    onBlur={changePasswordHandler} />
+                                <div className="valid-feedback">
+                                    Valid Password.
+                                </div>
                                 <div className="invalid-feedback">
-                                    Please enter Your Username
+                                    Enter your password. Must be longer than 5 symbols.
                                 </div>
                             </div>
 
                             <div className="d-flex justify-content-center">
-                                <button type="button" className="btn btn-secondary btn-lg">Login</button>
+                                <button type="submit" className="btn btn-secondary btn-lg">Login</button>
                             </div>
 
                             <p className="text-center text-muted mt-5 mb-0">Don't have an account? <a href="/register"

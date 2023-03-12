@@ -69,12 +69,16 @@ export const Register = () => {
     const registerSubmitHandler = (e) => {
         e.preventDefault();
 
-        if (validName && validUsername && validUsername && validPassword && validRepeatPassword) {
+        if (validName && validUsername && validEmail && validPassword && validRepeatPassword) {
             try {
-                const token = register(name, username, email, password);
+                const promise = register(name, username, email, password)
+                    .then(token => {
+                        console.log(token);
+                        setAuthToken(previousState => previousState = token);
+                        console.log(authToken);
+                        navigate('/');
+                    });
 
-                setAuthToken(previousState => previousState = token);
-                navigate('/');
             } catch (error) {
                 console.log(error.message);
             }
