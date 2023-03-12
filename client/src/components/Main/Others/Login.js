@@ -18,7 +18,7 @@ export const Login = () => {
 
     const changeEmailHandler = (e) => {
         setEmail(e.target.value);
-        const regex = /^[a-z]{3,}@[a-z]{2,}\.[a-z]{1,}$/gm;
+        const regex = /^[a-z]{3,}@[a-z]{2,}\.[a-z]{2,}$/gm;
         setValidEmail(previousState => previousState = regex.test(e.target.value.trim()));
     };
 
@@ -38,7 +38,6 @@ export const Login = () => {
             try {
                 const response = login(email, password)
                     .then(token => {
-                        console.log(token);
                         setAuthToken(previousState => previousState = token);
                         navigate('/');
                     });

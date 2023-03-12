@@ -25,7 +25,7 @@ export const Register = () => {
 
     const changeNameHandler = (e) => {
         setName(e.target.value);
-        if (e.target.value.trim().length > 3) {
+        if (e.target.value.trim().length > 0) {
             setValidName(previousState => previousState = true);
         } else {
             setValidName(previousState => previousState = false);
@@ -43,7 +43,7 @@ export const Register = () => {
 
     const changeEmailHandler = (e) => {
         setEmail(e.target.value);
-        const regex = /^[a-z]{3,}@[a-z]{2,}\.[a-z]{1,}$/gm;
+        const regex = /^[a-z]{3,}@[a-z]{2,}\.[a-z]{2,}$/gm;
         setValidEmail(previousState => previousState = regex.test(e.target.value.trim()));
     };
 
@@ -71,11 +71,9 @@ export const Register = () => {
 
         if (validName && validUsername && validEmail && validPassword && validRepeatPassword) {
             try {
-                const promise = register(name, username, email, password)
+                register(name, username, email, password)
                     .then(token => {
-                        console.log(token);
                         setAuthToken(previousState => previousState = token);
-                        console.log(authToken);
                         navigate('/');
                     });
 
@@ -109,7 +107,7 @@ export const Register = () => {
                                                 Right Name.
                                             </div>
                                             <div className="invalid-feedback">
-                                                Enter your name. Must be longer than 3 characters.
+                                                Enter your name.
                                             </div>
                                         </div>
 
