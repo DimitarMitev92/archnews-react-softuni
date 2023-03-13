@@ -6,7 +6,7 @@ export const PartnersSection = () => {
             </div>
             <div className="row ">
                 <div className="col text-center">
-                    <img className="img-fluid" src="https://lh3.googleusercontent.com/pw/AMWts8BKVtiN1nYiAGVlbXDL7bW_fZOab0ZW9cVLo8IZNo3L7MC8I9TxlbCfHasd8O1w4eBEsnCtMTvDC-yPjfVC8_gHmpD3yjy6kX61G30SfsR5c5JjyvF-DZqlK7IE1D3jYs6MwUB7sDGDzvV0Th1KXEMs=w200-h150-no?authuser=0" alt="partner4" />
+                    <img className="img-fluid" src="https://lh3.googleusercontent.com/pw/AMWts8AFVKLsn5iVwP7ATYcVJwXLF_-Vzahp4VkZOLnFdtgi1VlqTyUDY5dhXAxau_7WyKQv3WaxNZN3Zql-bJVUFWr4omzki_LPzgUAjnM5q7_1TNkBcQKT-h83-Gfz3km-HDDRxTKIrEgE34tYKY2_yZHZ=w200-h150-no?authuser=0" alt="partner4" />
                 </div>
                 <div className="col text-center">
                     <img className="img-fluid" src="https://lh3.googleusercontent.com/pw/AMWts8DxW1MvIRjyYb1BA4d6LiD0jxhdz3nkjm4isanRrl-xZqN4veOt6l6lllBUZn4TkS8YsqzvoFeV8_M5OuH7_CG4NjMiwixN7yeD_6kWpQQoLH5ubybrcbuJV0O4feuR_qD1VCBFuQRSqAiFWwxHiwMG=w200-h151-no?authuser=0" alt="partner2" />

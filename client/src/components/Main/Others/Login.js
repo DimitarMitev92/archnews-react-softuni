@@ -66,7 +66,7 @@ export const Login = () => {
                                     Right Email.
                                 </div>
                                 <div className="invalid-feedback">
-                                    Enter your email. Must be like this <strong>example@email.com</strong> .
+                                    Enter your email. Must be like this <strong>example@email.com</strong>.
                                 </div>
                             </div>
 
