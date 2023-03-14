@@ -88,6 +88,7 @@ export const Create = () => {
                                         <InputFiend
                                             title={"Title"}
                                             htmlFor={"titleInput"}
+                                            type={"text"}
                                             validItem={validTitle}
                                             value={title}
                                             onChange={changeTitleHandler}
@@ -99,6 +100,7 @@ export const Create = () => {
                                         <InputFiend
                                             title={"Location"}
                                             htmlFor={"locationInput"}
+                                            type={"text"}
                                             validItem={validLocation}
                                             value={location}
                                             onChange={changeLocationHandler}
@@ -110,6 +112,7 @@ export const Create = () => {
                                         <InputFiend
                                             title={"Image Link"}
                                             htmlFor={"imageInput"}
+                                            type={"url"}
                                             validItem={validImageUrl}
                                             value={imageUrl}
                                             onChange={changeImageUrlHandler}

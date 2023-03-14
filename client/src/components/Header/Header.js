@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import { HeaderLink } from './HeaderLink.js';
 
 export const Header = () => {
     return (
@@ -12,30 +13,51 @@ export const Header = () => {
                             className="d-inline-block align-text-center" />
                     </Link>
                     <ul className="nav nav-pills ">
-                        <li className="nav-item p-1">
-                            <Link className="btn btn-secondary" to="/">Home</Link>
-                        </li>
-                        <li className="nav-item p-1">
-                            <Link className="btn btn-secondary" to="/posts">Posts</Link>
-                        </li>
-                        <li className="nav-item p-1">
-                            <Link className="btn btn-secondary" to="/contact-us">Contact Us</Link>
-                        </li>
-                        <li className="nav-item p-1">
-                            <Link className="btn btn-secondary" to="/create">Create Post</Link>
-                        </li>
-                        <li className="nav-item p-1">
-                            <Link className="btn btn-secondary" to="/my-profile">My Profile</Link>
-                        </li>
-                        <li className="nav-item p-1">
-                            <Link className="btn btn-secondary" to="/register">Register</Link>
-                        </li>
-                        <li className="nav-item p-1">
-                            <Link className="btn btn-secondary" to="/login">Login</Link>
-                        </li>
-                        <li className="nav-item p-1">
-                            <Link className="btn btn-secondary" to="/">Logout</Link>
-                        </li>
+
+
+                        <HeaderLink
+                            to={"/"}
+                            title={"Home"}
+                        />
+                        <HeaderLink
+                            to={"/posts"}
+                            title={"Posts"}
+                        />
+
+
+                        {/* Start: Guests */}
+                        <HeaderLink
+                            to={"/register"}
+                            title={"Register"}
+                        />
+                        <HeaderLink
+                            to={"/login"}
+                            title={"Login"}
+                        />
+                        {/* End: Guests */}
+
+
+                        {/* Start: User */}
+                        <HeaderLink
+                            to={"/create"}
+                            title={"Create Post"}
+                        />
+                        <HeaderLink
+                            to={"/my-profile"}
+                            title={"My Profile"}
+                        />
+                        <HeaderLink
+                            to={"/"}
+                            title={"Logout"}
+                        />
+                        {/* End: User */}
+
+
+                        <HeaderLink
+                            to={"/contact-us"}
+                            title={"Contact Us"}
+                        />
+
                     </ul>
                 </div>
             </nav>

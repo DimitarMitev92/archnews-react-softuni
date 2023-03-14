@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 
 import { login } from '../../../../services/auth.js';
+import { LoginInput } from './LoginInput.js';
 
 export const Login = () => {
 
@@ -56,35 +57,29 @@ export const Login = () => {
                         <h2 className="text-uppercase text-center m-5">LOGIN</h2>
                         <form onSubmit={loginSubmitHandler}>
 
-                            <div className="form-outline m-4">
-                                <label className="form-label" htmlFor="emailInput">Your Email</label>
-                                <input type="email" id="emailInput"
-                                    className={`form-control form-control-lg ${validEmail ? 'is-valid' : 'is-invalid'}`}
-                                    value={email}
-                                    onChange={changeEmailHandler}
-                                    onBlur={changeEmailHandler} />
-                                <div className="valid-feedback">
-                                    Right Email.
-                                </div>
-                                <div className="invalid-feedback">
-                                    Enter your email. Must be like this <strong>example@email.com</strong>.
-                                </div>
-                            </div>
+                            <LoginInput
+                                title={"Your Email"}
+                                htmlFor={"emailInput"}
+                                type={"email"}
+                                validItem={validEmail}
+                                value={email}
+                                onChange={changeEmailHandler}
+                                onBlur={changeEmailHandler}
+                                validFeedback={"Right email."}
+                                invalidFeedback={"Enter your email."}
+                            />
 
-                            <div className="form-outline m-4">
-                                <label className="form-label" htmlFor="passwordInput">Password</label>
-                                <input type="password" id="passwordInput"
-                                    className={`form-control form-control-lg ${validPassword ? 'is-valid' : 'is-invalid'}`}
-                                    value={password}
-                                    onChange={changePasswordHandler}
-                                    onBlur={changePasswordHandler} />
-                                <div className="valid-feedback">
-                                    Valid Password.
-                                </div>
-                                <div className="invalid-feedback">
-                                    Enter your password. Must be longer than 5 symbols.
-                                </div>
-                            </div>
+                            <LoginInput
+                                title={"Password"}
+                                htmlFor={"passwordInput"}
+                                type={"password"}
+                                validItem={validPassword}
+                                value={password}
+                                onChange={changePasswordHandler}
+                                onBlur={changePasswordHandler}
+                                validFeedback={"Valid password."}
+                                invalidFeedback={"Enter your password."}
+                            />
 
                             <div className="d-flex justify-content-center">
                                 <button type="submit" className={`btn btn-secondary btn-lg ${!(validEmail && validPassword) ? 'disabled' : ''}`}>Login</button>

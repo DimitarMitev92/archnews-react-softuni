@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import { FooterLink } from './FooterLink.js';
 
 export const Footer = () => {
     return (
@@ -29,18 +30,29 @@ export const Footer = () => {
                             <h6 className="fw-bold mb-4">
                                 USEFUL LINKS
                             </h6>
-                            <p>
-                                <Link to="/posts" className="text-reset">Posts</Link>
-                            </p>
-                            <p>
-                                <Link to="/login" className="text-reset">Login</Link>
-                            </p>
-                            <p>
-                                <Link to="/register" className="text-reset">Register</Link>
-                            </p>
-                            <p>
-                                <Link to="/contact-us" className="text-reset">Contact Us</Link>
-                            </p>
+
+                            <FooterLink
+                                title={"Posts"}
+                                to={"/posts"}
+                            />
+
+                            <FooterLink
+                                title={"Login"}
+                                to={"/login"}
+                            />
+
+                            <FooterLink
+                                title={"Register"}
+                                to={"/register"}
+                            />
+
+                            <FooterLink
+                                title={"Contact Us"}
+                                to={"/contact-us"}
+                            />
+
+
+
                         </div>
                         {/* Grid column  */}
 

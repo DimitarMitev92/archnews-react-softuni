@@ -100,6 +100,7 @@ export const Register = () => {
                                         <InputFiend
                                             title={"Your Name"}
                                             htmlFor={"nameInput"}
+                                            type={"text"}
                                             validItem={validName}
                                             value={name}
                                             onChange={changeNameHandler}
@@ -111,6 +112,7 @@ export const Register = () => {
                                         <InputFiend
                                             title={"Your Username"}
                                             htmlFor={"usernameInput"}
+                                            type={"text"}
                                             validItem={validUsername}
                                             value={username}
                                             onChange={changeUsernameHandler}
@@ -122,6 +124,7 @@ export const Register = () => {
                                         <InputFiend
                                             title={"Your Email"}
                                             htmlFor={"emailInput"}
+                                            type={"email"}
                                             validItem={validEmail}
                                             value={email}
                                             onChange={changeEmailHandler}
@@ -133,6 +136,7 @@ export const Register = () => {
                                         <InputFiend
                                             title={"Password"}
                                             htmlFor={"passwordInput"}
+                                            type={"password"}
                                             validItem={validPassword}
                                             value={password}
                                             onChange={changePasswordHandler}
@@ -144,6 +148,7 @@ export const Register = () => {
                                         <InputFiend
                                             title={"Repeat your password"}
                                             htmlFor={"rePasswordInput"}
+                                            type={"password"}
                                             validItem={validRepeatPassword}
                                             value={repeatPassword}
                                             onChange={changeRepeatPasswordHandler}

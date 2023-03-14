@@ -1,5 +1,3 @@
-import { Link } from 'react-router-dom';
-
 import { CardPost } from '../../../UI/Card.js';
 import { Button } from '../../../UI/Button.js';
 

@@ -1,8 +1,8 @@
-import { Link } from 'react-router-dom';
-
 import { Button } from '../../../UI/Button.js';
 
 export const Details = () => {
+
+    // TODO: FIX DETAILS INFORMATION
     return (
         <section className="vh-auto">
             <div className="d-flex justify-content-center align-content-center">

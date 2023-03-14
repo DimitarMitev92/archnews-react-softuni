@@ -83,6 +83,7 @@ export const ContactUs = () => {
                                         <InputFiend
                                             title={"Your Name"}
                                             htmlFor={"nameInput"}
+                                            type={"text"}
                                             validItem={validName}
                                             value={name}
                                             onChange={changeNameHandler}
@@ -95,6 +96,7 @@ export const ContactUs = () => {
                                         <InputFiend
                                             title={"Your Email"}
                                             htmlFor={"emailInput"}
+                                            type={"email"}
                                             validItem={validEmail}
                                             value={email}
                                             onChange={changeEmailHandler}
@@ -106,6 +108,7 @@ export const ContactUs = () => {
                                         <InputFiend
                                             title={"Your Phone"}
                                             htmlFor={"phoneInput"}
+                                            type={"text"}
                                             validItem={validPhoneNumber}
                                             value={phoneNumber}
                                             onChange={changePhoneNumberHandler}

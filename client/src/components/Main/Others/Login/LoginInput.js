@@ -1,4 +1,4 @@
-export const InputFiend = ({
+export const LoginInput = ({
     title,
     htmlFor,
     type,
@@ -11,7 +11,7 @@ export const InputFiend = ({
 
 }) => {
     return (
-        <div className="form-outline mb-2">
+        <div className="form-outline m-4">
             <label className="form-label" htmlFor={htmlFor}>{title}</label>
             <input type={type} id={htmlFor}
                 className={`form-control form-control-lg ${validItem ? 'is-valid' : 'is-invalid'}`}
