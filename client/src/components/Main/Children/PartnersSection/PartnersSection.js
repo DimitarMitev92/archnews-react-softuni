@@ -30,8 +30,9 @@ export const PartnersSection = () => {
                 <h5 className="text-center">OUR PARTNERS</h5>
             </div>
             <div className="row ">
-                {partners.map(partner =>
+                {partners.map((partner, index) =>
                     <PartnerItem
+                        key={index}
                         title={partner.title}
                         classNameDiv={partner.classNameDiv}
                         classNameImg={partner.classNameImg}

@@ -1,6 +1,7 @@
-import { Link } from 'react-router-dom';
 
 import { CardMember } from './CardMember.js';
+
+import { Button } from '../../../UI/Button.js';
 
 export const AboutUs = () => {
 
@@ -49,13 +50,16 @@ export const AboutUs = () => {
             <img src="https://lh3.googleusercontent.com/pw/AMWts8A1hXNSfNF0-KT9Y9ZzxcqSoWXEhaAWaWxo_AqNpX9GGZhoEHWneseLIZ8G3g8bItxqd6rtnlRzt5eb8VH5TVLQM4bB-uhIx3MYXO2QPM5kvIiJfmo7FvRzdVTsEEsBsalMeJGJiOyxWPFIv5ymSwdH=w1500-h1000-no?authuser=0" alt="background" className="w-100" />
             <div className="position-absolute top-50 start-50 translate-middle text-center">
                 <h1>OUR TEAM</h1>
-                <Link className="btn btn-secondary border border-2 border-light" to="/contact-us">Contact Us <ion-icon
-                    name="call-outline"></ion-icon></Link>
-
+                <Button
+                    to={"/contact-us"}
+                    className={"btn btn-secondary border border-2 border-light"}
+                    title={"Contact Us"}
+                />
                 <div className="row d-none d-lg-block">
                     <div className="row row-cols-md-3 g-4">
-                        {members.map(member =>
+                        {members.map((member, index) =>
                             <CardMember
+                                key={index}
                                 profession={member.profession}
                                 imageUrl={member.imageUrl}
                                 altImage={member.altImage}

@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 
-import { CardPost } from './CardPost.js';
+import { CardPost } from '../../../UI/Card.js';
+import { Button } from '../../../UI/Button.js';
 
 export const BlogSection = () => {
 
@@ -11,6 +12,7 @@ export const BlogSection = () => {
             title: "Most Visited Products of Wallcovering",
             location: "Milano",
             date: "22.02.2023",
+            likes: "10",
             info: "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Iusto facere molestias voluptatibus impedit architecto aliquid cum culpa perferendis? Voluptate, consectetur!",
             postId: "1",
         },
@@ -20,6 +22,7 @@ export const BlogSection = () => {
             title: "Most Visited Products of Wallcovering",
             location: "Milano",
             date: "22.02.2023",
+            likes: "10",
             info: "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Iusto facere molestias voluptatibus impedit architecto aliquid cum culpa perferendis? Voluptate, consectetur!",
             postId: "2",
         },
@@ -29,6 +32,7 @@ export const BlogSection = () => {
             title: "Most Visited Products of Wallcovering",
             location: "Milano",
             date: "22.02.2023",
+            likes: "10",
             info: "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Iusto facere molestias voluptatibus impedit architecto aliquid cum culpa perferendis? Voluptate, consectetur!",
             postId: "3",
         }
@@ -42,18 +46,23 @@ export const BlogSection = () => {
             </div>;
 
             {posts.map(post =>
-                <CardPost
+                <CardPost key={post.postId}
                     imageUrl={post.imageUrl}
                     altImage={post.altImage}
                     title={post.title}
                     location={post.location}
                     date={post.date}
+                    likes={post.likes}
                     info={post.info}
                     postId={post.postId}
                 />)}
 
             <div className="d-flex align-items-center justify-content-center" style={{ height: "100px" }}>
-                <Link to="/posts" className="btn btn-light btn-lg">Load More &larr;</Link>
+                <Button
+                    to={"/posts"}
+                    className={"btn btn-light btn-lg"}
+                    title={"Load More"}
+                />
             </div>
 
         </ section>

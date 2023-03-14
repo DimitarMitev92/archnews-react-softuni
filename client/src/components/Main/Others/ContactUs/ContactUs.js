@@ -30,7 +30,7 @@ export const ContactUs = () => {
 
     const changeEmailHandler = (e) => {
         setEmail(e.target.value);
-        const regex = /^[a-z]{3,}@[a-z]{2,}\.[a-z]{2,}$/gm;
+        const regex = /^[a-z_\-0-9]{3,}@[a-z]{2,}\.[a-z]{2,}$/gm;
         setValidEmail(previousState => previousState = regex.test(e.target.value.trim()));
     };
 
@@ -93,6 +93,7 @@ export const ContactUs = () => {
                                             </div>
                                         </div>
 
+
                                         <div className="form-outline mb-2">
                                             <label className="form-label" htmlFor="emailInput">Your Email</label>
                                             <input type="text" id="emailInput"
@@ -104,7 +105,7 @@ export const ContactUs = () => {
                                                 Right Email.
                                             </div>
                                             <div className="invalid-feedback">
-                                                Enter your email. Must be like this <strong>example@email.com</strong>.
+                                                Enter your email.
                                             </div>
                                         </div>
 
@@ -119,7 +120,7 @@ export const ContactUs = () => {
                                                 Right Phone Number.
                                             </div>
                                             <div className="invalid-feedback">
-                                                Enter your phone number. Must be like this <strong>0123456789</strong>.
+                                                Enter your phone number.
                                             </div>
                                         </div>
 
