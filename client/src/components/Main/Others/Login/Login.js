@@ -55,6 +55,7 @@ export const Login = () => {
                     <div className="col-sm-6 text-black d-flex justify-content-center align-items-center flex-md-column">
                         <h2 className="text-uppercase text-center m-5">LOGIN</h2>
                         <form onSubmit={loginSubmitHandler}>
+
                             <div className="form-outline m-4">
                                 <label className="form-label" htmlFor="emailInput">Your Email</label>
                                 <input type="email" id="emailInput"

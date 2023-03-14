@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { register } from '../../../../services/auth.js';
+import { InputFiend } from '../../../UI/InputField.js';
 
 export const Register = () => {
 
@@ -96,82 +97,60 @@ export const Register = () => {
 
                                     <form onSubmit={registerSubmitHandler}>
 
-                                        <div className="form-outline mb-2">
-                                            <label className="form-label" htmlFor="nameInput">Your Name</label>
-                                            <input type="text" id="nameInput"
-                                                className={`form-control form-control-lg ${validName ? 'is-valid' : 'is-invalid'}`}
-                                                value={name}
-                                                onInput={changeNameHandler}
-                                                onBlur={changeNameHandler} />
-                                            <div className="valid-feedback">
-                                                Right Name.
-                                            </div>
-                                            <div className="invalid-feedback">
-                                                Enter your name.
-                                            </div>
-                                        </div>
+                                        <InputFiend
+                                            title={"Your Name"}
+                                            htmlFor={"nameInput"}
+                                            validItem={validName}
+                                            value={name}
+                                            onChange={changeNameHandler}
+                                            onBlur={changeNameHandler}
+                                            validFeedback={"Right name."}
+                                            invalidFeedback={"Enter your name."}
+                                        />
 
-                                        <div className="form-outline mb-2">
-                                            <label className="form-label" htmlFor="usernameInput">Your
-                                                Username</label>
-                                            <input type="text" id="usernameInput"
-                                                className={`form-control form-control-lg ${validUsername ? 'is-valid' : 'is-invalid'}`}
-                                                value={username}
-                                                onInput={changeUsernameHandler}
-                                                onBlur={changeUsernameHandler} />
-                                            <div className="valid-feedback">
-                                                Right Username.
-                                            </div>
-                                            <div className="invalid-feedback">
-                                                Enter your username. Must be longer than 3 characters.
-                                            </div>
-                                        </div>
+                                        <InputFiend
+                                            title={"Your Username"}
+                                            htmlFor={"usernameInput"}
+                                            validItem={validUsername}
+                                            value={username}
+                                            onChange={changeUsernameHandler}
+                                            onBlur={changeUsernameHandler}
+                                            validFeedback={"Right username."}
+                                            invalidFeedback={"Enter your username."}
+                                        />
 
-                                        <div className="form-outline mb-2">
-                                            <label className="form-label" htmlFor="emailInput">Your Email</label>
-                                            <input type="email" id="emailInput"
-                                                className={`form-control form-control-lg ${validEmail ? 'is-valid' : 'is-invalid'}`}
-                                                value={email}
-                                                onInput={changeEmailHandler}
-                                                onBlur={changeEmailHandler} />
-                                            <div className="valid-feedback">
-                                                Right Email.
-                                            </div>
-                                            <div className="invalid-feedback">
-                                                Enter your email. Must be like this <strong>example@email.com</strong>.
-                                            </div>
-                                        </div>
+                                        <InputFiend
+                                            title={"Your Email"}
+                                            htmlFor={"emailInput"}
+                                            validItem={validEmail}
+                                            value={email}
+                                            onChange={changeEmailHandler}
+                                            onBlur={changeEmailHandler}
+                                            validFeedback={"Right email."}
+                                            invalidFeedback={"Enter your email."}
+                                        />
 
-                                        <div className="form-outline mb-2">
-                                            <label className="form-label" htmlFor="passwordInput">Password</label>
-                                            <input type="password" id="passwordInput"
-                                                className={`form-control form-control-lg ${validPassword ? 'is-valid' : 'is-invalid'}`}
-                                                value={password}
-                                                onInput={changePasswordHandler}
-                                                onBlur={changePasswordHandler} />
-                                            <div className="valid-feedback">
-                                                Valid Password.
-                                            </div>
-                                            <div className="invalid-feedback">
-                                                Enter your password. Must be longer than 5 symbols.
-                                            </div>
-                                        </div>
+                                        <InputFiend
+                                            title={"Password"}
+                                            htmlFor={"passwordInput"}
+                                            validItem={validPassword}
+                                            value={password}
+                                            onChange={changePasswordHandler}
+                                            onBlur={changePasswordHandler}
+                                            validFeedback={"Valid password."}
+                                            invalidFeedback={"Enter your password."}
+                                        />
 
-                                        <div className="form-outline mb-2">
-                                            <label className="form-label" htmlFor="rePasswordInput">Repeat your
-                                                password</label>
-                                            <input type="password" id="rePasswordInput"
-                                                className={`form-control form-control-lg ${validRepeatPassword ? 'is-valid' : 'is-invalid'}`}
-                                                value={repeatPassword}
-                                                onInput={changeRepeatPasswordHandler}
-                                                onBlur={changeRepeatPasswordHandler} />
-                                            <div className="valid-feedback">
-                                                Passwords match.
-                                            </div>
-                                            <div className="invalid-feedback">
-                                                Passwords mismatch.
-                                            </div>
-                                        </div>
+                                        <InputFiend
+                                            title={"Repeat your password"}
+                                            htmlFor={"rePasswordInput"}
+                                            validItem={validRepeatPassword}
+                                            value={repeatPassword}
+                                            onChange={changeRepeatPasswordHandler}
+                                            onBlur={changeRepeatPasswordHandler}
+                                            validFeedback={"Passwords match."}
+                                            invalidFeedback={"Passwords mismatch."}
+                                        />
 
                                         <div className="d-flex justify-content-center">
                                             <button type="submit" className={`btn btn-secondary btn-lg ${!(validName && validUsername && validEmail && validPassword && validRepeatPassword) ? 'disabled' : ''}`}>Register</button>

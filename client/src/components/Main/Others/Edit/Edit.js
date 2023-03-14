@@ -1,4 +1,6 @@
 import { useState } from 'react';
+import { InputFiend } from '../../../UI/InputField.js';
+import { InputTextarea } from '../../../UI/InputTextarea.js';
 
 export const Edit = () => {
 
@@ -74,72 +76,49 @@ export const Edit = () => {
 
                                     <form>
 
-                                        <div className="form-outline mb-2">
-                                            <label className="form-label" htmlFor="titleInput">Title</label>
-                                            <input type="text" id="titleInput" className={`form-control form-control-lg ${validTitle ? 'is-valid' : 'is-invalid'}`}
-                                                value={title}
-                                                onChange={changeTitleHandler}
-                                                onBlur={changeTitleHandler} />
-                                            <div className="valid-feedback">
-                                                Right title.
-                                            </div>
-                                            <div className="invalid-feedback">
-                                                Enter post's title.
-                                            </div>
+                                        <InputFiend
+                                            title={"Title"}
+                                            htmlFor={"titleInput"}
+                                            validItem={validTitle}
+                                            value={title}
+                                            onChange={changeTitleHandler}
+                                            onBlur={changeTitleHandler}
+                                            validFeedback={"Right title."}
+                                            invalidFeedback={"Enter post's title."}
+                                        />
 
-                                        </div>
+                                        <InputFiend
+                                            title={"Location"}
+                                            htmlFor={"locationInput"}
+                                            validItem={validLocation}
+                                            value={location}
+                                            onChange={changeLocationHandler}
+                                            onBlur={changeLocationHandler}
+                                            validFeedback={"Right location."}
+                                            invalidFeedback={"Enter post's location."}
+                                        />
 
-                                        <div className="form-outline mb-2">
-                                            <label className="form-label" htmlFor="locationInput">Location</label>
-                                            <input type="text" id="locationInput"
-                                                className={`form-control form-control-lg ${validLocation ? "is-valid" : "is-invalid"}`}
-                                                value={location}
-                                                onChange={changeLocationHandler}
-                                                onBlur={changeLocationHandler} />
-                                            <div className="valid-feedback">
-                                                Right location.
-                                            </div>
-                                            <div className="invalid-feedback">
-                                                Enter post's location.
-                                            </div>
-                                        </div>
+                                        <InputFiend
+                                            title={"Image Link"}
+                                            htmlFor={"imageInput"}
+                                            validItem={validImageUrl}
+                                            value={imageUrl}
+                                            onChange={changeImageUrlHandler}
+                                            onBlur={changeImageUrlHandler}
+                                            validFeedback={"Right image link."}
+                                            invalidFeedback={"Enter post's image link."}
+                                        />
 
-                                        <div className="form-outline mb-2">
-                                            <label className="form-label" htmlFor="imageInput">Image Link</label>
-                                            <input type="text" id="imageInput" className={`form-control form-control-lg ${validImageUrl ? 'is-valid' : 'is-invalid'}`}
-                                                value={imageUrl}
-                                                onChange={changeImageUrlHandler}
-                                                onBlur={changeImageUrlHandler}
-                                            />
-                                            <div className="valid-feedback">
-                                                Right image link.
-                                            </div>
-                                            <div className="invalid-feedback">
-                                                Enter post's image link.
-                                            </div>
-                                        </div>
-
-                                        <div className="form-outline mb-2">
-                                            <div className="form-group">
-                                                <label htmlFor="exampleFormControlTextarea1">Your Post</label>
-                                                <textarea
-                                                    className={`form-control ${validPost ? "is-valid" : "is-invalid"}`} id="exampleFormControlTextarea1"
-                                                    rows="3"
-                                                    value={post}
-                                                    onChange={changePostHandler}
-                                                    onBlur={changePostHandler}
-                                                ></textarea>
-                                                <div className="valid-feedback">
-                                                    Right post.
-                                                </div>
-                                                <div className="invalid-feedback">
-                                                    Enter your post. Post must be longer than 20 characters.
-                                                </div>
-                                            </div>
-                                        </div>
-
-
-
+                                        <InputTextarea
+                                            title={"Your Post"}
+                                            htmlFor={"editTextarea"}
+                                            validItem={validPost}
+                                            value={post}
+                                            onChange={changePostHandler}
+                                            onBlur={changePostHandler}
+                                            validFeedback={"Right post."}
+                                            invalidFeedback={"Enter your post."}
+                                        />
 
                                         <div className="d-flex justify-content-center">
                                             <button type="submit" className={`btn btn-secondary btn-lg m-3 ${!(validTitle && validLocation && validImageUrl && validPost) ? "disabled" : ""}`}>Edit</button>

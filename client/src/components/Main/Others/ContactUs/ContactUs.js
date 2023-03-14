@@ -3,6 +3,8 @@ import { useState } from 'react';
 import { contact } from '../../../../services/contact.js';
 
 import { useNavigate } from 'react-router-dom';
+import { InputFiend } from '../../../UI/InputField.js';
+import { InputTextarea } from '../../../UI/InputTextarea.js';
 
 
 export const ContactUs = () => {
@@ -78,70 +80,51 @@ export const ContactUs = () => {
                                     </div>
                                     <form onSubmit={contactSubmitHandler}>
 
-                                        <div className="form-outline mb-2">
-                                            <label className="form-label" htmlFor="nameInput">Your Name</label>
-                                            <input type="text" id="nameInput"
-                                                className={`form-control form-control-lg ${validName ? 'is-valid' : 'is-invalid'}`}
-                                                value={name}
-                                                onChange={changeNameHandler}
-                                                onBlur={changeNameHandler} />
-                                            <div className="valid-feedback">
-                                                Right Name.
-                                            </div>
-                                            <div className="invalid-feedback">
-                                                Enter your name.
-                                            </div>
-                                        </div>
+                                        <InputFiend
+                                            title={"Your Name"}
+                                            htmlFor={"nameInput"}
+                                            validItem={validName}
+                                            value={name}
+                                            onChange={changeNameHandler}
+                                            onBlur={changeNameHandler}
+                                            validFeedback={"Right name."}
+                                            invalidFeedback={"Enter your name."}
+                                        />
 
 
-                                        <div className="form-outline mb-2">
-                                            <label className="form-label" htmlFor="emailInput">Your Email</label>
-                                            <input type="text" id="emailInput"
-                                                className={`form-control form-control-lg ${validEmail ? 'is-valid' : 'is-invalid'}`}
-                                                value={email}
-                                                onChange={changeEmailHandler}
-                                                onBlur={changeEmailHandler} />
-                                            <div className="valid-feedback">
-                                                Right Email.
-                                            </div>
-                                            <div className="invalid-feedback">
-                                                Enter your email.
-                                            </div>
-                                        </div>
+                                        <InputFiend
+                                            title={"Your Email"}
+                                            htmlFor={"emailInput"}
+                                            validItem={validEmail}
+                                            value={email}
+                                            onChange={changeEmailHandler}
+                                            onBlur={changeEmailHandler}
+                                            validFeedback={"Right email."}
+                                            invalidFeedback={"Enter your email."}
+                                        />
 
-                                        <div className="form-outline mb-2">
-                                            <label className="form-label" htmlFor="phoneInput">Your Phone</label>
-                                            <input type="text" id="phoneInput"
-                                                className={`form-control form-control-lg ${validPhoneNumber ? 'is-valid' : 'is-invalid'}`}
-                                                value={phoneNumber}
-                                                onChange={changePhoneNumberHandler}
-                                                onBlur={changePhoneNumberHandler} />
-                                            <div className="valid-feedback">
-                                                Right Phone Number.
-                                            </div>
-                                            <div className="invalid-feedback">
-                                                Enter your phone number.
-                                            </div>
-                                        </div>
+                                        <InputFiend
+                                            title={"Your Phone"}
+                                            htmlFor={"phoneInput"}
+                                            validItem={validPhoneNumber}
+                                            value={phoneNumber}
+                                            onChange={changePhoneNumberHandler}
+                                            onBlur={changePhoneNumberHandler}
+                                            validFeedback={"Right phone number."}
+                                            invalidFeedback={"Enter your phone number."}
+                                        />
 
-                                        <div className="form-outline mb-2">
-                                            <div className="form-group">
-                                                <label htmlFor="messageTextarea1">Your Message</label>
-                                                <textarea
-                                                    id="messageTextarea1"
-                                                    className={`form-control ${validMessage ? 'is-valid' : 'is-invalid'}`}
-                                                    value={message}
-                                                    onChange={changeMessageHandler}
-                                                    onBlur={changeMessageHandler}
-                                                    rows="3"></textarea>
-                                                <div className="valid-feedback">
-                                                    Right Message.
-                                                </div>
-                                                <div className="invalid-feedback">
-                                                    Enter your message. Must be longer then 10 characters.
-                                                </div>
-                                            </div>
-                                        </div>
+                                        <InputTextarea
+                                            title={"Your Message"}
+                                            htmlFor={"messageTextarea"}
+                                            validItem={validMessage}
+                                            value={message}
+                                            onChange={changeMessageHandler}
+                                            onBlur={changeMessageHandler}
+                                            validFeedback={"Right message."}
+                                            invalidFeedback={"Enter your message."}
+
+                                        />
 
                                         <div className="d-flex justify-content-center">
                                             <button type="submit"
