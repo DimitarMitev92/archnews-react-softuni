@@ -5,17 +5,17 @@ import { Header } from './components/Header/Header.js';
 import { Main } from './components/Main/Main.js';
 import { Footer } from './components/Footer/Footer.js';
 
-import { Register } from './components/Main/Others/Register.js';
-import { Login } from './components/Main/Others/Login.js';
-import { Create } from './components/Main/Others/Create.js';
-import { Details } from './components/Main/Others/Details.js';
-import { Edit } from './components/Main/Others/Edit.js';
-import { Posts } from './components/Main/Others/Posts.js';
-import { ContactUs } from './components/Main/Others/ContactUs.js';
-import { MyProfile } from './components/Main/Others/MyProfile.js';
+import { Register } from './components/Main/Others/Register/Register.js';
+import { Login } from './components/Main/Others/Login/Login.js';
+import { Create } from './components/Main/Others/Create/Create.js';
+import { Details } from './components/Main/Others/Details/Details.js';
+import { Edit } from './components/Main/Others/Edit/Edit.js';
+import { Posts } from './components/Main/Others/Posts/Posts.js';
+import { ContactUs } from './components/Main/Others/ContactUs/ContactUs.js';
+import { MyProfile } from './components/Main/Others/MyProfile/MyProfile.js';
 
 import { Routes, Route } from 'react-router-dom';
-import { NotFound } from './components/Main/Others/NotFound.js';
+import { NotFound } from './components/Main/Others/NotFound/NotFound.js';
 
 function App() {
   return (

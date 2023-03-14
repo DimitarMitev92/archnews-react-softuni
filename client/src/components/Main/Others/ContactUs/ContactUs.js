@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import { contact } from '../../../services/contact.js';
+import { contact } from '../../../../services/contact.js';
 
 import { useNavigate } from 'react-router-dom';
 

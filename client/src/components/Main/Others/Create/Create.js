@@ -2,7 +2,7 @@ import { useState } from 'react';
 
 import { useNavigate } from 'react-router-dom';
 
-import { create } from '../../../services/crud.js';
+import { create } from '../../../../services/crud.js';
 
 export const Create = () => {
 

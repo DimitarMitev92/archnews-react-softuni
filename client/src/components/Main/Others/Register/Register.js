@@ -2,7 +2,7 @@ import { useState } from 'react';
 
 import { useNavigate } from 'react-router-dom';
 
-import { register } from '../../../services/auth.js';
+import { register } from '../../../../services/auth.js';
 
 export const Register = () => {
 
