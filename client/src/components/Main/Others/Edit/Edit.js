@@ -1,6 +1,15 @@
+//REACT
 import { useState } from 'react';
+//REACT COMPONENTS
 import { InputFiend } from '../../../UI/InputField.js';
 import { InputTextarea } from '../../../UI/InputTextarea.js';
+//REACT HOOKS
+//REACT CONTEXT
+
+//REACT ROUTER
+
+//SERVICES
+
 
 export const Edit = () => {
 
@@ -57,7 +66,7 @@ export const Edit = () => {
                 const date = new Date();
                 const likes = 0;
             } catch (error) {
-                console.log(error.message);
+                // console.log(error.message);
             }
         }
     };

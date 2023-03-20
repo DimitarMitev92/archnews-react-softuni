@@ -1,4 +1,11 @@
+//REACT
+//REACT COMPONENTS
 import { Button } from './Button.js';
+//REACT HOOKS
+//REACT CONTEXT
+//REACT ROUTER
+//SERVICES
+
 
 export const CardPost = ({
     imageUrl,

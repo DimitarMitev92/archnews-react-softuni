@@ -1,21 +1,34 @@
-import { useState } from 'react';
+//REACT
+import { useState, useContext } from 'react';
 
+//REACT COMPONENTS
+import { LoginInput } from './LoginInput.js';
+
+//REACT HOOKS
+
+//REACT CONTEXT
+import { AuthContext } from '../../../../contexts/authContext.js';
+
+//REACT ROUTER
 import { useNavigate, Link } from 'react-router-dom';
 
+
+//SERVICES
 import { login } from '../../../../services/auth.js';
-import { LoginInput } from './LoginInput.js';
+
 
 export const Login = () => {
 
     const navigate = useNavigate();
 
     const [email, setEmail] = useState('');
-    const [password, setPasword] = useState('');
+    const [password, setPassword] = useState('');
 
     const [validEmail, setValidEmail] = useState(false);
     const [validPassword, setValidPassword] = useState(false);
 
-    const [authToken, setAuthToken] = useState(null);
+    const { loginUser } = useContext(AuthContext);
+
 
     const changeEmailHandler = (e) => {
         setEmail(e.target.value);
@@ -24,8 +37,8 @@ export const Login = () => {
     };
 
     const changePasswordHandler = (e) => {
-        setPasword(e.target.value);
-        if (e.target.value.trim().length > 5) {
+        setPassword(e.target.value);
+        if (e.target.value.trim().length > 4) {
             setValidPassword(previousState => previousState = true);
         } else {
             setValidPassword(previousState => previousState = false);
@@ -35,19 +48,22 @@ export const Login = () => {
 
     const loginSubmitHandler = (e) => {
         e.preventDefault();
-        if (validEmail && validPassword) {
-            try {
-                const response = login(email, password)
-                    .then(token => {
-                        setAuthToken(previousState => previousState = token);
-                        navigate('/');
-                    });
-            } catch (error) {
-                console.log(error.message);
-            }
-        }
+        login(email, password)
+            .then(user => {
+                if (user === undefined) {
+                    throw new Error('Email or password is not valid');
+                }
+                if (user.code === 403) {
+                    throw new Error(user.message);
+                }
+                loginUser(user);
+                navigate('/');
+            }).catch(error => {
+                //TODO maybe make some modal popup maybe other thing a dont know
+                alert(error.message);
+                navigate('/404');
+            });
     };
-
 
     return (
         <section className="vh-100">

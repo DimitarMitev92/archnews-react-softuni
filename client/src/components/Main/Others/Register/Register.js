@@ -1,9 +1,15 @@
-import { useState } from 'react';
-
-import { useNavigate } from 'react-router-dom';
-
-import { register } from '../../../../services/auth.js';
+//REACT
+import { useContext, useState } from 'react';
+//REACT COMPONENTS
 import { InputFiend } from '../../../UI/InputField.js';
+//REACT HOOKS
+//REACT CONTEXT
+import { AuthContext } from '../../../../contexts/authContext.js';
+//REACT ROUTER
+import { useNavigate } from 'react-router-dom';
+//SERVICES
+import { register } from '../../../../services/auth.js';
+
 
 export const Register = () => {
 
@@ -12,7 +18,7 @@ export const Register = () => {
     const [name, setName] = useState('');
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
-    const [password, setPasword] = useState('');
+    const [password, setPassword] = useState('');
     const [repeatPassword, setRepeatPassword] = useState('');
 
     const [validName, setValidName] = useState(false);
@@ -21,8 +27,7 @@ export const Register = () => {
     const [validPassword, setValidPassword] = useState(false);
     const [validRepeatPassword, setValidRepeatPassword] = useState(false);
 
-    const [authToken, setAuthToken] = useState(null);
-
+    const { loginUser } = useContext(AuthContext);
 
     const changeNameHandler = (e) => {
         setName(e.target.value);
@@ -49,8 +54,8 @@ export const Register = () => {
     };
 
     const changePasswordHandler = (e) => {
-        setPasword(e.target.value);
-        if (e.target.value.trim().length > 5) {
+        setPassword(e.target.value);
+        if (e.target.value.trim().length > 4) {
             setValidPassword(previousState => previousState = true);
         } else {
             setValidPassword(previousState => previousState = false);
@@ -69,19 +74,15 @@ export const Register = () => {
 
     const registerSubmitHandler = (e) => {
         e.preventDefault();
-
-        if (validName && validUsername && validEmail && validPassword && validRepeatPassword) {
-            try {
-                register(name, username, email, password)
-                    .then(token => {
-                        setAuthToken(previousState => previousState = token);
-                        navigate('/');
-                    });
-
-            } catch (error) {
-                console.log(error.message);
-            }
-        }
+        register(name, username, email, password)
+            .then(user => {
+                if (user.code === 409) {
+                    throw new Error("A user with the same email already exists");
+                }
+                loginUser(user);
+                navigate('/');
+            })
+            .catch(error => console.log(error.message));
     };
 
 

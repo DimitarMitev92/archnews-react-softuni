@@ -1,5 +1,10 @@
-
+//REACT
+//REACT COMPONENTS
 import { CardPost } from "../../../UI/Card.js";
+//REACT HOOKS
+//REACT CONTEXT
+//REACT ROUTER
+//SERVICES
 
 export const Posts = () => {
 

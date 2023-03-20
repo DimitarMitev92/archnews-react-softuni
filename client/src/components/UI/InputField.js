@@ -1,3 +1,10 @@
+//REACT
+//REACT COMPONENTS
+//REACT HOOKS
+//REACT CONTEXT
+//REACT ROUTER
+//SERVICES
+
 export const InputFiend = ({
     title,
     htmlFor,

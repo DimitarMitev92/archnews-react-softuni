@@ -1,10 +1,17 @@
+//REACT
 import { useState } from 'react';
-
-import { contact } from '../../../../services/contact.js';
-
-import { useNavigate } from 'react-router-dom';
+//REACT COMPONENTS
 import { InputFiend } from '../../../UI/InputField.js';
 import { InputTextarea } from '../../../UI/InputTextarea.js';
+//REACT HOOKS
+//REACT CONTEXT
+//REACT ROUTER
+import { useNavigate } from 'react-router-dom';
+//SERVICES
+import { contact } from '../../../../services/contact.js';
+
+
+
 
 
 export const ContactUs = () => {
@@ -53,15 +60,11 @@ export const ContactUs = () => {
 
     const contactSubmitHandler = (e) => {
         e.preventDefault();
+        contact(name, email, phoneNumber, message)
+            .then(result => console.log(result));
+        navigate('/');
+        // .catch(error => console.log(error.message));
 
-        try {
-            contact(name, email, phoneNumber, message)
-                .then(result => console.log(result));
-            navigate('/');
-
-        } catch (error) {
-            console.log(error.message);
-        }
     };
 
     return (

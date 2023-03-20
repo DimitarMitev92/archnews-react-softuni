@@ -1,4 +1,11 @@
+//REACT
+//REACT COMPONENTS
 import { PartnerItem } from "./PartnerItem.js";
+//REACT HOOKS
+//REACT CONTEXT
+//REACT ROUTER
+//SERVICES
+
 
 export const PartnersSection = () => {
 

@@ -1,4 +1,11 @@
+//REACT
+//REACT COMPONENTS
 import { CardProfile } from './CardProfile.js';
+//REACT HOOKS
+//REACT CONTEXT
+//REACT ROUTER
+//SERVICES
+
 
 export const MyProfile = () => {
 

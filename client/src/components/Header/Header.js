@@ -1,7 +1,18 @@
-import { Link } from 'react-router-dom';
+//REACT
+import React, { useContext } from 'react';
+//REACT COMPONENTS
 import { HeaderLink } from './HeaderLink.js';
+//REACT HOOKS
+//REACT CONTEXT
+import { AuthContext } from '../../contexts/authContext.js';
+//REACT ROUTER
+import { Link } from 'react-router-dom';
+//SERVICES
+
 
 export const Header = () => {
+
+    const { auth } = useContext(AuthContext);
     return (
 
         <header>
@@ -14,7 +25,6 @@ export const Header = () => {
                     </Link>
                     <ul className="nav nav-pills ">
 
-
                         <HeaderLink
                             to={"/"}
                             title={"Home"}
@@ -24,21 +34,49 @@ export const Header = () => {
                             title={"Posts"}
                         />
 
+                        {auth.accessToken ?
+                            <React.Fragment>
+                                <HeaderLink
+                                    to={"/create"}
+                                    title={"Create Post"}
+                                />
+                                <HeaderLink
+                                    to={"/my-profile"}
+                                    title={"My Profile"}
+                                />
+                                <HeaderLink
+                                    to={"/logout"}
+                                    title={"Logout"}
+                                />
+                            </React.Fragment> :
+                            <React.Fragment>
+                                <HeaderLink
+                                    to={"/register"}
+                                    title={"Register"}
+                                />
+                                <HeaderLink
+                                    to={"/login"}
+                                    title={"Login"}
+                                />
+                            </React.Fragment>
+                        }
+
+
 
                         {/* Start: Guests */}
-                        <HeaderLink
+                        {/* <HeaderLink
                             to={"/register"}
                             title={"Register"}
                         />
                         <HeaderLink
                             to={"/login"}
                             title={"Login"}
-                        />
+                        /> */}
                         {/* End: Guests */}
 
 
                         {/* Start: User */}
-                        <HeaderLink
+                        {/* <HeaderLink
                             to={"/create"}
                             title={"Create Post"}
                         />
@@ -49,7 +87,7 @@ export const Header = () => {
                         <HeaderLink
                             to={"/"}
                             title={"Logout"}
-                        />
+                        /> */}
                         {/* End: User */}
 
 

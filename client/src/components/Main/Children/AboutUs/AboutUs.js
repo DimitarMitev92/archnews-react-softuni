@@ -1,7 +1,11 @@
-
+//REACT
+//REACT COMPONENTS
 import { CardMember } from './CardMember.js';
-
 import { Button } from '../../../UI/Button.js';
+//REACT HOOKS
+//REACT CONTEXT
+//REACT ROUTER
+//SERVICES
 
 export const AboutUs = () => {
 

@@ -1,10 +1,15 @@
+//REACT
 import { useState } from 'react';
-
-import { useNavigate } from 'react-router-dom';
-
-import { create } from '../../../../services/crud.js';
+//REACT COMPONENTS
 import { InputFiend } from '../../../UI/InputField.js';
 import { InputTextarea } from '../../../UI/InputTextarea.js';
+//REACT HOOKS
+//REACT CONTEXT
+//REACT ROUTER
+import { useNavigate } from 'react-router-dom';
+//SERVICES
+import { create } from '../../../../services/crud.js';
+
 
 export const Create = () => {
 
@@ -57,17 +62,14 @@ export const Create = () => {
         e.preventDefault();
 
         if (validTitle && validLocation && validImageUrl && validPost) {
-            try {
-                //SOME FIX
-                const userId = 1;
-                const date = new Date();
-                const likes = 0;
-                create(title, location, imageUrl, post, date, likes, userId)
-                    .then(result => console.log(result));
-                navigation('/details/:postId');
-            } catch (error) {
-                console.log(error.message);
-            }
+            //SOME FIX
+            const userId = 1;
+            const date = new Date();
+            const likes = 0;
+            create(title, location, imageUrl, post, date, likes, userId)
+                .then(result => console.log(result));
+            navigation('/details/:postId');
+            // .catch(error => console.log(error.message));
         }
 
     };

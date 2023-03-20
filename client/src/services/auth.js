@@ -14,14 +14,14 @@ export const register = async (fullName, username, email, password) => {
         })
     });
 
-    const result = await response.json();
-    return result.accessToken;
+    const user = await response.json();
+    return user;
 };
 
 export const login = async (email, password) => {
     const response = await fetch(`${baseUrl}/login`, {
         method: 'POST',
-        header: {
+        headers: {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({
@@ -29,6 +29,17 @@ export const login = async (email, password) => {
             password: password
         })
     });
-    const result = await response.json();
-    return result.accessToken;
+    const user = await response.json();
+    return user;
+};
+
+export const logout = async (accessToken) => {
+
+    const result = await fetch(`${baseUrl}/logout`, {
+        method: 'GET',
+        headers: {
+            'X-Authorization': accessToken
+        }
+    });
+    console.log(result);
 };
