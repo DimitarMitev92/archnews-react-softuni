@@ -11,6 +11,7 @@ export const register = async (fullName, username, email, password) => {
             username: username,
             email: email,
             password: password,
+            posts: []
         })
     });
 
@@ -41,5 +42,4 @@ export const logout = async (accessToken) => {
             'X-Authorization': accessToken
         }
     });
-    console.log(result);
 };

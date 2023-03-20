@@ -1,19 +1,22 @@
 //REACT
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 //REACT COMPONENTS
 import { InputFiend } from '../../../UI/InputField.js';
 import { InputTextarea } from '../../../UI/InputTextarea.js';
 //REACT HOOKS
 //REACT CONTEXT
+import { AuthContext } from '../../../../contexts/authContext.js';
 //REACT ROUTER
 import { useNavigate } from 'react-router-dom';
 //SERVICES
-import { create } from '../../../../services/crud.js';
+import { createPost } from '../../../../services/posts.js';
 
 
 export const Create = () => {
 
-    const navigation = useNavigate();
+    const navigate = useNavigate();
+
+    const { auth } = useContext(AuthContext);
 
     const [title, setTitle] = useState('');
     const [location, setLocation] = useState('');
@@ -61,17 +64,18 @@ export const Create = () => {
     const submitCreateHandler = (e) => {
         e.preventDefault();
 
-        if (validTitle && validLocation && validImageUrl && validPost) {
-            //SOME FIX
-            const userId = 1;
-            const date = new Date();
-            const likes = 0;
-            create(title, location, imageUrl, post, date, likes, userId)
-                .then(result => console.log(result));
-            navigation('/details/:postId');
-            // .catch(error => console.log(error.message));
-        }
+        const postData = {
+            title,
+            location,
+            imageUrl,
+            post,
+            likes: 0,
+            usersLiked: [],
+        };
 
+        createPost(auth.accessToken, postData)
+            .then(() => navigate('/posts'))
+            .catch(() => navigate('/404'));
     };
 
 

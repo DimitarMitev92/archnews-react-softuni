@@ -1,3 +1,6 @@
+//IMAGES AND LOGOS
+import logo from '../../assets/logos/main-icon/ArchNews-1.png';
+
 //REACT
 import React, { useContext } from 'react';
 //REACT COMPONENTS
@@ -13,14 +16,13 @@ import { Link } from 'react-router-dom';
 export const Header = () => {
 
     const { auth } = useContext(AuthContext);
-    return (
 
+    return (
         <header>
-            {/*  Start: Navigation Bar */}
             <nav className="navbar fixed-top bg-white border-bottom border-1 border-dark">
                 <div className="container-fluid">
                     <Link className="navbar-brand" to="/">
-                        <img src="https://lh3.googleusercontent.com/pw/AMWts8A6BXSwv_9rWhqKm5tJ3h0IET50m4d6tsNqGRGOPbnIuvqMd-khh_11BFRMMVZEUGDxqZy8DE8fRvzElmM2UlxJZ4XCYPsxu8CwdNJ_J24lddwCJymMluEAka9OywdTOo_ript5_ILYHfycU-poG3-D=w797-h174-no?authuser=0" alt="Logo" height="40"
+                        <img src={logo} alt="Logo" height="40"
                             className="d-inline-block align-text-center" />
                     </Link>
                     <ul className="nav nav-pills ">
@@ -61,36 +63,6 @@ export const Header = () => {
                             </React.Fragment>
                         }
 
-
-
-                        {/* Start: Guests */}
-                        {/* <HeaderLink
-                            to={"/register"}
-                            title={"Register"}
-                        />
-                        <HeaderLink
-                            to={"/login"}
-                            title={"Login"}
-                        /> */}
-                        {/* End: Guests */}
-
-
-                        {/* Start: User */}
-                        {/* <HeaderLink
-                            to={"/create"}
-                            title={"Create Post"}
-                        />
-                        <HeaderLink
-                            to={"/my-profile"}
-                            title={"My Profile"}
-                        />
-                        <HeaderLink
-                            to={"/"}
-                            title={"Logout"}
-                        /> */}
-                        {/* End: User */}
-
-
                         <HeaderLink
                             to={"/contact-us"}
                             title={"Contact Us"}
@@ -99,8 +71,6 @@ export const Header = () => {
                     </ul>
                 </div>
             </nav>
-            {/*  End: Navigation Bar */}
         </header>
-
     );
 };
