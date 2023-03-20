@@ -33,15 +33,14 @@ export const BlogSection = () => {
 
             {posts.length !== 0 ?
                 posts.map(post =>
-                    <CardPost key={post.postId}
+                    <CardPost key={post._id}
                         imageUrl={post.imageUrl}
-                        altImage={post.altImage}
                         title={post.title}
                         location={post.location}
-                        date={post.date}
+                        date={post._createdOn}
                         likes={post.likes}
-                        info={post.info}
-                        postId={post.postId}
+                        info={post.post}
+                        postId={post._id}
                     />) :
                 <h3 className="text-center p-4 text-light">There are no posts yet.</h3>}
 
