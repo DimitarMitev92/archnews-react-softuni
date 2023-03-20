@@ -1,3 +1,6 @@
+//IMAGES AND LOGOS
+import background from '../../../../assets/images/contact-us/contactUs-image.png';
+
 //REACT
 import { useState } from 'react';
 //REACT COMPONENTS
@@ -68,7 +71,7 @@ export const ContactUs = () => {
     };
 
     return (
-        <section className="vh-100 bg-image" style={{ backgroundImage: `url('https://lh3.googleusercontent.com/pw/AMWts8CcOITLGfZuYLWEJwxlEkhUrXGSrF6033yH3_uyByd47llheWbhPfQHtRGZmCnEcvFBCHN38ESip3uFCt5_PAFZjixmyowkGYPU0o20NVth-4ANuEpL3_5veBP5A4nGckoJ-XlJbJ4I5NtR-qeyQOcg=w1980-h1080-no?authuser=0')` }}>
+        <section className="vh-100 bg-image" style={{ backgroundImage: `url(${background})` }}>
             <div className="mask d-flex align-items-center h-100 gradient-custom-3">
                 <div className="container h-100">
                     <div className="row d-flex justify-content-center align-items-center h-100">

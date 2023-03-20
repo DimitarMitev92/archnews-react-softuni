@@ -1,3 +1,6 @@
+//IMAGES AND LOGOS
+import background from '../../../../assets/images/edit/edit-image.png';
+
 //REACT
 import { useState } from 'react';
 //REACT COMPONENTS
@@ -74,7 +77,7 @@ export const Edit = () => {
 
 
     return (
-        <section className="vh-100 bg-image" style={{ backgroundImage: `url('https://lh3.googleusercontent.com/pw/AMWts8A9tMv0KVNWgitYMIAxPXZR_IRoAXBFmGHgunUSriu_8FfR77lC_SFZLu_9DuNBv6RBJWMr2c_auQQCJosKzjaVkO-ahsZGX73Tbs0TVPmKGHSWMSTgvlKO5whr43o15NnkbmT_iCjha-zYbhWU9g_B=w1980-h1080-no?authuser=0')` }}>
+        <section className="vh-100 bg-image" style={{ backgroundImage: `url(${background})` }}>
             <div className="mask d-flex align-items-center h-100 gradient-custom-3">
                 <div className="container h-100">
                     <div className="row d-flex justify-content-center align-items-center h-100">

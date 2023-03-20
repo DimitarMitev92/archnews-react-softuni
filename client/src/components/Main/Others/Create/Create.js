@@ -1,3 +1,6 @@
+//IMAGES AND LOGOS
+import background from '../../../../assets/images/create/create-imageNew.png';
+
 //REACT
 import { useContext, useState } from 'react';
 //REACT COMPONENTS
@@ -80,7 +83,7 @@ export const Create = () => {
 
 
     return (
-        <section className="vh-100 bg-image" style={{ backgroundImage: `url('https://lh3.googleusercontent.com/pw/AMWts8AypubVIK2f7_ULlKclY6W-MWbDWAuy0rJ4_knaEKTbBpviu1MHgXxukBtcCWv05wb5kEn5yXql2x4Su2L1Q0HPkhDrAy1UJxgDt5h1v_MQhcXQgcKCzG9vdQKVJrhwryxWQgrQ2w2zXA7k-zypnRgL=w1980-h1080-no?authuser=0')` }}>
+        <section className="vh-100 bg-image" style={{ backgroundImage: `url(${background})` }}>
             <div className="mask d-flex align-items-center h-100 gradient-custom-3">
                 <div className="container h-100">
                     <div className="row d-flex justify-content-center align-items-center h-100">

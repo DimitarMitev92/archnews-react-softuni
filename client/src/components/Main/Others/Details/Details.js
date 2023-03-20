@@ -7,7 +7,7 @@ import { Button } from '../../../UI/Button.js';
 //SERVICES
 
 
-export const Details = () => {
+export const Details = (props) => {
 
     // TODO: FIX DETAILS INFORMATION
     return (

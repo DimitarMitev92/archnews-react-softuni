@@ -21,3 +21,13 @@ export const getAllPosts = async () => {
     });
     return response.json();
 };
+
+export const getPostById = async (postId) => {
+    const response = await fetch(`${baseUrl}/posts/${postId}`, {
+        method: 'GET',
+        headers: {
+            "Content-Type": "application/json"
+        }
+    });
+    return response.json();
+};
