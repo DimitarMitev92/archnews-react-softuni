@@ -65,7 +65,7 @@ export const MyProfile = () => {
                         likes={post.likes}
                         info={post.info}
                     />) :
-                <h3 className="text-center p-4 text-light">There are no posts yet</h3>
+                <h3 className="text-center p-4 text-light">There are no posts yet.</h3>
             }
 
         </section>

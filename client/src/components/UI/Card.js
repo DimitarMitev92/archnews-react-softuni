@@ -6,6 +6,8 @@ import { Button } from './Button.js';
 //REACT ROUTER
 //SERVICES
 
+import { dateParser } from '../../utils/dateParser.js';
+
 
 export const CardPost = ({
     imageUrl,
@@ -16,6 +18,8 @@ export const CardPost = ({
     info,
     postId,
 }) => {
+
+    date = dateParser(date);
     return (
         < div className="row p-5 border-top border-light border-2" >
             <div className="col zoom-in">
