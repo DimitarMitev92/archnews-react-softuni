@@ -36,7 +36,7 @@ export const login = async (email, password) => {
 
 export const logout = async (accessToken) => {
 
-    const result = await fetch(`${baseUrl}/logout`, {
+    await fetch(`${baseUrl}/logout`, {
         method: 'GET',
         headers: {
             'X-Authorization': accessToken

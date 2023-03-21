@@ -1,31 +1,44 @@
 //IMAGES AND LOGOS
 import background from '../../../../assets/images/edit/edit-image.png';
-
 //REACT
-import { useState } from 'react';
 //REACT COMPONENTS
 import { InputFiend } from '../../../UI/InputField.js';
 import { InputTextarea } from '../../../UI/InputTextarea.js';
 //REACT HOOKS
+import { useState, useEffect, useContext } from 'react';
 //REACT CONTEXT
-
-//REACT ROUTER
-
+import { AuthContext } from '../../../../contexts/authContext.js';
+//REACT ROUTER  
+import { useParams, useNavigate } from 'react-router-dom';
 //SERVICES
-
+import { getPostById, updatePost } from '../../../../services/posts.js';
 
 export const Edit = () => {
 
-    //FIX INITIAL STATE FROM CURRENT POST
+    const { postId } = useParams();
+    const { auth } = useContext(AuthContext);
+    const navigate = useNavigate();
+
     const [title, setTitle] = useState('');
     const [location, setLocation] = useState('');
     const [imageUrl, setImageUrl] = useState('');
     const [post, setPost] = useState('');
 
-    const [validTitle, setValidTitle] = useState(false);
-    const [validLocation, setValidLocation] = useState(false);
-    const [validImageUrl, setValidImageUrl] = useState(false);
-    const [validPost, setValidPost] = useState(false);
+    const [validTitle, setValidTitle] = useState(true);
+    const [validLocation, setValidLocation] = useState(true);
+    const [validImageUrl, setValidImageUrl] = useState(true);
+    const [validPost, setValidPost] = useState(true);
+
+    useEffect(() => {
+        getPostById(postId)
+            .then(post => {
+                setTitle(post.title);
+                setLocation(post.location);
+                setImageUrl(post.imageUrl);
+                setPost(post.post);
+            });
+    }, []);
+
 
     const changeTitleHandler = (e) => {
         setTitle(e.target.value);
@@ -62,16 +75,23 @@ export const Edit = () => {
 
     const submitEditHandler = (e) => {
         e.preventDefault();
-        if (validTitle && validLocation && validImageUrl && validPost) {
-            try {
-                //SOME FIX
-                const userId = 1;
-                const date = new Date();
-                const likes = 0;
-            } catch (error) {
-                // console.log(error.message);
-            }
-        }
+        const postData = {
+            title,
+            location,
+            imageUrl,
+            post
+        };
+        updatePost(postId, postData, auth.accessToken)
+            .then(result => {
+                if (result.code === 404) throw new Error(result.message);
+                console.log(postId);
+                console.log(postData);
+                console.log(auth.accessToken);
+                console.log(result);
+                navigate(`/posts`);
+            })
+            .catch(error => alert(error.message));
+
     };
 
 
@@ -86,7 +106,7 @@ export const Edit = () => {
                                 <div className="card-body p-5 ">
                                     <h2 className="text-uppercase text-center mb-5">EDIT POST</h2>
 
-                                    <form>
+                                    <form onSubmit={submitEditHandler}>
 
                                         <InputFiend
                                             title={"Title"}

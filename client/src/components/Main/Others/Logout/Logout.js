@@ -1,5 +1,5 @@
 //REACT
-import { useState, useContext, useEffect } from 'react';
+import { useContext, useEffect } from 'react';
 
 //REACT COMPONENTS
 //REACT HOOKS

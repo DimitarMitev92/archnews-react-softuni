@@ -31,3 +31,15 @@ export const getPostById = async (postId) => {
     });
     return response.json();
 };
+
+export const updatePost = async (postId, postData, accessToken) => {
+    const response = await fetch(`${baseUrl}/posts/${postId}`, {
+        method: 'PUT',
+        headers: {
+            "Content-Type": "application/json",
+            'X-Authorization': (accessToken)
+        },
+        body: JSON.stringify(postData)
+    });
+    return response.json();
+};
