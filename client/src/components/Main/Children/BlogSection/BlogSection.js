@@ -17,7 +17,6 @@ export const BlogSection = () => {
         getAllPosts()
             .then(allPosts => {
                 if (allPosts.code === 404) {
-                    console.log('Not Found');
                     setPosts([]);
                 } else {
                     setPosts(allPosts.slice(-3).reverse());

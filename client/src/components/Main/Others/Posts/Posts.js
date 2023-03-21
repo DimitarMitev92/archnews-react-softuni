@@ -15,7 +15,6 @@ export const Posts = () => {
         getAllPosts()
             .then(allPosts => {
                 if (allPosts.code === 404) {
-                    console.log('Not Found');
                     setPosts([]);
                 } else {
                     setPosts(allPosts);

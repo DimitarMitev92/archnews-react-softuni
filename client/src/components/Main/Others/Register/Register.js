@@ -82,7 +82,7 @@ export const Register = () => {
                 loginUser(user);
                 navigate('/');
             })
-            .catch(error => console.log(error.message));
+            .catch(error => alert(error.message));
     };
 
 
