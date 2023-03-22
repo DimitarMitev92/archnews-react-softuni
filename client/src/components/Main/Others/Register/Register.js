@@ -1,3 +1,6 @@
+//IMAGES AND LOGOS
+import background from '../../../../assets/images/register/register-imageNew.png';
+
 //REACT
 import { useContext, useState } from 'react';
 //REACT COMPONENTS
@@ -87,7 +90,7 @@ export const Register = () => {
 
 
     return (
-        <section className="vh-100 bg-image" style={{ backgroundImage: `url('https://lh3.googleusercontent.com/pw/AMWts8BDJbc97V1ZUW03fEMa_mhHvYqEX3hGP7P9VpgjglZ8eTTHZH0W15ga8kzfQG0gL0UglfYXXAa-WKAQIP5GWcYIVu9gw_Wm4A2GN6xwHJ4fDDEcSZx093PXRs4be5_j79N4EKEvukMpowYOoXmNhMvI=w1980-h1080-no?authuser=0')` }}>
+        <section className="vh-100 bg-image" style={{ backgroundImage: `url(${background})` }}>
             <div className="mask d-flex align-items-center h-100 gradient-custom-3">
                 <div className="container h-100">
                     <div className="row d-flex justify-content-center align-items-center h-100">

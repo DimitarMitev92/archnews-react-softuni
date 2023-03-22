@@ -24,6 +24,9 @@ export const Edit = () => {
     const [imageUrl, setImageUrl] = useState('');
     const [post, setPost] = useState('');
 
+    const [likes, setLikes] = useState(0);
+    const [usersLiked, setUsersLiked] = useState([]);
+
     const [validTitle, setValidTitle] = useState(true);
     const [validLocation, setValidLocation] = useState(true);
     const [validImageUrl, setValidImageUrl] = useState(true);
@@ -36,8 +39,10 @@ export const Edit = () => {
                 setLocation(post.location);
                 setImageUrl(post.imageUrl);
                 setPost(post.post);
+                setLikes(post.likes);
+                setUsersLiked(post.usersLiked);
             });
-    }, []);
+    }, [postId]);
 
 
     const changeTitleHandler = (e) => {
@@ -79,16 +84,15 @@ export const Edit = () => {
             title,
             location,
             imageUrl,
-            post
+            post,
+            likes,
+            usersLiked
         };
         updatePost(postId, postData, auth.accessToken)
             .then(result => {
+                if (result.code === 403) throw new Error('You are not authorized!');
                 if (result.code === 404) throw new Error(result.message);
-                console.log(postId);
-                console.log(postData);
-                console.log(auth.accessToken);
-                console.log(result);
-                navigate(`/posts`);
+                navigate(`/details/${postId}`);
             })
             .catch(error => alert(error.message));
 

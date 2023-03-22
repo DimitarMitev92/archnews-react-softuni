@@ -34,6 +34,7 @@ function App() {
 
   return (
     <AuthContext.Provider value={{ auth, loginUser }}>
+
       <Header />
 
       <Routes>

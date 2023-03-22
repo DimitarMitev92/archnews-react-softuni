@@ -43,3 +43,13 @@ export const updatePost = async (postId, postData, accessToken) => {
     });
     return response.json();
 };
+
+export const deletePost = async (postId, accessToken) => {
+    const response = await fetch(`${baseUrl}/posts/${postId}`, {
+        method: 'DELETE',
+        headers: {
+            'X-Authorization': (accessToken)
+        }
+    });
+    return response.json();
+};

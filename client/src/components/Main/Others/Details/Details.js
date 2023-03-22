@@ -1,34 +1,64 @@
 //REACT
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 //REACT COMPONENTS
 import { Button } from '../../../UI/Button.js';
 //REACT HOOKS
 //REACT CONTEXT
+import { AuthContext } from '../../../../contexts/authContext.js';
 //REACT ROUTER
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 //SERVICES
-import { getPostById } from '../../../../services/posts.js';
+import { getPostById, deletePost } from '../../../../services/posts.js';
 //UTILS
 import { dateParser } from '../../../../utils/dateParser.js';
 
 
 export const Details = () => {
+
     const { postId } = useParams();
 
+    const { auth } = useContext(AuthContext);
+
+    const navigate = useNavigate();
+
+    const [isOwner, setIsOwner] = useState(false);
+    const [isLiked, setIsLiked] = useState(false);
+    const [isLogIn, setIsLogIn] = useState(false);
+
     const [post, setPost] = useState({});
+
+
 
     useEffect(() => {
         getPostById(postId)
             .then(post => {
-                setPost(post);
+                setPost(previousState => previousState = post);
+                if (post._ownerId === auth._id) {
+                    setIsOwner(previousState => previousState = true);
+                }
             });
 
     }, [postId]);
 
-    //TODO LIKES, EDIT, DELETE, AND VISIBLE BUTTONS BY USER AND OWNER
+    useEffect(() => {
+
+    });
+
+    const deletePostHandler = () => {
+        const userChoice = window.confirm('Are you sure you want to delete this post? If you delete it, you won\'t be able to recover it.');
+        if (userChoice) {
+            deletePost(postId, auth.accessToken)
+                .then((result) => {
+                    if (result.code === 403) throw new Error(result.message);
+                    console.log(result);
+                    navigate('/posts');
+                })
+                .catch((error) => alert(error.message));
+        }
+    };
 
     return (
-        <section className="vh-auto overflow-hidden">
+        <section className="vh-auto overflow-hidden mt-5">
             <div className="d-flex justify-content-center align-content-center">
                 <div className="row">
                     <div className="col-sm-6 text-black d-flex justify-content-center align-items-center flex-md-column">
@@ -39,27 +69,37 @@ export const Details = () => {
                         <article style={{ textIndent: "50px" }} className="text-dark p-4 ">{post.post}
                         </article>
                         <div className="d-flex justify-content-center">
-                            <Button
-                                to={"/"}
-                                className={"btn btn-success m-2"}
-                                title={"Like"}
-                            />
-                            <Button
-                                to={"/"}
-                                className={"btn btn-danger m-2"}
-                                title={"Dislike"}
-                            />
-                            {/* //TODO FIX POSTID */}
-                            <Button
-                                to={`/edit/${post._id}`}
-                                className={"btn btn-success m-2"}
-                                title={"Edit"}
-                            />
-                            <Button
-                                to={"/"}
-                                className={"btn btn-danger m-2"}
-                                title={"Delete"}
-                            />
+                            {isLogIn &&
+                                <>
+                                    {isOwner ?
+                                        <>
+                                            <Button
+                                                to={`/edit/${post._id}`}
+                                                className={"btn btn-success m-2"}
+                                                title={"Edit"}
+                                            />
+                                            <Button
+                                                onClick={deletePostHandler}
+                                                className={"btn btn-danger m-2"}
+                                                title={"Delete"}
+                                            />
+                                        </> :
+                                        <>
+                                            <Button
+                                                className={"btn btn-success m-2"}
+                                                title={"Like"}
+                                                disabled={isLiked}
+                                            />
+                                            <Button
+                                                to={"/"}
+                                                className={"btn btn-danger m-2"}
+                                                title={"Dislike"}
+                                                disabled={isLiked}
+                                            />
+                                        </>
+                                    }
+                                </>
+                            }
                         </div>
                     </div>
                     <div className="col-sm-6 px-0 d-none d-sm-block">
