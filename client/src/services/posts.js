@@ -1,55 +1,34 @@
-const baseUrl = 'http://localhost:3030/data';
+import * as api from './api.js';
+
+const endpoint = {
+    'create': 'data/posts',
+    'all': 'data/posts',
+    'byId': 'data/posts/',
+    'update': 'data/posts/',
+    'delete': 'data/posts/'
+};
 
 export const createPost = async (accessToken, postData) => {
-    const response = await fetch(`${baseUrl}/posts`, {
-        method: 'POST',
-        headers: {
-            "Content-Type": "application/json",
-            "X-Authorization": accessToken
-        },
-        body: JSON.stringify(postData)
-    });
-    return response.json();
+    const response = await api.post(endpoint.create, postData, accessToken);
+    return response;
 };
 
 export const getAllPosts = async () => {
-    const response = await fetch(`${baseUrl}/posts`, {
-        method: 'GET',
-        headers: {
-            "Content-Type": "application/json"
-        }
-    });
-    return response.json();
+    const response = await api.get(endpoint.all);
+    return response;
 };
 
 export const getPostById = async (postId) => {
-    const response = await fetch(`${baseUrl}/posts/${postId}`, {
-        method: 'GET',
-        headers: {
-            "Content-Type": "application/json"
-        }
-    });
-    return response.json();
+    const response = await api.get(endpoint.byId + postId);
+    return response;
 };
 
 export const updatePost = async (postId, postData, accessToken) => {
-    const response = await fetch(`${baseUrl}/posts/${postId}`, {
-        method: 'PUT',
-        headers: {
-            "Content-Type": "application/json",
-            'X-Authorization': (accessToken)
-        },
-        body: JSON.stringify(postData)
-    });
-    return response.json();
+    const response = await api.put(endpoint.update + postId, postData, accessToken);
+    return response;
 };
 
 export const deletePost = async (postId, accessToken) => {
-    const response = await fetch(`${baseUrl}/posts/${postId}`, {
-        method: 'DELETE',
-        headers: {
-            'X-Authorization': (accessToken)
-        }
-    });
-    return response.json();
+    const response = await api.del(endpoint.delete + postId, null, accessToken);
+    return response;
 };

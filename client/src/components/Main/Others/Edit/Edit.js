@@ -95,7 +95,6 @@ export const Edit = () => {
                 navigate(`/details/${postId}`);
             })
             .catch(error => alert(error.message));
-
     };
 
 

@@ -1,45 +1,31 @@
-const baseUrl = `http://localhost:3030/users`;
+import * as api from './api.js';
 
-export const register = async (fullName, username, email, password) => {
-    const response = await fetch(`${baseUrl}/register`, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-            name: fullName,
-            username: username,
-            email: email,
-            password: password,
-            posts: []
-        })
-    });
+const endpoint = {
+    'login': 'users/login',
+    'register': 'users/register',
+    'logout': 'users/logout'
+};
 
-    const user = await response.json();
-    return user;
+export const register = async (name, username, email, password) => {
+    const data = {
+        name,
+        username,
+        email,
+        password
+    };
+    const response = await api.post(endpoint.register, data);
+    return response;
 };
 
 export const login = async (email, password) => {
-    const response = await fetch(`${baseUrl}/login`, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-            email: email,
-            password: password
-        })
-    });
-    const user = await response.json();
-    return user;
+    const data = {
+        email,
+        password
+    };
+    const response = await api.post(endpoint.login, data);
+    return response;
 };
 
 export const logout = async (accessToken) => {
-
-    await fetch(`${baseUrl}/logout`, {
-        method: 'GET',
-        headers: {
-            'X-Authorization': accessToken
-        }
-    });
+    api.get(endpoint.logout, null, accessToken);
 };

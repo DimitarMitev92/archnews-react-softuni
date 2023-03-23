@@ -72,12 +72,13 @@ export const Create = () => {
             location,
             imageUrl,
             post,
-            likes: 0,
-            usersLiked: [],
         };
 
         createPost(auth.accessToken, postData)
-            .then(() => navigate('/posts'))
+            .then((result) => {
+                console.log(result);
+                navigate('/posts');
+            })
             .catch(() => navigate('/404'));
     };
 

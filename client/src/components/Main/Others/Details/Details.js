@@ -15,34 +15,38 @@ import { dateParser } from '../../../../utils/dateParser.js';
 
 export const Details = () => {
 
+    const navigate = useNavigate();
+
     const { postId } = useParams();
 
     const { auth } = useContext(AuthContext);
 
-    const navigate = useNavigate();
-
+    const [currentPost, setCurrentPost] = useState({});
     const [isOwner, setIsOwner] = useState(false);
     const [isLiked, setIsLiked] = useState(false);
     const [isLogIn, setIsLogIn] = useState(false);
 
     const [post, setPost] = useState({});
 
-
-
     useEffect(() => {
         getPostById(postId)
             .then(post => {
+                setCurrentPost(previousState => previousState = post);
                 setPost(previousState => previousState = post);
                 if (post._ownerId === auth._id) {
                     setIsOwner(previousState => previousState = true);
                 }
             });
 
-    }, [postId]);
+    }, [postId, auth._id]);
 
     useEffect(() => {
-
-    });
+        if (auth._id) {
+            setIsLogIn(previousState => previousState = true);
+        } else {
+            setIsLogIn(previousState => previousState = false);
+        }
+    }, [auth]);
 
     const deletePostHandler = () => {
         const userChoice = window.confirm('Are you sure you want to delete this post? If you delete it, you won\'t be able to recover it.');
@@ -55,6 +59,20 @@ export const Details = () => {
                 })
                 .catch((error) => alert(error.message));
         }
+    };
+
+    //TODO: FIX LIKES AND DISLIKE FUNCTIONALITY
+    const likeHandle = () => {
+        // setIsLiked(previousState => previousState = true);
+        // console.log(currentPost);
+        // setCurrentPost(post => ({ ...post, likes: (post.likes + 1), usersLiked: [...post.usersLiked, auth._id] }));
+        // console.log(currentPost);
+        // updatePost(postId, currentPost, auth.accessToken)
+        //     .then(result => console.log(result));
+    };
+
+    const dislikeHandler = () => {
+        // console.log('dislike');
     };
 
     return (
@@ -86,12 +104,13 @@ export const Details = () => {
                                         </> :
                                         <>
                                             <Button
+                                                onClick={likeHandle}
                                                 className={"btn btn-success m-2"}
                                                 title={"Like"}
                                                 disabled={isLiked}
                                             />
                                             <Button
-                                                to={"/"}
+                                                onClick={dislikeHandler}
                                                 className={"btn btn-danger m-2"}
                                                 title={"Dislike"}
                                                 disabled={isLiked}
