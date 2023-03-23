@@ -76,7 +76,6 @@ export const Create = () => {
 
         createPost(auth.accessToken, postData)
             .then((result) => {
-                console.log(result);
                 navigate('/posts');
             })
             .catch(() => navigate('/404'));

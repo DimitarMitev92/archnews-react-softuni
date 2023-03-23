@@ -7,13 +7,14 @@ import { Button } from '../../../UI/Button.js';
 //REACT CONTEXT
 //REACT ROUTER
 //SERVICES
-import { getAllPosts } from '../../../../services/posts.js';
+import { getAllPosts, createPost } from '../../../../services/posts.js';
 
 
 export const BlogSection = () => {
 
     const [posts, setPosts] = useState([]);
     useEffect(() => {
+
         getAllPosts()
             .then(allPosts => {
                 if (allPosts.code === 404) {
@@ -21,7 +22,8 @@ export const BlogSection = () => {
                 } else {
                     setPosts(allPosts.slice(-3).reverse());
                 }
-            });
+            })
+            .catch((error) => alert(error));
     }, []);
 
     return (

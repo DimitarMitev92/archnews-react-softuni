@@ -19,7 +19,7 @@ export const Posts = () => {
                 } else {
                     setPosts(allPosts);
                 }
-            });
+            }).catch((error) => alert(error));
     }, []);
     return (
         <section className="container bg-secondary  m-5 mx-auto">
@@ -35,12 +35,10 @@ export const Posts = () => {
                         title={post.title}
                         location={post.location}
                         date={post._createdOn}
-                        likes={post.likes}
                         info={post.post}
                         postId={post._id}
                     />) :
                 <h3 className="text-center p-4 text-light">There are no posts yet.</h3>}
-
         </section>
     );
 };

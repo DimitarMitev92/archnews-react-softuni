@@ -34,7 +34,7 @@ export const Register = () => {
 
     const changeNameHandler = (e) => {
         setName(e.target.value);
-        if (e.target.value.trim().length > 0) {
+        if (e.target.value.trim().length > 3) {
             setValidName(previousState => previousState = true);
         } else {
             setValidName(previousState => previousState = false);

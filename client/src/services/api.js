@@ -18,10 +18,10 @@ async function requester(method, url, data, accessToken) {
     try {
         const response = await fetch(host + url, option);
 
-        if (!response.ok) {
-            const err = await response.json();
-            throw new Error(err.message);
-        }
+        // if (!response.ok) {
+        //     const err = await response.json();
+        //     throw new Error(err.message);
+        // }
         if (response.status === 204) {
             return response;
         } else {
@@ -29,7 +29,6 @@ async function requester(method, url, data, accessToken) {
         }
 
     } catch (error) {
-        alert(error.message);
         throw error;
     }
 }

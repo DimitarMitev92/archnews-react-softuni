@@ -53,7 +53,6 @@ export const Login = () => {
         e.preventDefault();
         login(email, password)
             .then(user => {
-                console.log(user);
                 if (user === undefined) {
                     throw new Error('Email or password is not valid');
                 }
