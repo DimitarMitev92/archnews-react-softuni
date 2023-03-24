@@ -9,8 +9,10 @@ import { AuthContext } from '../../../../contexts/authContext.js';
 import { useNavigate } from 'react-router-dom';
 //SERVICES
 import { getAllPostByUserId, deletePost } from '../../../../services/posts.js';
+import { getAllLikes } from '../../../../services/likes.js';
 //UTILS
 import { dateParser } from '../../../../utils/dateParser.js';
+import { addLikesToCurrentPost } from '../../../../utils/addLikesToPost.js';
 
 
 export const MyProfile = () => {
@@ -22,22 +24,37 @@ export const MyProfile = () => {
     const { auth } = useContext(AuthContext);
 
     const [myPosts, setMyPosts] = useState([]);
+    const [myPostsWithLikes, setMyPostsWithLikes] = useState([]);
+    const [likes, setLikes] = useState([]);
 
     const currentUser = auth.name;
 
     useEffect(() => {
         getAllPostByUserId(auth._id)
             .then(result => {
-                setMyPosts(result);
+                setMyPosts(previousState => previousState = result);
             });
-    }, [myPosts]);
+    }, [auth._id]);
+
+    useEffect(() => {
+        getAllLikes()
+            .then((result) => {
+                setLikes(previousState => previousState = result);
+            });
+    }, [auth._id]);
+
+    useEffect(() => {
+        console.log(myPosts, likes);
+        setMyPostsWithLikes(previousState => previousState = addLikesToCurrentPost(myPosts, likes));
+    }, [myPosts, likes]);
+
+
 
     const deletePostHandler = (postId) => {
         const userChoice = window.confirm('Are you sure you want to delete this post? If you delete it ,you won\'t be able to recover it.');
         if (userChoice) {
             deletePost(postId, auth.accessToken)
                 .then((result) => {
-                    console.log(postId);
                     if (result.code === 403) throw new Error(result.message);
                     navigate('/my-profile');
                 })
@@ -55,8 +72,8 @@ export const MyProfile = () => {
             </div>
 
 
-            {myPosts.length !== 0 ?
-                myPosts.map(post =>
+            {myPostsWithLikes.length !== 0 ?
+                myPostsWithLikes.map(post =>
                     <CardProfile
                         key={post._id}
                         postId={post._id}

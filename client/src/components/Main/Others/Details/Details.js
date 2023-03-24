@@ -9,7 +9,7 @@ import { AuthContext } from '../../../../contexts/authContext.js';
 import { useParams, useNavigate } from 'react-router-dom';
 //SERVICES
 import { getPostByPostId, deletePost } from '../../../../services/posts.js';
-import { createLikes, getAllLikesForPost, isUserLikedPost } from '../../../../services/likes.js';
+import { createLikes, getAllLikesForPost } from '../../../../services/likes.js';
 //UTILS
 import { dateParser } from '../../../../utils/dateParser.js';
 
