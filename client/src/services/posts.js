@@ -3,7 +3,8 @@ import * as api from './api.js';
 const endpoint = {
     'create': 'data/posts',
     'all': 'data/posts',
-    'byId': 'data/posts/',
+    'byPostId': 'data/posts/',
+    'byUserId': 'data/posts',
     'update': 'data/posts/',
     'delete': 'data/posts/'
 };
@@ -18,8 +19,14 @@ export const getAllPosts = async () => {
     return response;
 };
 
-export const getPostById = async (postId) => {
-    const response = await api.get(endpoint.byId + postId);
+export const getAllPostByUserId = async (userId) => {
+    const encodedUrl = encodeURIComponent(`="${userId}"`);
+    const response = await api.get(`${endpoint.byUserId}?where=_ownerId${encodedUrl}`);
+    return response;
+};
+
+export const getPostByPostId = async (postId) => {
+    const response = await api.get(endpoint.byPostId + postId);
     return response;
 };
 

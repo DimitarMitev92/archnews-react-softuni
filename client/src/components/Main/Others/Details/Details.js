@@ -8,7 +8,7 @@ import { AuthContext } from '../../../../contexts/authContext.js';
 //REACT ROUTER
 import { useParams, useNavigate } from 'react-router-dom';
 //SERVICES
-import { getPostById, deletePost } from '../../../../services/posts.js';
+import { getPostByPostId, deletePost } from '../../../../services/posts.js';
 import { createLikes, getAllLikesForPost, isUserLikedPost } from '../../../../services/likes.js';
 //UTILS
 import { dateParser } from '../../../../utils/dateParser.js';
@@ -29,7 +29,7 @@ export const Details = () => {
     const [post, setPost] = useState({});
 
     useEffect(() => {
-        getPostById(postId)
+        getPostByPostId(postId)
             .then(post => {
                 setPost(previousState => previousState = post);
                 if (post._ownerId === auth._id) {

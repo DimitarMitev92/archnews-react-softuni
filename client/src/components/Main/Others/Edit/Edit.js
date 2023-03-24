@@ -11,7 +11,7 @@ import { AuthContext } from '../../../../contexts/authContext.js';
 //REACT ROUTER  
 import { useParams, useNavigate } from 'react-router-dom';
 //SERVICES
-import { getPostById, updatePost } from '../../../../services/posts.js';
+import { getPostByPostId, updatePost } from '../../../../services/posts.js';
 
 export const Edit = () => {
 
@@ -33,7 +33,7 @@ export const Edit = () => {
     const [validPost, setValidPost] = useState(true);
 
     useEffect(() => {
-        getPostById(postId)
+        getPostByPostId(postId)
             .then(post => {
                 setTitle(post.title);
                 setLocation(post.location);

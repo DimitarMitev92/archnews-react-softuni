@@ -1,47 +1,49 @@
 //REACT
+import { useEffect, useState, useContext } from 'react';
 //REACT COMPONENTS
 import { CardProfile } from './CardProfile.js';
 //REACT HOOKS
 //REACT CONTEXT
+import { AuthContext } from '../../../../contexts/authContext.js';
 //REACT ROUTER
+import { useNavigate } from 'react-router-dom';
 //SERVICES
+import { getAllPostByUserId, deletePost } from '../../../../services/posts.js';
+//UTILS
+import { dateParser } from '../../../../utils/dateParser.js';
 
 
 export const MyProfile = () => {
 
-    const currentUser = "Dimitar Mitev";
+    const navigate = useNavigate();
 
-    const myPosts = [];
-    // const myPosts =
-    //     [
-    //         {
-    //             postId: "1",
-    //             imageUrl: "https://lh3.googleusercontent.com/pw/AMWts8CSJQZw5TziHGvx-rIGHyUOwF_dZoermaBARiy4QjMWXIAgsokJNd5-sXk-pC04dckew_r7yn9wcRdER4LBIvGHm0qDswpiqjWB3eKTT6pAbYPsMPGTgC1uXkPf-Hyl9msfC3u4g0o-RYVXsN_CtcBt=w2120-h1413-no?authuser=0",
-    //             title: "Most Visited Products of Wallcovering",
-    //             location: "Milano",
-    //             date: "22.02.2023",
-    //             likes: "10",
-    //             info: "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Iusto facere molestias voluptatibus impedit architecto aliquid cum culpa perferendis? Voluptate, consectetur!",
-    //         },
-    //         {
-    //             postId: "2",
-    //             imageUrl: "https://lh3.googleusercontent.com/pw/AMWts8BQzX4Azc4oGZMkrASpZgTFNTZtI8ej_sNQ85JDZ7y8hyy1P7T4yfUs7BPt-_rcZQjwPwjx26t92xjdZN5wruPgyrAwXQh5EQo-N-Cto5DHZ2NaaqqamTxK83Sd6DSY1g7bAKq5DSe5cq3lNn-tpUJw=w1886-h1413-no?authuser=0",
-    //             title: "Most Visited Products of Wallcovering",
-    //             location: "Milano",
-    //             date: "22.02.2023",
-    //             likes: "10",
-    //             info: "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Iusto facere molestias voluptatibus impedit architecto aliquid cum culpa perferendis? Voluptate, consectetur!",
-    //         },
-    //         {
-    //             postId: "3",
-    //             imageUrl: "https://lh3.googleusercontent.com/pw/AMWts8C7oubJFAavqfbOygAYshzKGN6bMwld3-a7nZFHDXC7vl7N47SDohZlHDidr9TwoEo6OPrraPZ0VbXRhW9HbtmILWK1U934fN64Mh2vmSwEM-hHkMM9yD83TJvA3p0rMn4y7INsJDukJk77_lJeo8Xl=w1979-h1413-no?authuser=0",
-    //             title: "Most Visited Products of Wallcovering",
-    //             location: "Milano",
-    //             date: "22.02.2023",
-    //             likes: "10",
-    //             info: "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Iusto facere molestias voluptatibus impedit architecto aliquid cum culpa perferendis? Voluptate, consectetur!",
-    //         }
-    //     ];
+
+
+    const { auth } = useContext(AuthContext);
+
+    const [myPosts, setMyPosts] = useState([]);
+
+    const currentUser = auth.name;
+
+    useEffect(() => {
+        getAllPostByUserId(auth._id)
+            .then(result => {
+                setMyPosts(result);
+            });
+    }, [myPosts]);
+
+    const deletePostHandler = (postId) => {
+        const userChoice = window.confirm('Are you sure you want to delete this post? If you delete it ,you won\'t be able to recover it.');
+        if (userChoice) {
+            deletePost(postId, auth.accessToken)
+                .then((result) => {
+                    console.log(postId);
+                    if (result.code === 403) throw new Error(result.message);
+                    navigate('/my-profile');
+                })
+                .catch((error) => alert(error.message));
+        }
+    };
 
 
     return (
@@ -56,14 +58,15 @@ export const MyProfile = () => {
             {myPosts.length !== 0 ?
                 myPosts.map(post =>
                     <CardProfile
-                        key={post.postId}
-                        postId={post.postId}
+                        key={post._id}
+                        postId={post._id}
                         imageUrl={post.imageUrl}
                         title={post.title}
                         location={post.location}
-                        date={post.date}
+                        date={dateParser(post._createdOn)}
                         likes={post.likes}
-                        info={post.info}
+                        info={post.post}
+                        deleteHandler={deletePostHandler}
                     />) :
                 <h3 className="text-center p-4 text-light">There are no posts yet.</h3>
             }

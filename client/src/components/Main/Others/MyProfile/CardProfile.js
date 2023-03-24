@@ -15,7 +15,13 @@ export const CardProfile = ({
     date,
     likes,
     info,
+    deleteHandler
 }) => {
+
+    const onDeleteHandler = (e) => {
+        e.preventDefault();
+        deleteHandler(postId);
+    };
     return (
         <div className="row p-5 border-top border-light border-2">
             <div className="col zoom-in">
@@ -37,6 +43,7 @@ export const CardProfile = ({
                 <Button
                     to={`/`}
                     className={"btn btn-danger m-2"}
+                    onClick={onDeleteHandler}
                     title={"Delete"}
                 />
             </div>
