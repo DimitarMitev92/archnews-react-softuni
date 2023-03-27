@@ -21,6 +21,7 @@ export const BlogSection = () => {
     const [myPosts, setPosts] = useState([]);
     const [myPostsWithLikes, setMyPostsWithLikes] = useState([]);
     const [likes, setLikes] = useState([]);
+    const [sortBy, setSortBy] = useState('');
 
     useEffect(() => {
 
@@ -46,10 +47,26 @@ export const BlogSection = () => {
         setMyPostsWithLikes(previousState => previousState = addLikesToCurrentPost(myPosts, likes));
     }, [myPosts, likes]);
 
+    const onSortHandler = (e) => {
+        setSortBy(previousState => previousState = e.target.textContent);
+    };
+
     return (
         < section className="container bg-secondary  m-5 mx-auto" >
             <div className="row bg-black">
                 <h2 className="text-center p-4 text-light ">ARCHITECTURE POSTS</h2>
+
+            </div>
+            <div className="dropdown show d-flex justify-content-center m-2" onClick={onSortHandler}>
+                <a className="btn btn-dark dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Sort by
+                </a>
+
+                <div className="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                    <a className="dropdown-item" >Newest</a>
+                    <a className="dropdown-item" >Oldest</a>
+                    <a className="dropdown-item" >Most liked</a>
+                </div>
             </div>
 
             {myPostsWithLikes.length !== 0 ?
