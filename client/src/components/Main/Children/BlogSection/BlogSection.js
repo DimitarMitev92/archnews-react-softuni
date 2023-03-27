@@ -1,18 +1,27 @@
 //REACT
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 //REACT COMPONENTS
 import { CardPost } from '../../../UI/Card.js';
 import { Button } from '../../../UI/Button.js';
 //REACT HOOKS
 //REACT CONTEXT
+import { AuthContext } from '../../../../contexts/authContext.js';
 //REACT ROUTER
 //SERVICES
-import { getAllPosts, createPost } from '../../../../services/posts.js';
+import { getAllPosts } from '../../../../services/posts.js';
+import { getAllLikes } from '../../../../services/likes.js';
+//UTILS
+import { addLikesToCurrentPost } from '../../../../utils/addLikesToPost.js';
 
 
 export const BlogSection = () => {
 
-    const [posts, setPosts] = useState([]);
+    const { auth } = useContext(AuthContext);
+
+    const [myPosts, setPosts] = useState([]);
+    const [myPostsWithLikes, setMyPostsWithLikes] = useState([]);
+    const [likes, setLikes] = useState([]);
+
     useEffect(() => {
 
         getAllPosts()
@@ -26,14 +35,25 @@ export const BlogSection = () => {
             .catch((error) => alert(error));
     }, []);
 
+    useEffect(() => {
+        getAllLikes()
+            .then((result) => {
+                setLikes(previousState => previousState = result);
+            });
+    }, [auth._id]);
+
+    useEffect(() => {
+        setMyPostsWithLikes(previousState => previousState = addLikesToCurrentPost(myPosts, likes));
+    }, [myPosts, likes]);
+
     return (
         < section className="container bg-secondary  m-5 mx-auto" >
             <div className="row bg-black">
                 <h2 className="text-center p-4 text-light ">ARCHITECTURE POSTS</h2>
             </div>
 
-            {posts.length !== 0 ?
-                posts.map(post =>
+            {myPostsWithLikes.length !== 0 ?
+                myPostsWithLikes.map(post =>
                     <CardPost key={post._id}
                         imageUrl={post.imageUrl}
                         title={post.title}
@@ -45,7 +65,7 @@ export const BlogSection = () => {
                     />) :
                 <h3 className="text-center p-4 text-light">There are no posts yet.</h3>}
 
-            {posts.length === 0 ||
+            {myPostsWithLikes.length === 0 ||
                 <div className="d-flex align-items-center justify-content-center" style={{ height: "100px" }}>
                     <Button
                         to={"/posts"}

@@ -30,6 +30,7 @@ export const CardPost = ({
                 <h3 className="text-light">{title}</h3>
                 <h5 className="text-light"><i><ion-icon name="location-outline"></ion-icon></i> {location}</h5>
                 <h5 className="text-light"><i><ion-icon name="calendar-outline"></ion-icon></i> {date}</h5>
+                <h5 className="text-light"><i><ion-icon name="heart-outline"></ion-icon></i> Likes: {likes}</h5>
                 <article className="text-light">{info}</article>
                 <Button
                     to={`/details/${postId}`}

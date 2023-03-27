@@ -19,8 +19,6 @@ export const MyProfile = () => {
 
     const navigate = useNavigate();
 
-
-
     const { auth } = useContext(AuthContext);
 
     const [myPosts, setMyPosts] = useState([]);
@@ -44,7 +42,6 @@ export const MyProfile = () => {
     }, [auth._id]);
 
     useEffect(() => {
-        console.log(myPosts, likes);
         setMyPostsWithLikes(previousState => previousState = addLikesToCurrentPost(myPosts, likes));
     }, [myPosts, likes]);
 

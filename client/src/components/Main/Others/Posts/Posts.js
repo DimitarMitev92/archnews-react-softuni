@@ -1,19 +1,26 @@
 //REACT
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 //REACT COMPONENTS
 import { CardPost } from "../../../UI/Card.js";
 //REACT HOOKS
 //REACT CONTEXT
+import { AuthContext } from "../../../../contexts/authContext.js";
 //REACT ROUTER
 //SERVICES
 import { getAllPosts } from '../../../../services/posts.js';
+import { getAllLikes } from "../../../../services/likes.js";
 //UTILS
 import { searcherViaName } from '../../../../utils/searchViaName.js';
+import { addLikesToCurrentPost } from "../../../../utils/addLikesToPost.js";
 
 export const Posts = () => {
 
-    const [posts, setPosts] = useState([]);
+    const { auth } = useContext(AuthContext);
+
+    const [myPosts, setPosts] = useState([]);
+    const [myPostsWithLikes, setMyPostsWithLikes] = useState([]);
     const [searchName, setSearchName] = useState('');
+    const [likes, setLikes] = useState([]);
 
     useEffect(() => {
         getAllPosts()
@@ -26,6 +33,18 @@ export const Posts = () => {
             }).catch((error) => alert(error));
     }, [searchName]);
 
+    useEffect(() => {
+        getAllLikes()
+            .then((result) => {
+                setLikes(previousState => previousState = result);
+            });
+    }, [auth._id]);
+
+
+    useEffect(() => {
+        setMyPostsWithLikes(previousState => previousState = addLikesToCurrentPost(myPosts, likes));
+    }, [myPosts, likes]);
+
     const searchViaNameHandler = (e) => {
         setSearchName(e.target.value);
 
@@ -33,7 +52,7 @@ export const Posts = () => {
 
     const searchSubmitHandler = (e) => {
         e.preventDefault();
-        setPosts(searcherViaName(searchName, posts));
+        setPosts(searcherViaName(searchName, myPosts));
     };
 
     return (
@@ -47,14 +66,15 @@ export const Posts = () => {
             </form>
 
 
-            {posts.length !== 0 ?
-                posts.map(post =>
+            {myPostsWithLikes.length !== 0 ?
+                myPostsWithLikes.map(post =>
                     <CardPost
                         key={post._id}
                         imageUrl={post.imageUrl}
                         title={post.title}
                         location={post.location}
                         date={post._createdOn}
+                        likes={post.likes}
                         info={post.post}
                         postId={post._id}
                     />) :
