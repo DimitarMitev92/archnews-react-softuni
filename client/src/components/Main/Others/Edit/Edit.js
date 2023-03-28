@@ -41,7 +41,7 @@ export const Edit = () => {
                 setPost(post.post);
                 setLikes(post.likes);
                 setUsersLiked(post.usersLiked);
-            });
+            }).catch(error => alert(error.message));
     }, [postId]);
 
 
@@ -97,7 +97,46 @@ export const Edit = () => {
             .catch(error => alert(error.message));
     };
 
-
+    const editInputs = [{
+        title: "Title",
+        htmlFor: "titleInput",
+        type: "text",
+        validItem: validTitle,
+        value: title,
+        onChange: changeTitleHandler,
+        onBlur: changeTitleHandler,
+        validFeedback: "Right title.",
+        invalidFeedback: "Enter post's title.",
+    }, {
+        title: "Location",
+        htmlFor: "locationInput",
+        type: "text",
+        validItem: validLocation,
+        value: location,
+        onChange: changeLocationHandler,
+        onBlur: changeLocationHandler,
+        validFeedback: "Right location.",
+        invalidFeedback: "Enter post's location.",
+    }, {
+        title: "Image Link",
+        htmlFor: "imageInput",
+        type: "url",
+        validItem: validImageUrl,
+        value: imageUrl,
+        onChange: changeImageUrlHandler,
+        onBlur: changeImageUrlHandler,
+        validFeedback: "Right image link.",
+        invalidFeedback: "Enter post's image link.",
+    }, {
+        title: "Your Post",
+        htmlFor: "editTextarea",
+        validItem: validPost,
+        value: post,
+        onChange: changePostHandler,
+        onBlur: changePostHandler,
+        validFeedback: "Right post.",
+        invalidFeedback: "Enter your post.",
+    }];
 
     return (
         <section className="vh-100 bg-image" style={{ backgroundImage: `url(${background})` }}>
@@ -110,53 +149,18 @@ export const Edit = () => {
                                     <h2 className="text-uppercase text-center mb-5">EDIT POST</h2>
 
                                     <form onSubmit={submitEditHandler}>
-
-                                        <InputField
-                                            title={"Title"}
-                                            htmlFor={"titleInput"}
-                                            type={"text"}
-                                            validItem={validTitle}
-                                            value={title}
-                                            onChange={changeTitleHandler}
-                                            onBlur={changeTitleHandler}
-                                            validFeedback={"Right title."}
-                                            invalidFeedback={"Enter post's title."}
-                                        />
-
-                                        <InputField
-                                            title={"Location"}
-                                            htmlFor={"locationInput"}
-                                            type={"text"}
-                                            validItem={validLocation}
-                                            value={location}
-                                            onChange={changeLocationHandler}
-                                            onBlur={changeLocationHandler}
-                                            validFeedback={"Right location."}
-                                            invalidFeedback={"Enter post's location."}
-                                        />
-
-                                        <InputField
-                                            title={"Image Link"}
-                                            htmlFor={"imageInput"}
-                                            type={"url"}
-                                            validItem={validImageUrl}
-                                            value={imageUrl}
-                                            onChange={changeImageUrlHandler}
-                                            onBlur={changeImageUrlHandler}
-                                            validFeedback={"Right image link."}
-                                            invalidFeedback={"Enter post's image link."}
-                                        />
-
-                                        <InputTextarea
-                                            title={"Your Post"}
-                                            htmlFor={"editTextarea"}
-                                            validItem={validPost}
-                                            value={post}
-                                            onChange={changePostHandler}
-                                            onBlur={changePostHandler}
-                                            validFeedback={"Right post."}
-                                            invalidFeedback={"Enter your post."}
-                                        />
+                                        {editInputs.map((editInput, index) => <InputField
+                                            key={index}
+                                            title={editInput.title}
+                                            htmlFor={editInput.htmlFor}
+                                            type={editInput.type}
+                                            validItem={editInput.validItem}
+                                            value={editInput.value}
+                                            onChange={editInput.onChange}
+                                            onBlur={editInput.onBlur}
+                                            validFeedback={editInput.validFeedback}
+                                            invalidFeedback={editInput.invalidFeedback}
+                                        />)}
 
                                         <div className="d-flex justify-content-center">
                                             <button type="submit" className={`btn btn-secondary btn-lg m-3 ${!(validTitle && validLocation && validImageUrl && validPost) ? "disabled" : ""}`}>Edit</button>

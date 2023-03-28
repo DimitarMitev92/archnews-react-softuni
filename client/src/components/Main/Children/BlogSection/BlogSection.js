@@ -27,7 +27,7 @@ export const BlogSection = () => {
         getAllPosts()
             .then(allPosts => {
                 if (allPosts.code === 404) {
-                    setPosts([]);
+                    setPosts(previousState => previousState = []);
                 } else {
                     setPosts(allPosts.slice(-3).reverse());
                 }
@@ -38,7 +38,11 @@ export const BlogSection = () => {
     useEffect(() => {
         getAllLikes()
             .then((result) => {
-                setLikes(previousState => previousState = result);
+                if (result.code === 404) {
+                    setLikes(previousState => previousState = []);
+                } else {
+                    setLikes(previousState => previousState = result);
+                }
             })
             .catch((error) => alert(error.message));
     }, [auth._id]);
