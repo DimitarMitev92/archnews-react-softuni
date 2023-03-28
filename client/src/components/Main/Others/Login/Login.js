@@ -66,6 +66,28 @@ export const Login = () => {
             });
     };
 
+    const loginInputs = [{
+        title: "Your Email",
+        htmlFor: "emailInput",
+        type: "email",
+        validItem: validEmail,
+        value: email,
+        onChange: changeEmailHandler,
+        onBlur: changeEmailHandler,
+        validFeedback: "Right email.",
+        invalidFeedback: "Enter your email.",
+    }, {
+        title: "Password",
+        htmlFor: "passwordInput",
+        type: "password",
+        validItem: validPassword,
+        value: password,
+        onChange: changePasswordHandler,
+        onBlur: changePasswordHandler,
+        validFeedback: "Valid password.",
+        invalidFeedback: "Enter your password.",
+    }];
+
     return (
         <section className="vh-100">
             <div className="container-fluid">
@@ -74,29 +96,18 @@ export const Login = () => {
                         <h2 className="text-uppercase text-center m-5">LOGIN</h2>
                         <form onSubmit={loginSubmitHandler}>
 
-                            <LoginInput
-                                title={"Your Email"}
-                                htmlFor={"emailInput"}
-                                type={"email"}
-                                validItem={validEmail}
-                                value={email}
-                                onChange={changeEmailHandler}
-                                onBlur={changeEmailHandler}
-                                validFeedback={"Right email."}
-                                invalidFeedback={"Enter your email."}
-                            />
-
-                            <LoginInput
-                                title={"Password"}
-                                htmlFor={"passwordInput"}
-                                type={"password"}
-                                validItem={validPassword}
-                                value={password}
-                                onChange={changePasswordHandler}
-                                onBlur={changePasswordHandler}
-                                validFeedback={"Valid password."}
-                                invalidFeedback={"Enter your password."}
-                            />
+                            {loginInputs.map((loginInput, index) => <LoginInput
+                                key={index}
+                                title={loginInput.title}
+                                htmlFor={loginInput.htmlFor}
+                                type={loginInput.type}
+                                validItem={loginInput.validItem}
+                                value={loginInput.value}
+                                onChange={loginInput.onChange}
+                                onBlur={loginInput.onBlur}
+                                validFeedback={loginInput.validFeedback}
+                                invalidFeedback={loginInput.invalidFeedback}
+                            />)}
 
                             <div className="d-flex justify-content-center">
                                 <button type="submit" className={`btn btn-secondary btn-lg ${!(validEmail && validPassword) ? 'disabled' : ''}`}>Login</button>
