@@ -4,7 +4,7 @@ import background from '../../../../assets/images/create/create-imageNew.png';
 //REACT
 import { useContext, useState } from 'react';
 //REACT COMPONENTS
-import { InputFiend } from '../../../UI/InputField.js';
+import { InputField } from '../../../UI/InputField.js';
 import { InputTextarea } from '../../../UI/InputTextarea.js';
 //REACT HOOKS
 //REACT CONTEXT
@@ -81,6 +81,39 @@ export const Create = () => {
             .catch(() => navigate('/404'));
     };
 
+    const createInputs = [
+        {
+            title: "Title",
+            htmlFor: "titleInput",
+            type: "text",
+            validItem: validTitle,
+            value: title,
+            onChange: changeTitleHandler,
+            onBlur: changeTitleHandler,
+            validFeedback: "Right title.",
+            invalidFeedback: "Enter post's title.",
+        }, {
+            title: "Location",
+            htmlFor: "locationInput",
+            type: "text",
+            validItem: validLocation,
+            value: location,
+            onChange: changeLocationHandler,
+            onBlur: changeLocationHandler,
+            validFeedback: "Right location.",
+            invalidFeedback: "Enter post's location.",
+        }, {
+            title: "Image Link",
+            htmlFor: "imageInput",
+            type: "url",
+            validItem: validImageUrl,
+            value: imageUrl,
+            onChange: changeImageUrlHandler,
+            onBlur: changeImageUrlHandler,
+            validFeedback: "Right image link",
+            invalidFeedback: "Enter post's image link.",
+        }];
+
 
     return (
         <section className="vh-100 bg-image" style={{ backgroundImage: `url(${background})` }}>
@@ -94,41 +127,18 @@ export const Create = () => {
 
                                     <form onSubmit={submitCreateHandler}>
 
-                                        <InputFiend
-                                            title={"Title"}
-                                            htmlFor={"titleInput"}
-                                            type={"text"}
-                                            validItem={validTitle}
-                                            value={title}
-                                            onChange={changeTitleHandler}
-                                            onBlur={changeTitleHandler}
-                                            validFeedback={"Right title."}
-                                            invalidFeedback={"Enter post's title."}
-                                        />
-
-                                        <InputFiend
-                                            title={"Location"}
-                                            htmlFor={"locationInput"}
-                                            type={"text"}
-                                            validItem={validLocation}
-                                            value={location}
-                                            onChange={changeLocationHandler}
-                                            onBlur={changeLocationHandler}
-                                            validFeedback={"Right location."}
-                                            invalidFeedback={"Enter post's location."}
-                                        />
-
-                                        <InputFiend
-                                            title={"Image Link"}
-                                            htmlFor={"imageInput"}
-                                            type={"url"}
-                                            validItem={validImageUrl}
-                                            value={imageUrl}
-                                            onChange={changeImageUrlHandler}
-                                            onBlur={changeImageUrlHandler}
-                                            validFeedback={"Right image link"}
-                                            invalidFeedback={"Enter post's image link."}
-                                        />
+                                        {createInputs.map((createInput, index) => <InputField
+                                            key={index}
+                                            title={createInput.title}
+                                            htmlFor={createInput.htmlFor}
+                                            type={createInput.type}
+                                            validItem={createInput.validItem}
+                                            value={createInput.value}
+                                            onChange={createInput.onChange}
+                                            onBlur={createInput.onBlur}
+                                            validFeedback={createInput.validFeedback}
+                                            invalidFeedback={createInput.invalidFeedback}
+                                        />)}
 
                                         <InputTextarea
                                             title={"Your Post"}

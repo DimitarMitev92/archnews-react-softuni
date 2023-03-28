@@ -5,7 +5,7 @@
 //REACT ROUTER
 //SERVICES
 
-export const InputFiend = ({
+export const InputField = ({
     title,
     htmlFor,
     type,

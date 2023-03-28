@@ -3,7 +3,7 @@ import background from '../../../../assets/images/contact-us/contactUs-image.png
 //REACT
 import { useState } from 'react';
 //REACT COMPONENTS
-import { InputFiend } from '../../../UI/InputField.js';
+import { InputField } from '../../../UI/InputField.js';
 import { InputTextarea } from '../../../UI/InputTextarea.js';
 //REACT HOOKS
 //REACT CONTEXT
@@ -125,7 +125,7 @@ export const ContactUs = () => {
                                     </div>
                                     <form onSubmit={contactSubmitHandler}>
 
-                                        {contactsInputs.map((contact, index) => <InputFiend
+                                        {contactsInputs.map((contact, index) => <InputField
                                             key={index}
                                             title={contact.title}
                                             htmlFor={contact.htmlFor}

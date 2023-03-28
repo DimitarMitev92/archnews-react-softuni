@@ -4,7 +4,7 @@ import background from '../../../../assets/images/register/register-imageNew.png
 //REACT
 import { useContext, useState } from 'react';
 //REACT COMPONENTS
-import { InputFiend } from '../../../UI/InputField.js';
+import { InputField } from '../../../UI/InputField.js';
 //REACT HOOKS
 //REACT CONTEXT
 import { AuthContext } from '../../../../contexts/authContext.js';
@@ -101,7 +101,7 @@ export const Register = () => {
 
                                     <form onSubmit={registerSubmitHandler}>
 
-                                        <InputFiend
+                                        <InputField
                                             title={"Your Name"}
                                             htmlFor={"nameInput"}
                                             type={"text"}
@@ -113,7 +113,7 @@ export const Register = () => {
                                             invalidFeedback={"Enter your name."}
                                         />
 
-                                        <InputFiend
+                                        <InputField
                                             title={"Your Username"}
                                             htmlFor={"usernameInput"}
                                             type={"text"}
@@ -125,7 +125,7 @@ export const Register = () => {
                                             invalidFeedback={"Enter your username."}
                                         />
 
-                                        <InputFiend
+                                        <InputField
                                             title={"Your Email"}
                                             htmlFor={"emailInput"}
                                             type={"email"}
@@ -137,7 +137,7 @@ export const Register = () => {
                                             invalidFeedback={"Enter your email."}
                                         />
 
-                                        <InputFiend
+                                        <InputField
                                             title={"Password"}
                                             htmlFor={"passwordInput"}
                                             type={"password"}
@@ -149,7 +149,7 @@ export const Register = () => {
                                             invalidFeedback={"Enter your password."}
                                         />
 
-                                        <InputFiend
+                                        <InputField
                                             title={"Repeat your password"}
                                             htmlFor={"rePasswordInput"}
                                             type={"password"}

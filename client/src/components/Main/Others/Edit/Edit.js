@@ -2,7 +2,7 @@
 import background from '../../../../assets/images/edit/edit-image.png';
 //REACT
 //REACT COMPONENTS
-import { InputFiend } from '../../../UI/InputField.js';
+import { InputField } from '../../../UI/InputField.js';
 import { InputTextarea } from '../../../UI/InputTextarea.js';
 //REACT HOOKS
 import { useState, useEffect, useContext } from 'react';
@@ -111,7 +111,7 @@ export const Edit = () => {
 
                                     <form onSubmit={submitEditHandler}>
 
-                                        <InputFiend
+                                        <InputField
                                             title={"Title"}
                                             htmlFor={"titleInput"}
                                             type={"text"}
@@ -123,7 +123,7 @@ export const Edit = () => {
                                             invalidFeedback={"Enter post's title."}
                                         />
 
-                                        <InputFiend
+                                        <InputField
                                             title={"Location"}
                                             htmlFor={"locationInput"}
                                             type={"text"}
@@ -135,7 +135,7 @@ export const Edit = () => {
                                             invalidFeedback={"Enter post's location."}
                                         />
 
-                                        <InputFiend
+                                        <InputField
                                             title={"Image Link"}
                                             htmlFor={"imageInput"}
                                             type={"url"}
