@@ -35,7 +35,7 @@ export const Details = () => {
                 if (post._ownerId === auth._id) {
                     setIsOwner(previousState => previousState = true);
                 }
-            });
+            }).catch(error => alert(error.message));
     }, [postId, auth._id]);
 
     useEffect(() => {
@@ -55,7 +55,7 @@ export const Details = () => {
                 setLikes(result.length);
                 const isCurrentUserLikedPost = Boolean(result.filter(x => x.likedUser === auth._id).length);
                 setIsLiked(isCurrentUserLikedPost);
-            });
+            }).catch(error => alert(error.message));
     }, [auth._id, likes, postId]);
 
     const deletePostHandler = () => {
@@ -81,7 +81,7 @@ export const Details = () => {
                     .then((result) => {
                         setLikes(result.length);
                     });
-            });
+            }).catch(error => alert(error.message));
     };
 
     return (
