@@ -11,8 +11,11 @@ import { AboutUs } from "./Children/AboutUs/AboutUs.js";
 
 
 export const Main = () => {
+
+
     return (
         <main>
+
             <HeroSection />
 
             <PartnersSection />
