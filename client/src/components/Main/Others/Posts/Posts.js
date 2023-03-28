@@ -58,21 +58,6 @@ export const Posts = () => {
         setPosts(searcherViaName(searchName, myPosts));
     };
 
-    // TODO: MAYBE MAKE A SORTING
-    // useEffect(() => {
-    //     if (sortBy === 'Newest') {
-    //         setMyPostsWithLikes(previousState => previousState = myPostsWithLikes.sort((a, b) => new Date(b._createdOn) - new Date(a._createdOn)));
-    //     } else if (sortBy === 'Oldest') {
-    //         setMyPostsWithLikes(previousState => previousState = myPostsWithLikes.sort((a, b) => new Date(a._createdOn) - new Date(b._createdOn)));
-    //     } else if (sortBy === "Most liked") {
-    //         setMyPostsWithLikes(previousState => previousState = myPostsWithLikes.sort((a, b) => b.likes - a.likes));
-    //     }
-
-    // }, [sortBy]);
-
-
-
-
     return (
         <section className="container bg-secondary  m-5 mx-auto">
             <div className="row bg-black">

@@ -1,6 +1,5 @@
 //IMAGES AND LOGOS
 import background from '../../../../assets/images/contact-us/contactUs-image.png';
-
 //REACT
 import { useState } from 'react';
 //REACT COMPONENTS
@@ -12,10 +11,6 @@ import { InputTextarea } from '../../../UI/InputTextarea.js';
 import { useNavigate } from 'react-router-dom';
 //SERVICES
 import { contact } from '../../../../services/contact.js';
-
-
-
-
 
 export const ContactUs = () => {
 
@@ -64,11 +59,55 @@ export const ContactUs = () => {
     const contactSubmitHandler = (e) => {
         e.preventDefault();
         contact(name, email, phoneNumber, message)
-            .then(result => console.log(result));
-        navigate('/');
-        // .catch(error => console.log(error.message));
-
+            .then(result => {
+                console.log(result);
+                navigate('/');
+            })
+            .catch(error => alert(error.message));
     };
+
+    const contactsInputs = [
+        {
+            title: "Your Name",
+            htmlFor: "nameInput",
+            type: "text",
+            validItem: validName,
+            value: name,
+            onChange: changeNameHandler,
+            onBlur: changeNameHandler,
+            validFeedback: "Right name.",
+            invalidFeedback: "Enter your name.",
+        }, {
+            title: "Your Email",
+            htmlFor: "emailInput",
+            type: "email",
+            validItem: validEmail,
+            value: email,
+            onChange: changeEmailHandler,
+            onBlur: changeEmailHandler,
+            validFeedback: "Right email.",
+            invalidFeedback: "Enter your email.",
+        }, {
+            title: "Your Phone",
+            htmlFor: "phoneInput",
+            type: "text",
+            validItem: validPhoneNumber,
+            value: phoneNumber,
+            onChange: changePhoneNumberHandler,
+            onBlur: changePhoneNumberHandler,
+            validFeedback: "Right phone number.",
+            invalidFeedback: "Enter your phone number.",
+        }, {
+            title: "Your Message",
+            htmlFor: "messageTextarea",
+            validItem: validMessage,
+            value: message,
+            onChange: changeMessageHandler,
+            onBlur: changeMessageHandler,
+            validFeedback: "Right message.",
+            invalidFeedback: "Enter your message.",
+        }
+    ];
 
     return (
         <section className="vh-100 bg-image" style={{ backgroundImage: `url(${background})` }}>
@@ -86,54 +125,17 @@ export const ContactUs = () => {
                                     </div>
                                     <form onSubmit={contactSubmitHandler}>
 
-                                        <InputFiend
-                                            title={"Your Name"}
-                                            htmlFor={"nameInput"}
-                                            type={"text"}
-                                            validItem={validName}
-                                            value={name}
-                                            onChange={changeNameHandler}
-                                            onBlur={changeNameHandler}
-                                            validFeedback={"Right name."}
-                                            invalidFeedback={"Enter your name."}
-                                        />
-
-
-                                        <InputFiend
-                                            title={"Your Email"}
-                                            htmlFor={"emailInput"}
-                                            type={"email"}
-                                            validItem={validEmail}
-                                            value={email}
-                                            onChange={changeEmailHandler}
-                                            onBlur={changeEmailHandler}
-                                            validFeedback={"Right email."}
-                                            invalidFeedback={"Enter your email."}
-                                        />
-
-                                        <InputFiend
-                                            title={"Your Phone"}
-                                            htmlFor={"phoneInput"}
-                                            type={"text"}
-                                            validItem={validPhoneNumber}
-                                            value={phoneNumber}
-                                            onChange={changePhoneNumberHandler}
-                                            onBlur={changePhoneNumberHandler}
-                                            validFeedback={"Right phone number."}
-                                            invalidFeedback={"Enter your phone number."}
-                                        />
-
-                                        <InputTextarea
-                                            title={"Your Message"}
-                                            htmlFor={"messageTextarea"}
-                                            validItem={validMessage}
-                                            value={message}
-                                            onChange={changeMessageHandler}
-                                            onBlur={changeMessageHandler}
-                                            validFeedback={"Right message."}
-                                            invalidFeedback={"Enter your message."}
-
-                                        />
+                                        {contactsInputs.map((contact, index) => <InputFiend
+                                            key={index}
+                                            title={contact.title}
+                                            htmlFor={contact.htmlFor}
+                                            validItem={contact.validItem}
+                                            value={contact.value}
+                                            onChange={contact.onChange}
+                                            onBlur={contact.onBlur}
+                                            validFeedback={contact.validFeedback}
+                                            invalidFeedback={contact.invalidFeedback}
+                                        />)}
 
                                         <div className="d-flex justify-content-center">
                                             <button type="submit"

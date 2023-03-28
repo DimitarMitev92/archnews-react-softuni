@@ -39,7 +39,8 @@ export const BlogSection = () => {
         getAllLikes()
             .then((result) => {
                 setLikes(previousState => previousState = result);
-            });
+            })
+            .catch((error) => alert(error.message));
     }, [auth._id]);
 
     useEffect(() => {

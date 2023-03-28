@@ -29,19 +29,19 @@ export const AboutUs = () => {
             profession: "CEO",
             imageUrl: owner1,
             altImage: "owner",
-            info: "Lorem ipsum dolor, sit amet consectetur adipisicing elit.         Dolore, porro."
+            info: "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dolore, porro."
         },
         {
             profession: "Marketing Manager",
             imageUrl: member2,
             altImage: "member2",
-            info: "Lorem ipsum dolor sit amet consectetur adipisicing elit.           Tempore, sint."
+            info: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore, sint."
         },
         {
             profession: "Social Media Manager",
             imageUrl: member3,
             altImage: "member3",
-            info: "Lorem ipsum, dolor sit amet consectetur adipisicing elit.          Sequi, culpa."
+            info: "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sequi, culpa."
         },
         {
             profession: "Web Designer",
