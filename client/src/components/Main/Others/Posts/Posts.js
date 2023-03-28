@@ -36,8 +36,12 @@ export const Posts = () => {
     useEffect(() => {
         getAllLikes()
             .then((result) => {
+                if (result.code === 404) {
+                    result = [];
+                }
                 setLikes(previousState => previousState = result);
-            });
+            })
+            .catch((error) => alert(error.message));
     }, [auth._id]);
 
 
@@ -47,13 +51,27 @@ export const Posts = () => {
 
     const searchViaNameHandler = (e) => {
         setSearchName(e.target.value);
-
     };
 
     const searchSubmitHandler = (e) => {
         e.preventDefault();
         setPosts(searcherViaName(searchName, myPosts));
     };
+
+    // TODO: MAYBE MAKE A SORTING
+    // useEffect(() => {
+    //     if (sortBy === 'Newest') {
+    //         setMyPostsWithLikes(previousState => previousState = myPostsWithLikes.sort((a, b) => new Date(b._createdOn) - new Date(a._createdOn)));
+    //     } else if (sortBy === 'Oldest') {
+    //         setMyPostsWithLikes(previousState => previousState = myPostsWithLikes.sort((a, b) => new Date(a._createdOn) - new Date(b._createdOn)));
+    //     } else if (sortBy === "Most liked") {
+    //         setMyPostsWithLikes(previousState => previousState = myPostsWithLikes.sort((a, b) => b.likes - a.likes));
+    //     }
+
+    // }, [sortBy]);
+
+
+
 
     return (
         <section className="container bg-secondary  m-5 mx-auto">
@@ -64,7 +82,6 @@ export const Posts = () => {
                 <input className="form-control me-2" type="search" placeholder="Search via name" aria-label="Search" onChange={searchViaNameHandler} value={searchName} />
                 <button className="btn btn-light btn-lg" type="submit">Search</button>
             </form>
-
 
             {myPostsWithLikes.length !== 0 ?
                 myPostsWithLikes.map(post =>

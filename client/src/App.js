@@ -22,6 +22,7 @@ import { NotFound } from './components/Main/Others/NotFound/NotFound.js';
 import { AuthContext } from './contexts/authContext.js';
 //REACT ROUTER
 import { Routes, Route } from 'react-router-dom';
+import { RouteGuard } from './components/RouteGuard/RouteGuard.js';
 //SERVICES
 
 function App() {
@@ -39,15 +40,17 @@ function App() {
 
       <Routes>
         <Route path="/" element={<Main />} />
-        <Route path="/my-profile" element={<MyProfile />} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/create" element={<Create />} />
         <Route path="/details/:postId" element={<Details />} />
-        <Route path="/edit/:postId" element={<Edit />} />
         <Route path="/posts" element={<Posts />} />
         <Route path="/contact-us" element={<ContactUs />} />
         <Route path="/logout" element={<Logout />} />
+        <Route element={<RouteGuard />}>
+          <Route path="/create" element={<Create />} />
+          <Route path="/edit/:postId" element={<Edit />} />
+          <Route path="/my-profile" element={<MyProfile />} />
+        </Route>
         <Route path="/*" element={<NotFound />} />
       </Routes>
 

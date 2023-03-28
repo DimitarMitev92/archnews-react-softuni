@@ -6,7 +6,7 @@ const endpoint = {
     'byPostId': 'data/posts/',
     'byUserId': 'data/posts',
     'update': 'data/posts/',
-    'delete': 'data/posts/'
+    'delete': 'data/posts/',
 };
 
 export const createPost = async (accessToken, postData) => {
@@ -39,3 +39,5 @@ export const deletePost = async (postId, accessToken) => {
     const response = await api.del(endpoint.delete + postId, null, accessToken);
     return response;
 };
+
+
