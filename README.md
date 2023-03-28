@@ -144,10 +144,6 @@ This is a React project for the course of _SoftUni - ReactJS - February 2023_. I
 
 ![search-found](https://raw.githubusercontent.com/DimitarMitev92/archnews-react-softuni/main/screenshots/search-with-find.png)
 
-## Edit.
-
-![edit](https://raw.githubusercontent.com/DimitarMitev92/archnews-react-softuni/main/screenshots/edit-post.png)
-
 ## Details without like.
 
 ![details-with-like](https://raw.githubusercontent.com/DimitarMitev92/archnews-react-softuni/main/screenshots/details-without-like.png)
@@ -167,6 +163,10 @@ This is a React project for the course of _SoftUni - ReactJS - February 2023_. I
 ### Create with text.
 
 ![create-with-text](https://raw.githubusercontent.com/DimitarMitev92/archnews-react-softuni/main/screenshots/create-with-text.png)
+
+## Edit Page.
+
+![edit](https://raw.githubusercontent.com/DimitarMitev92/archnews-react-softuni/main/screenshots/edit-post.png)
 
 ### Contact us without text.
 
