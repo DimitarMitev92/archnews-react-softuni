@@ -1,6 +1,5 @@
 //IMAGES AND LOGOS
 import background from '../../../../assets/images/create/create-imageNew.png';
-
 //REACT
 import { useContext, useState } from 'react';
 //REACT COMPONENTS

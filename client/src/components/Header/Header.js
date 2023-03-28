@@ -1,6 +1,5 @@
 //IMAGES AND LOGOS
 import logo from '../../assets/logos/main-icon/ArchNews-1.png';
-
 //REACT
 import React, { useContext } from 'react';
 //REACT COMPONENTS

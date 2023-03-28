@@ -1,6 +1,5 @@
 //IMAGES AND LOGOS
 import background from '../../../../assets/images/register/register-imageNew.png';
-
 //REACT
 import { useContext, useState } from 'react';
 //REACT COMPONENTS
@@ -88,6 +87,58 @@ export const Register = () => {
             .catch(error => alert(error.message));
     };
 
+    const registerInputs = [{
+        title: "Your Name",
+        htmlFor: "nameInput",
+        type: "text",
+        validItem: validName,
+        value: name,
+        onChange: changeNameHandler,
+        onBlur: changeNameHandler,
+        validFeedback: "Right name.",
+        invalidFeedback: "Enter your name.",
+    }, {
+        title: "Your Username",
+        htmlFor: "usernameInput",
+        type: "text",
+        validItem: validUsername,
+        value: username,
+        onChange: changeUsernameHandler,
+        onBlur: changeUsernameHandler,
+        validFeedback: "Right username.",
+        invalidFeedback: "Enter your username.",
+    }, {
+        title: "Your Email",
+        htmlFor: "emailInput",
+        type: "email",
+        validItem: validEmail,
+        value: email,
+        onChange: changeEmailHandler,
+        onBlur: changeEmailHandler,
+        validFeedback: "Right email.",
+        invalidFeedback: "Enter your email.",
+    }, {
+        title: "Password",
+        htmlFor: "passwordInput",
+        type: "password",
+        validItem: validPassword,
+        value: password,
+        onChange: changePasswordHandler,
+        onBlur: changePasswordHandler,
+        validFeedback: "Valid password.",
+        invalidFeedback: "Enter your password.",
+    }, {
+        title: "Repeat your password",
+        htmlFor: "rePasswordInput",
+        type: "password",
+        validItem: validRepeatPassword,
+        value: repeatPassword,
+        onChange: changeRepeatPasswordHandler,
+        onBlur: changeRepeatPasswordHandler,
+        validFeedback: "Passwords match.",
+        invalidFeedback: "Passwords mismatch.",
+    }];
+
 
     return (
         <section className="vh-100 bg-image" style={{ backgroundImage: `url(${background})` }}>
@@ -101,65 +152,19 @@ export const Register = () => {
 
                                     <form onSubmit={registerSubmitHandler}>
 
-                                        <InputField
-                                            title={"Your Name"}
-                                            htmlFor={"nameInput"}
-                                            type={"text"}
-                                            validItem={validName}
-                                            value={name}
-                                            onChange={changeNameHandler}
-                                            onBlur={changeNameHandler}
-                                            validFeedback={"Right name."}
-                                            invalidFeedback={"Enter your name."}
-                                        />
-
-                                        <InputField
-                                            title={"Your Username"}
-                                            htmlFor={"usernameInput"}
-                                            type={"text"}
-                                            validItem={validUsername}
-                                            value={username}
-                                            onChange={changeUsernameHandler}
-                                            onBlur={changeUsernameHandler}
-                                            validFeedback={"Right username."}
-                                            invalidFeedback={"Enter your username."}
-                                        />
-
-                                        <InputField
-                                            title={"Your Email"}
-                                            htmlFor={"emailInput"}
-                                            type={"email"}
-                                            validItem={validEmail}
-                                            value={email}
-                                            onChange={changeEmailHandler}
-                                            onBlur={changeEmailHandler}
-                                            validFeedback={"Right email."}
-                                            invalidFeedback={"Enter your email."}
-                                        />
-
-                                        <InputField
-                                            title={"Password"}
-                                            htmlFor={"passwordInput"}
-                                            type={"password"}
-                                            validItem={validPassword}
-                                            value={password}
-                                            onChange={changePasswordHandler}
-                                            onBlur={changePasswordHandler}
-                                            validFeedback={"Valid password."}
-                                            invalidFeedback={"Enter your password."}
-                                        />
-
-                                        <InputField
-                                            title={"Repeat your password"}
-                                            htmlFor={"rePasswordInput"}
-                                            type={"password"}
-                                            validItem={validRepeatPassword}
-                                            value={repeatPassword}
-                                            onChange={changeRepeatPasswordHandler}
-                                            onBlur={changeRepeatPasswordHandler}
-                                            validFeedback={"Passwords match."}
-                                            invalidFeedback={"Passwords mismatch."}
-                                        />
+                                        {registerInputs.map((registerInput, index) =>
+                                            <InputField
+                                                key={index}
+                                                title={registerInput.title}
+                                                htmlFor={registerInput.htmlFor}
+                                                type={registerInput.type}
+                                                validItem={registerInput.validItem}
+                                                value={registerInput.value}
+                                                onChange={registerInput.onChange}
+                                                onBlur={registerInput.onBlur}
+                                                validFeedback={registerInput.validFeedback}
+                                                invalidFeedback={registerInput.invalidFeedback}
+                                            />)}
 
                                         <div className="d-flex justify-content-center">
                                             <button type="submit" className={`btn btn-secondary btn-lg ${!(validName && validUsername && validEmail && validPassword && validRepeatPassword) ? 'disabled' : ''}`}>Register</button>

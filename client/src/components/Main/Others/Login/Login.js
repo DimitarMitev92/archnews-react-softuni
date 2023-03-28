@@ -1,21 +1,14 @@
 //IMAGES AND LOGOS
 import background from '../../../../assets/images/login/login-imageNew.jpg';
-
 //REACT
 import { useState, useContext } from 'react';
-
 //REACT COMPONENTS
 import { LoginInput } from './LoginInput.js';
-
 //REACT HOOKS
-
 //REACT CONTEXT
 import { AuthContext } from '../../../../contexts/authContext.js';
-
 //REACT ROUTER
 import { useNavigate, Link } from 'react-router-dom';
-
-
 //SERVICES
 import { login } from '../../../../services/auth.js';
 

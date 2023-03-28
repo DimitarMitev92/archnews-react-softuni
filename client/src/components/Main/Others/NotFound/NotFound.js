@@ -1,6 +1,5 @@
 //IMAGES AND LOGOS
 import status404 from '../../../../assets/images/404/404.png';
-
 //REACT
 //REACT COMPONENTS
 //REACT HOOKS

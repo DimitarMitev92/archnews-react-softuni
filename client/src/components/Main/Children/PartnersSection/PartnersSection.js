@@ -2,7 +2,6 @@
 import partner1 from '../../../../assets/logos/partners/partner1.png';
 import partner2 from '../../../../assets/logos/partners/partner2.png';
 import partner3 from '../../../../assets/logos/partners/partner3.png';
-
 //REACT
 //REACT COMPONENTS
 import { PartnerItem } from "./PartnerItem.js";

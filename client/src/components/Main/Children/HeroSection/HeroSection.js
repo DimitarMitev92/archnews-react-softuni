@@ -1,6 +1,5 @@
 //IMAGES AND LOGOS
 import background from '../../../../assets/images/hero-section/hero-image.jpg';
-
 //REACT
 //REACT COMPONENTS
 //REACT HOOKS

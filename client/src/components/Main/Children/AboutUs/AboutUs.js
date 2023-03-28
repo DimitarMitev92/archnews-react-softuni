@@ -6,7 +6,6 @@ import member3 from '../../../../assets/images/about-us/members/member3.png';
 import member4 from '../../../../assets/images/about-us/members/member4.png';
 import member5 from '../../../../assets/images/about-us/members/member5.png';
 import owner1 from '../../../../assets/images/about-us/members/owner1.png';
-
 //REACT
 //REACT COMPONENTS
 import { CardMember } from './CardMember.js';
