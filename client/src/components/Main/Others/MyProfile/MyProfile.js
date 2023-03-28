@@ -24,6 +24,7 @@ export const MyProfile = () => {
     const [myPosts, setMyPosts] = useState([]);
     const [myPostsWithLikes, setMyPostsWithLikes] = useState([]);
     const [likes, setLikes] = useState([]);
+    const [isDelete, setIsDelete] = useState(false);
 
     const currentUser = auth.name;
 
@@ -31,19 +32,19 @@ export const MyProfile = () => {
         getAllPostByUserId(auth._id)
             .then(result => {
                 setMyPosts(previousState => previousState = result);
-            });
-    }, [auth._id]);
+            }).catch(error => alert(error.message));
+    }, [auth._id, isDelete]);
 
     useEffect(() => {
         getAllLikes()
             .then((result) => {
                 setLikes(previousState => previousState = result);
-            });
-    }, [auth._id]);
+            }).catch(error => alert(error.message));
+    }, [auth._id, isDelete]);
 
     useEffect(() => {
         setMyPostsWithLikes(previousState => previousState = addLikesToCurrentPost(myPosts, likes));
-    }, [myPosts, likes]);
+    }, [myPosts, likes, isDelete]);
 
 
 
@@ -52,6 +53,7 @@ export const MyProfile = () => {
         if (userChoice) {
             deletePost(postId, auth.accessToken)
                 .then((result) => {
+                    setIsDelete(previousState => previousState = !previousState);
                     if (result.code === 403) throw new Error(result.message);
                     navigate('/my-profile');
                 })

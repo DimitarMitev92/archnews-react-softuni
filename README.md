@@ -1,2 +1,3 @@
-# archnews-react-softuni
-React project for ReactJS SoftUni
+# ARCHNEWS React Softuni Project
+
+---
