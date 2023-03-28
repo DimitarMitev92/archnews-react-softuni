@@ -78,6 +78,11 @@ export const Create = () => {
                 navigate('/posts');
             })
             .catch(() => navigate('/404'));
+
+        setTitle(preventDefault => preventDefault = '');
+        setLocation(preventDefault => preventDefault = '');
+        setImageUrl(preventDefault => preventDefault = '');
+        setPost(preventDefault => preventDefault = '');
     };
 
     const createInputs = [

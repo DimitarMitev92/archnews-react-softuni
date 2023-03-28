@@ -95,6 +95,12 @@ export const Edit = () => {
                 navigate(`/details/${postId}`);
             })
             .catch(error => alert(error.message));
+
+        setTitle(previousState => previousState = '');
+        setLocation(previousState => previousState = '');
+        setImageUrl(previousState => previousState = '');
+        setPost(previousState => previousState = '');
+
     };
 
     const editInputs = [{
@@ -127,15 +133,6 @@ export const Edit = () => {
         onBlur: changeImageUrlHandler,
         validFeedback: "Right image link.",
         invalidFeedback: "Enter post's image link.",
-    }, {
-        title: "Your Post",
-        htmlFor: "editTextarea",
-        validItem: validPost,
-        value: post,
-        onChange: changePostHandler,
-        onBlur: changePostHandler,
-        validFeedback: "Right post.",
-        invalidFeedback: "Enter your post.",
     }];
 
     return (
@@ -161,6 +158,18 @@ export const Edit = () => {
                                             validFeedback={editInput.validFeedback}
                                             invalidFeedback={editInput.invalidFeedback}
                                         />)}
+
+                                        <InputTextarea
+                                            title={"Your Post"}
+                                            htmlFor={"editTextarea"}
+                                            validItem={validPost}
+                                            value={post}
+                                            onChange={changePostHandler}
+                                            onBlur={changePostHandler}
+                                            validFeedback={"Right post."}
+                                            invalidFeedback={"Enter your post."}
+
+                                        />
 
                                         <div className="d-flex justify-content-center">
                                             <button type="submit" className={`btn btn-secondary btn-lg m-3 ${!(validTitle && validLocation && validImageUrl && validPost) ? "disabled" : ""}`}>Edit</button>

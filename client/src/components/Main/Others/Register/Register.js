@@ -85,6 +85,12 @@ export const Register = () => {
                 navigate('/');
             })
             .catch(error => alert(error.message));
+
+        setName(previousState => previousState = '');
+        setUsername(previousState => previousState = '');
+        setEmail(previousState => previousState = '');
+        setPassword(previousState => previousState = '');
+        setRepeatPassword(previousState => previousState = '');
     };
 
     const registerInputs = [{

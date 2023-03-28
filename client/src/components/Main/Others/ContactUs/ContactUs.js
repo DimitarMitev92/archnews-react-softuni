@@ -64,6 +64,11 @@ export const ContactUs = () => {
                 navigate('/');
             })
             .catch(error => alert(error.message));
+
+        setName(previousState => previousState = '');
+        setEmail(previousState => previousState = '');
+        setPhoneNumber(previousState => previousState = '');
+        setMessage(previousState => previousState = '');
     };
 
     const contactsInputs = [
@@ -97,15 +102,6 @@ export const ContactUs = () => {
             onBlur: changePhoneNumberHandler,
             validFeedback: "Right phone number.",
             invalidFeedback: "Enter your phone number.",
-        }, {
-            title: "Your Message",
-            htmlFor: "messageTextarea",
-            validItem: validMessage,
-            value: message,
-            onChange: changeMessageHandler,
-            onBlur: changeMessageHandler,
-            validFeedback: "Right message.",
-            invalidFeedback: "Enter your message.",
         }
     ];
 
@@ -136,6 +132,17 @@ export const ContactUs = () => {
                                             validFeedback={contact.validFeedback}
                                             invalidFeedback={contact.invalidFeedback}
                                         />)}
+
+                                        <InputTextarea
+                                            title={"Your Message"}
+                                            htmlFor={"messageTextarea"}
+                                            validItem={validMessage}
+                                            value={message}
+                                            onChange={changeMessageHandler}
+                                            onBlur={changeMessageHandler}
+                                            validFeedback={"Right message."}
+                                            invalidFeedback={"Enter your message."}
+                                        />
 
                                         <div className="d-flex justify-content-center">
                                             <button type="submit"

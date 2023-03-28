@@ -57,6 +57,10 @@ export const Login = () => {
             }).catch(error => {
                 alert(error.message);
             });
+
+        setEmail(previousState => previousState = '');
+        setPassword(previousState => previousState = '');
+
     };
 
     const loginInputs = [{
