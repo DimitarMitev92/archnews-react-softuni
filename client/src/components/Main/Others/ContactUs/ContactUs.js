@@ -37,13 +37,13 @@ export const ContactUs = () => {
 
     const changeEmailHandler = (e) => {
         setEmail(e.target.value);
-        const regex = /^[a-z_\-0-9]{3,}@[a-z]{2,}\.[a-z]{2,}$/gm;
+        const regex = /^[a-z_\-0-9]{3,}@[a-z]{2,}\.[a-z]{2,}$/;
         setValidEmail(previousState => previousState = regex.test(e.target.value.trim()));
     };
 
     const changePhoneNumberHandler = (e) => {
         setPhoneNumber(e.target.value);
-        const regex = /^[0]{1}[0-9]{9}$/gm;
+        const regex = /^[0]{1}[0-9]{9}$/;
         setValidPhoneNumber(previousState => previousState = regex.test(e.target.value.trim()));
     };
 

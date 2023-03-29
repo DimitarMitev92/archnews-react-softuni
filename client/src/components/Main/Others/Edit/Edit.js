@@ -65,7 +65,7 @@ export const Edit = () => {
 
     const changeImageUrlHandler = (e) => {
         setImageUrl(e.target.value);
-        const regex = /^https?:\/\//gm;
+        const regex = /^https?:\/\//;
         setValidImageUrl(previousState => previousState = regex.test(e.target.value.trim()));
     };
 

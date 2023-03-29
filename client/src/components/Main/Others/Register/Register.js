@@ -51,7 +51,7 @@ export const Register = () => {
 
     const changeEmailHandler = (e) => {
         setEmail(e.target.value);
-        const regex = /^[a-z]{3,}@[a-z]{2,}\.[a-z]{2,}$/gm;
+        const regex = /^[a-z]{3,}@[a-z]{2,}\.[a-z]{2,}$/;
         setValidEmail(previousState => previousState = regex.test(e.target.value.trim()));
     };
 
