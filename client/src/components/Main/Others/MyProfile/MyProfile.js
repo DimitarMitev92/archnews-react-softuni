@@ -31,6 +31,9 @@ export const MyProfile = () => {
     useEffect(() => {
         getAllPostByUserId(auth._id)
             .then(result => {
+                if (result.code === 404) {
+                    result = [];
+                }
                 setMyPosts(previousState => previousState = result);
             }).catch(error => alert(error.message));
     }, [auth._id, isDelete]);
