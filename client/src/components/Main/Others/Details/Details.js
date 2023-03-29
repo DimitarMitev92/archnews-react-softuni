@@ -64,7 +64,7 @@ export const Details = () => {
             deletePost(postId, auth.accessToken)
                 .then((result) => {
                     if (result.code === 403) throw new Error(result.message);
-                    navigate('/posts');
+                    navigate('/my-profile');
                 })
                 .catch((error) => alert(error.message));
         }
