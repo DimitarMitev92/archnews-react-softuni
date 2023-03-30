@@ -1,7 +1,7 @@
 //IMAGES AND LOGOS
 import background from '../../../../assets/images/contact-us/contactUs-image.png';
 //REACT
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 //REACT COMPONENTS
 import { InputField } from '../../../UI/InputField.js';
 import { InputTextarea } from '../../../UI/InputTextarea.js';
@@ -16,6 +16,8 @@ export const ContactUs = () => {
 
     const navigate = useNavigate();
 
+    const [contactsForm, setContactForm] = useState([]);
+
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [phoneNumber, setPhoneNumber] = useState('');
@@ -25,6 +27,26 @@ export const ContactUs = () => {
     const [validEmail, setValidEmail] = useState(false);
     const [validPhoneNumber, setValidPhoneNumber] = useState(false);
     const [validMessage, setValidMessage] = useState(false);
+
+    const [isClickName, setIsClickName] = useState(false);
+    const [isClickEmail, setIsClickEmail] = useState(false);
+    const [isClickPhoneNumber, setIsClickPhoneNumber] = useState(false);
+    const [isClickMessage, setIsClickMessage] = useState(false);
+
+    const clickNameHandler = (e) => {
+        setIsClickName(previousState => previousState = true);
+    };
+    const clickEmailHandler = (e) => {
+        setIsClickEmail(previousState => previousState = true);
+
+    };
+    const clickPhoneNumber = (e) => {
+        setIsClickPhoneNumber(previousState => previousState = true);
+    };
+
+    const clickMessage = (e) => {
+        setIsClickMessage(previousState => previousState = true);
+    };
 
     const changeNameHandler = (e) => {
         setName(e.target.value);
@@ -80,6 +102,8 @@ export const ContactUs = () => {
             value: name,
             onChange: changeNameHandler,
             onBlur: changeNameHandler,
+            onClick: clickNameHandler,
+            isClicked: isClickName,
             validFeedback: "Right name.",
             invalidFeedback: "Enter your name.",
         }, {
@@ -90,6 +114,8 @@ export const ContactUs = () => {
             value: email,
             onChange: changeEmailHandler,
             onBlur: changeEmailHandler,
+            onClick: clickEmailHandler,
+            isClicked: isClickEmail,
             validFeedback: "Right email.",
             invalidFeedback: "Enter your email.",
         }, {
@@ -100,10 +126,16 @@ export const ContactUs = () => {
             value: phoneNumber,
             onChange: changePhoneNumberHandler,
             onBlur: changePhoneNumberHandler,
+            onClick: clickPhoneNumber,
+            isClicked: isClickPhoneNumber,
             validFeedback: "Right phone number.",
             invalidFeedback: "Enter your phone number.",
         }
     ];
+
+    useEffect(() => {
+        setContactForm(preventDefault => preventDefault = contactsInputs);
+    }, [isClickName, isClickEmail, isClickPhoneNumber, name, email, phoneNumber, message]);
 
     return (
         <section className="vh-100 bg-image" style={{ backgroundImage: `url(${background})` }}>
@@ -121,7 +153,7 @@ export const ContactUs = () => {
                                     </div>
                                     <form onSubmit={contactSubmitHandler}>
 
-                                        {contactsInputs.map((contact, index) => <InputField
+                                        {contactsForm.map((contact, index) => <InputField
                                             key={index}
                                             title={contact.title}
                                             htmlFor={contact.htmlFor}
@@ -129,6 +161,8 @@ export const ContactUs = () => {
                                             value={contact.value}
                                             onChange={contact.onChange}
                                             onBlur={contact.onBlur}
+                                            onClick={contact.onClick}
+                                            isClicked={contact.isClicked}
                                             validFeedback={contact.validFeedback}
                                             invalidFeedback={contact.invalidFeedback}
                                         />)}
@@ -140,6 +174,8 @@ export const ContactUs = () => {
                                             value={message}
                                             onChange={changeMessageHandler}
                                             onBlur={changeMessageHandler}
+                                            onClick={clickMessage}
+                                            isClicked={isClickMessage}
                                             validFeedback={"Right message."}
                                             invalidFeedback={"Enter your message."}
                                         />

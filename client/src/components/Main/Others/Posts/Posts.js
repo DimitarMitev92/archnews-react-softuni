@@ -64,7 +64,7 @@ export const Posts = () => {
                 <h2 className="text-center p-4 text-light">ARCHITECTURE NEWS</h2>
             </div>
             <form className="d-flex m-3" role="search" onSubmit={searchSubmitHandler}>
-                <input className="form-control me-2" type="search" placeholder="Search via name" aria-label="Search" onChange={searchViaNameHandler} value={searchName} />
+                <input className="form-control me-2" type="search" placeholder="Search by name" aria-label="Search" onChange={searchViaNameHandler} value={searchName} />
                 <button className="btn btn-light btn-lg" type="submit">Search</button>
             </form>
 

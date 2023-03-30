@@ -1,7 +1,7 @@
 //IMAGES AND LOGOS
 import background from '../../../../assets/images/login/login-imageNew.jpg';
 //REACT
-import { useState, useContext } from 'react';
+import { useState, useContext, useEffect } from 'react';
 //REACT COMPONENTS
 import { LoginInput } from './LoginInput.js';
 //REACT HOOKS
@@ -17,13 +17,26 @@ export const Login = () => {
 
     const navigate = useNavigate();
 
+    const [loginForm, setLoginForm] = useState([]);
+
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
     const [validEmail, setValidEmail] = useState(false);
     const [validPassword, setValidPassword] = useState(false);
 
+    const [isClickEmail, setIsClickEmail] = useState(false);
+    const [isClickPassword, setIsClickPassword] = useState(false);
+
     const { loginUser } = useContext(AuthContext);
+
+    const clickEmailHandler = (e) => {
+        setIsClickEmail(previousState => previousState = true);
+    };
+
+    const clickPasswordHandler = (e) => {
+        setIsClickPassword(previousState => previousState = true);
+    };
 
 
     const changeEmailHandler = (e) => {
@@ -71,6 +84,8 @@ export const Login = () => {
         value: email,
         onChange: changeEmailHandler,
         onBlur: changeEmailHandler,
+        onClick: clickEmailHandler,
+        isClicked: isClickEmail,
         validFeedback: "Right email.",
         invalidFeedback: "Enter your email.",
     }, {
@@ -81,9 +96,15 @@ export const Login = () => {
         value: password,
         onChange: changePasswordHandler,
         onBlur: changePasswordHandler,
+        onClick: clickPasswordHandler,
+        isClicked: isClickPassword,
         validFeedback: "Valid password.",
         invalidFeedback: "Enter your password.",
     }];
+
+    useEffect(() => {
+        setLoginForm(previousState => previousState = loginInputs);
+    }, [isClickEmail, isClickPassword, email, password]);
 
     return (
         <section className="vh-100">
@@ -93,7 +114,7 @@ export const Login = () => {
                         <h2 className="text-uppercase text-center m-5">LOGIN</h2>
                         <form onSubmit={loginSubmitHandler}>
 
-                            {loginInputs.map((loginInput, index) => <LoginInput
+                            {loginForm.map((loginInput, index) => <LoginInput
                                 key={index}
                                 title={loginInput.title}
                                 htmlFor={loginInput.htmlFor}
@@ -102,6 +123,8 @@ export const Login = () => {
                                 value={loginInput.value}
                                 onChange={loginInput.onChange}
                                 onBlur={loginInput.onBlur}
+                                onClick={loginInput.onClick}
+                                isClicked={loginInput.isClicked}
                                 validFeedback={loginInput.validFeedback}
                                 invalidFeedback={loginInput.invalidFeedback}
                             />)}

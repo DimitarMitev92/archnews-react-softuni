@@ -1,7 +1,7 @@
 //IMAGES AND LOGOS
 import background from '../../../../assets/images/register/register-imageNew.png';
 //REACT
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 //REACT COMPONENTS
 import { InputField } from '../../../UI/InputField.js';
 //REACT HOOKS
@@ -17,6 +17,8 @@ export const Register = () => {
 
     const navigate = useNavigate();
 
+    const [registerForm, setRegisterForm] = useState([]);
+
     const [name, setName] = useState('');
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
@@ -28,6 +30,32 @@ export const Register = () => {
     const [validEmail, setValidEmail] = useState(false);
     const [validPassword, setValidPassword] = useState(false);
     const [validRepeatPassword, setValidRepeatPassword] = useState(false);
+
+    const [isClickName, setIsClickName] = useState(false);
+    const [isClickUsername, setIsClickUsername] = useState(false);
+    const [isClickEmail, setIsClickEmail] = useState(false);
+    const [isClickPassword, setIsClickPassword] = useState(false);
+    const [isClickRepeatPassword, setIsClickRepeatPassword] = useState(false);
+
+    const clickNameHandler = (e) => {
+        setIsClickName(previousState => previousState = true);
+    };
+
+    const clickUsernameHandler = (e) => {
+        setIsClickUsername(previousState => previousState = true);
+    };
+
+    const clickEmailHandler = (e) => {
+        setIsClickEmail(previousState => previousState = true);
+    };
+
+    const clickPasswordHandler = (e) => {
+        setIsClickPassword(previousState => previousState = true);
+    };
+
+    const clickRepeatPasswordHandler = (e) => {
+        setIsClickRepeatPassword(previousState => previousState = true);
+    };
 
     const { loginUser } = useContext(AuthContext);
 
@@ -101,6 +129,8 @@ export const Register = () => {
         value: name,
         onChange: changeNameHandler,
         onBlur: changeNameHandler,
+        onClick: clickNameHandler,
+        isClicked: isClickName,
         validFeedback: "Right name.",
         invalidFeedback: "Enter your name.",
     }, {
@@ -111,6 +141,8 @@ export const Register = () => {
         value: username,
         onChange: changeUsernameHandler,
         onBlur: changeUsernameHandler,
+        onClick: clickUsernameHandler,
+        isClicked: isClickUsername,
         validFeedback: "Right username.",
         invalidFeedback: "Enter your username.",
     }, {
@@ -121,6 +153,8 @@ export const Register = () => {
         value: email,
         onChange: changeEmailHandler,
         onBlur: changeEmailHandler,
+        onClick: clickEmailHandler,
+        isClicked: isClickEmail,
         validFeedback: "Right email.",
         invalidFeedback: "Enter your email.",
     }, {
@@ -131,6 +165,8 @@ export const Register = () => {
         value: password,
         onChange: changePasswordHandler,
         onBlur: changePasswordHandler,
+        onClick: clickPasswordHandler,
+        isClicked: isClickPassword,
         validFeedback: "Valid password.",
         invalidFeedback: "Enter your password.",
     }, {
@@ -141,10 +177,16 @@ export const Register = () => {
         value: repeatPassword,
         onChange: changeRepeatPasswordHandler,
         onBlur: changeRepeatPasswordHandler,
+        onClick: clickRepeatPasswordHandler,
+        isClicked: isClickRepeatPassword,
         validFeedback: "Passwords match.",
         invalidFeedback: "Passwords mismatch.",
     }];
 
+    useEffect(() => {
+        setRegisterForm(previousState => previousState = registerInputs);
+
+    }, [isClickName, isClickUsername, isClickEmail, isClickPassword, isClickRepeatPassword, name, username, email, password, repeatPassword]);
 
     return (
         <section className="vh-100 bg-image" style={{ backgroundImage: `url(${background})` }}>
@@ -158,7 +200,7 @@ export const Register = () => {
 
                                     <form onSubmit={registerSubmitHandler}>
 
-                                        {registerInputs.map((registerInput, index) =>
+                                        {registerForm.map((registerInput, index) =>
                                             <InputField
                                                 key={index}
                                                 title={registerInput.title}
@@ -168,6 +210,8 @@ export const Register = () => {
                                                 value={registerInput.value}
                                                 onChange={registerInput.onChange}
                                                 onBlur={registerInput.onBlur}
+                                                onClick={registerInput.onClick}
+                                                isClicked={registerInput.isClicked}
                                                 validFeedback={registerInput.validFeedback}
                                                 invalidFeedback={registerInput.invalidFeedback}
                                             />)}

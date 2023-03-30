@@ -1,7 +1,7 @@
 //IMAGES AND LOGOS
 import background from '../../../../assets/images/create/create-imageNew.png';
 //REACT
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 //REACT COMPONENTS
 import { InputField } from '../../../UI/InputField.js';
 import { InputTextarea } from '../../../UI/InputTextarea.js';
@@ -20,6 +20,8 @@ export const Create = () => {
 
     const { auth } = useContext(AuthContext);
 
+    const [createForm, setCreateForm] = useState([]);
+
     const [title, setTitle] = useState('');
     const [location, setLocation] = useState('');
     const [imageUrl, setImageUrl] = useState('');
@@ -29,6 +31,30 @@ export const Create = () => {
     const [validLocation, setValidLocation] = useState(false);
     const [validImageUrl, setValidImageUrl] = useState(false);
     const [validPost, setValidPost] = useState(false);
+
+    const [isClickTitle, setIsClickTitle] = useState(false);
+    const [isClickLocation, setIsClickLocation] = useState(false);
+    const [isClickImageLink, setIsClickImageLink] = useState(false);
+    const [isClickPost, setIsClickPost] = useState(false);
+
+    const clickTitleHandler = (e) => {
+        setIsClickTitle(previousState => previousState = true);
+    };
+
+    const clickLocationHandler = (e) => {
+        setIsClickLocation(previousState => previousState = true);
+    };
+
+    const clickImageLinkHandler = (e) => {
+        setIsClickImageLink(previousState => previousState = true);
+    };
+
+    const clickPostHandler = (e) => {
+        setIsClickPost(previousState => previousState = true);
+    };
+
+
+
 
     const changeTitleHandler = (e) => {
         setTitle(e.target.value);
@@ -94,6 +120,8 @@ export const Create = () => {
             value: title,
             onChange: changeTitleHandler,
             onBlur: changeTitleHandler,
+            onClick: clickTitleHandler,
+            isClicked: isClickTitle,
             validFeedback: "Right title.",
             invalidFeedback: "Enter post's title.",
         }, {
@@ -104,6 +132,8 @@ export const Create = () => {
             value: location,
             onChange: changeLocationHandler,
             onBlur: changeLocationHandler,
+            onClick: clickLocationHandler,
+            isClicked: isClickLocation,
             validFeedback: "Right location.",
             invalidFeedback: "Enter post's location.",
         }, {
@@ -114,9 +144,15 @@ export const Create = () => {
             value: imageUrl,
             onChange: changeImageUrlHandler,
             onBlur: changeImageUrlHandler,
+            onClick: clickImageLinkHandler,
+            isClicked: isClickImageLink,
             validFeedback: "Right image link",
             invalidFeedback: "Enter post's image link.",
         }];
+
+    useEffect(() => {
+        setCreateForm(previousState => previousState = createInputs);
+    }, [isClickTitle, isClickLocation, isClickImageLink, isClickPost, title, location, imageUrl, post]);
 
 
     return (
@@ -131,7 +167,7 @@ export const Create = () => {
 
                                     <form onSubmit={submitCreateHandler}>
 
-                                        {createInputs.map((createInput, index) => <InputField
+                                        {createForm.map((createInput, index) => <InputField
                                             key={index}
                                             title={createInput.title}
                                             htmlFor={createInput.htmlFor}
@@ -140,6 +176,8 @@ export const Create = () => {
                                             value={createInput.value}
                                             onChange={createInput.onChange}
                                             onBlur={createInput.onBlur}
+                                            onClick={createInput.onClick}
+                                            isClicked={createInput.isClicked}
                                             validFeedback={createInput.validFeedback}
                                             invalidFeedback={createInput.invalidFeedback}
                                         />)}
@@ -151,6 +189,8 @@ export const Create = () => {
                                             value={post}
                                             onChange={changePostHandler}
                                             onBlur={changePostHandler}
+                                            onClick={clickPostHandler}
+                                            isClicked={isClickPost}
                                             validFeedback={"Right post."}
                                             invalidFeedback={"Enter your post."}
                                         />

@@ -13,6 +13,8 @@ export const LoginInput = ({
     value,
     onChange,
     onBlur,
+    onClick,
+    isClicked,
     validFeedback,
     invalidFeedback
 
@@ -21,14 +23,15 @@ export const LoginInput = ({
         <div className="form-outline m-4">
             <label className="form-label" htmlFor={htmlFor}>{title}</label>
             <input type={type} id={htmlFor}
-                className={`form-control form-control-lg ${validItem ? 'is-valid' : 'is-invalid'}`}
+                className={`form-control form-control-lg ${isClicked ? validItem ? 'is-valid' : 'is-invalid' : ''}`}
                 value={value}
                 onChange={onChange}
-                onBlur={onBlur} />
-            <div className="valid-feedback">
+                onBlur={onBlur}
+                onClick={onClick} />
+            <div className="valid-feedback" style={{ display: isClicked ? '' : 'none' }}>
                 {validFeedback}
             </div>
-            <div className="invalid-feedback">
+            <div className="invalid-feedback" style={{ display: isClicked ? '' : 'none' }}>
                 {invalidFeedback}
             </div>
         </div>

@@ -12,6 +12,8 @@ export const InputTextarea = ({
     value,
     onChange,
     onBlur,
+    onClick,
+    isClicked,
     validFeedback,
     invalidFeedback
 
@@ -21,16 +23,17 @@ export const InputTextarea = ({
             <div className="form-group">
                 <label htmlFor={htmlFor}>{title}</label>
                 <textarea
-                    className={`form-control ${validItem ? "is-valid" : "is-invalid"}`} id={htmlFor}
+                    className={`form-control ${isClicked ? validItem ? "is-valid" : "is-invalid" : ''}`} id={htmlFor}
                     rows="3"
                     value={value}
                     onChange={onChange}
                     onBlur={onBlur}
+                    onClick={onClick}
                 ></textarea>
-                <div className="valid-feedback">
+                <div className="valid-feedback" style={{ display: isClicked ? '' : 'none' }}>
                     {validFeedback}
                 </div>
-                <div className="invalid-feedback">
+                <div className="invalid-feedback" style={{ display: isClicked ? '' : 'none' }}>
                     {invalidFeedback}
                 </div>
             </div>

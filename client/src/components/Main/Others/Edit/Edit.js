@@ -19,6 +19,8 @@ export const Edit = () => {
     const { auth } = useContext(AuthContext);
     const navigate = useNavigate();
 
+    const [editForm, setEditForm] = useState([]);
+
     const [title, setTitle] = useState('');
     const [location, setLocation] = useState('');
     const [imageUrl, setImageUrl] = useState('');
@@ -31,6 +33,29 @@ export const Edit = () => {
     const [validLocation, setValidLocation] = useState(true);
     const [validImageUrl, setValidImageUrl] = useState(true);
     const [validPost, setValidPost] = useState(true);
+
+    const [isClickTitle, setIsClickTitle] = useState(false);
+    const [isClickLocation, setIsClickLocation] = useState(false);
+    const [isClickImageLink, setIsClickImageLink] = useState(false);
+    const [isClickPost, setIsClickPost] = useState(false);
+
+    const clickTitleHandler = (e) => {
+        setIsClickTitle(previousState => previousState = true);
+    };
+
+    const clickLocationHandler = (e) => {
+        setIsClickLocation(previousState => previousState = true);
+    };
+
+    const clickImageLinkHandler = (e) => {
+        setIsClickImageLink(previousState => previousState = true);
+    };
+
+    const clickPostHandler = (e) => {
+        setIsClickPost(previousState => previousState = true);
+    };
+
+
 
     useEffect(() => {
         getPostByPostId(postId)
@@ -111,6 +136,8 @@ export const Edit = () => {
         value: title,
         onChange: changeTitleHandler,
         onBlur: changeTitleHandler,
+        onClick: clickTitleHandler,
+        isClicked: isClickTitle,
         validFeedback: "Right title.",
         invalidFeedback: "Enter post's title.",
     }, {
@@ -121,6 +148,8 @@ export const Edit = () => {
         value: location,
         onChange: changeLocationHandler,
         onBlur: changeLocationHandler,
+        onClick: clickLocationHandler,
+        isClicked: isClickLocation,
         validFeedback: "Right location.",
         invalidFeedback: "Enter post's location.",
     }, {
@@ -131,9 +160,15 @@ export const Edit = () => {
         value: imageUrl,
         onChange: changeImageUrlHandler,
         onBlur: changeImageUrlHandler,
+        onClick: clickImageLinkHandler,
+        isClicked: isClickImageLink,
         validFeedback: "Right image link.",
         invalidFeedback: "Enter post's image link.",
     }];
+
+    useEffect(() => {
+        setEditForm(previousState => previousState = editInputs);
+    }, [isClickTitle, isClickLocation, isClickImageLink, isClickPost, title, location, imageUrl, post]);
 
     return (
         <section className="vh-100 bg-image" style={{ backgroundImage: `url(${background})` }}>
@@ -146,7 +181,7 @@ export const Edit = () => {
                                     <h2 className="text-uppercase text-center mb-5">EDIT POST</h2>
 
                                     <form onSubmit={submitEditHandler}>
-                                        {editInputs.map((editInput, index) => <InputField
+                                        {editForm.map((editInput, index) => <InputField
                                             key={index}
                                             title={editInput.title}
                                             htmlFor={editInput.htmlFor}
@@ -155,6 +190,8 @@ export const Edit = () => {
                                             value={editInput.value}
                                             onChange={editInput.onChange}
                                             onBlur={editInput.onBlur}
+                                            onClick={editInput.onClick}
+                                            isClicked={editInput.isClicked}
                                             validFeedback={editInput.validFeedback}
                                             invalidFeedback={editInput.invalidFeedback}
                                         />)}
@@ -166,6 +203,8 @@ export const Edit = () => {
                                             value={post}
                                             onChange={changePostHandler}
                                             onBlur={changePostHandler}
+                                            onClick={clickPostHandler}
+                                            isClicked={isClickPost}
                                             validFeedback={"Right post."}
                                             invalidFeedback={"Enter your post."}
 
