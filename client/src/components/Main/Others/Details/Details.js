@@ -2,6 +2,7 @@
 import { useEffect, useState, useContext } from 'react';
 //REACT COMPONENTS
 import { Button } from '../../../UI/Button.js';
+import { ModalDelete } from '../../../UI/ModalDelete.js';
 //REACT HOOKS
 //REACT CONTEXT
 import { AuthContext } from '../../../../contexts/authContext.js';
@@ -25,6 +26,8 @@ export const Details = () => {
     const [isLiked, setIsLiked] = useState(false);
     const [likes, setLikes] = useState(0);
     const [isLogIn, setIsLogIn] = useState(false);
+
+    const [showDeleteModal, setShowDeleteModal] = useState(false);
 
     const [post, setPost] = useState({});
 
@@ -58,16 +61,21 @@ export const Details = () => {
             }).catch(error => alert(error.message));
     }, [auth._id, likes, postId]);
 
+    const clickDeleteHandler = () => {
+        setShowDeleteModal(previousState => previousState = true);
+    };
+
+    const closeModalHandler = () => {
+        setShowDeleteModal(previousState => previousState = false);
+    };
+
     const deletePostHandler = () => {
-        const userChoice = window.confirm('Are you sure you want to delete this post? If you delete it, you won\'t be able to recover it.');
-        if (userChoice) {
-            deletePost(postId, auth.accessToken)
-                .then((result) => {
-                    if (result.code === 403) throw new Error(result.message);
-                    navigate('/my-profile');
-                })
-                .catch((error) => alert(error.message));
-        }
+        deletePost(postId, auth.accessToken)
+            .then((result) => {
+                if (result.code === 403) throw new Error(result.message);
+                navigate('/my-profile');
+            })
+            .catch((error) => alert(error.message));
     };
 
     const likeHandle = async () => {
@@ -85,50 +93,55 @@ export const Details = () => {
     };
 
     return (
-        <section className="vh-auto overflow-hidden mt-5">
-            <div className="d-flex justify-content-center align-content-center">
-                <div className="row">
-                    <div className="col-sm-6 text-black d-flex justify-content-center align-items-center flex-md-column">
-                        <h2 className="text-uppercase text-center m-5">{post.title}</h2>
-                        <h5 className="text-dark"><i><ion-icon name="location-outline"></ion-icon></i> {post.location}</h5>
-                        <h5 className="text-dark"><i><ion-icon name="calendar-outline"></ion-icon></i> {dateParser(post._createdOn)}</h5>
-                        <h5 className="text-dark">LIKES: {likes}</h5>
-                        <article style={{ textIndent: "50px" }} className="text-dark p-4 ">{post.post}
-                        </article>
-                        <div className="d-flex justify-content-center">
-                            {isLogIn &&
-                                <>
-                                    {isOwner ?
-                                        <>
+        <>
+            {showDeleteModal && <ModalDelete
+                onClickClose={closeModalHandler}
+                onClickDelete={deletePostHandler} />}
+            <section className="vh-auto overflow-hidden mt-5">
+                <div className="d-flex justify-content-center align-content-center">
+                    <div className="row">
+                        <div className="col-sm-6 text-black d-flex justify-content-center align-items-center flex-md-column">
+                            <h2 className="text-uppercase text-center m-5">{post.title}</h2>
+                            <h5 className="text-dark"><i><ion-icon name="location-outline"></ion-icon></i> {post.location}</h5>
+                            <h5 className="text-dark"><i><ion-icon name="calendar-outline"></ion-icon></i> {dateParser(post._createdOn)}</h5>
+                            <h5 className="text-dark">LIKES: {likes}</h5>
+                            <article style={{ textIndent: "50px" }} className="text-dark p-4 ">{post.post}
+                            </article>
+                            <div className="d-flex justify-content-center">
+                                {isLogIn &&
+                                    <>
+                                        {isOwner ?
+                                            <>
+                                                <Button
+                                                    to={`/edit/${post._id}`}
+                                                    className={"btn btn-success m-2"}
+                                                    title={"Edit"}
+                                                />
+                                                <Button
+                                                    onClick={clickDeleteHandler}
+                                                    className={"btn btn-danger m-2"}
+                                                    title={"Delete"}
+                                                />
+                                            </> :
                                             <Button
-                                                to={`/edit/${post._id}`}
+                                                onClick={likeHandle}
                                                 className={"btn btn-success m-2"}
-                                                title={"Edit"}
+                                                title={"Like"}
+                                                disabled={isLiked}
                                             />
-                                            <Button
-                                                onClick={deletePostHandler}
-                                                className={"btn btn-danger m-2"}
-                                                title={"Delete"}
-                                            />
-                                        </> :
-                                        <Button
-                                            onClick={likeHandle}
-                                            className={"btn btn-success m-2"}
-                                            title={"Like"}
-                                            disabled={isLiked}
-                                        />
 
-                                    }
-                                </>
-                            }
+                                        }
+                                    </>
+                                }
+                            </div>
+                        </div>
+                        <div className="col-sm-6 px-0 d-none d-sm-block">
+                            <img className="img-fluid" src={post.imageUrl} alt="post"
+                                style={{ objectFit: "cover", objectPosition: "left" }} />
                         </div>
                     </div>
-                    <div className="col-sm-6 px-0 d-none d-sm-block">
-                        <img className="img-fluid" src={post.imageUrl} alt="post"
-                            style={{ objectFit: "cover", objectPosition: "left" }} />
-                    </div>
                 </div>
-            </div>
-        </section>
+            </section>
+        </>
     );
 };

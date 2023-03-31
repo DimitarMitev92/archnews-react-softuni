@@ -23,6 +23,7 @@ export const Main = () => {
             <BlogSection />
 
             <AboutUs />
+
         </main>
     );
 };

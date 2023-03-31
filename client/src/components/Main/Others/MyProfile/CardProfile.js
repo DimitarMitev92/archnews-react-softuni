@@ -15,12 +15,12 @@ export const CardProfile = ({
     date,
     likes,
     info,
-    deleteHandler
-}) => {
+    clickDelete,
 
-    const onDeleteHandler = (e) => {
-        e.preventDefault();
-        deleteHandler(postId);
+}) => {
+    const clickDeletePost = (e) => {
+        console.log(postId);
+        clickDelete(postId);
     };
     return (
         <div className="row p-5 border-top border-light border-2">
@@ -41,9 +41,8 @@ export const CardProfile = ({
                     title={"Edit"}
                 />
                 <Button
-                    to={`/`}
                     className={"btn btn-danger m-2"}
-                    onClick={onDeleteHandler}
+                    onClick={clickDeletePost}
                     title={"Delete"}
                 />
             </div>

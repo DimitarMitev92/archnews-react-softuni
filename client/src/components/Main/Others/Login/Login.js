@@ -17,6 +17,8 @@ export const Login = () => {
 
     const navigate = useNavigate();
 
+    const { loginUser } = useContext(AuthContext);
+
     const [loginForm, setLoginForm] = useState([]);
 
     const [email, setEmail] = useState('');
@@ -28,7 +30,6 @@ export const Login = () => {
     const [isClickEmail, setIsClickEmail] = useState(false);
     const [isClickPassword, setIsClickPassword] = useState(false);
 
-    const { loginUser } = useContext(AuthContext);
 
     const clickEmailHandler = (e) => {
         setIsClickEmail(previousState => previousState = true);
