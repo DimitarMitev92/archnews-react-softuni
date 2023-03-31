@@ -9,7 +9,7 @@ export const ModalDelete = ({
         onClickDelete(postId);
     };
     return (
-        <div className="d-flex justify-content-center align-items-center min-vh-100 modal bg-secondary">
+        <div className="d-flex justify-content-center align-items-center min-vh-100 modal bg-secondary bg-opacity-75">
             <div className="modal-dialog">
                 <div className="modal-content">
                     <div className="modal-header">
