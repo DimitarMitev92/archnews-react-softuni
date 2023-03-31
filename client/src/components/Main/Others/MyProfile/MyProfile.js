@@ -28,6 +28,7 @@ export const MyProfile = () => {
 
     const [showDeleteModal, setShowDeleteModal] = useState(false);
     const [currentPostDelete, setCurrentPostDelete] = useState('');
+    const [isDeleted, setIsDeleted] = useState(false);
 
     const currentUser = auth.name;
 
@@ -39,18 +40,18 @@ export const MyProfile = () => {
                 }
                 setMyPosts(previousState => previousState = result);
             }).catch(error => alert(error.message));
-    }, [auth._id]);
+    }, [auth._id, isDeleted]);
 
     useEffect(() => {
         getAllLikes()
             .then((result) => {
                 setLikes(previousState => previousState = result);
             }).catch(error => alert(error.message));
-    }, [auth._id]);
+    }, [auth._id, isDeleted]);
 
     useEffect(() => {
         setMyPostsWithLikes(previousState => previousState = addLikesToCurrentPost(myPosts, likes));
-    }, [myPosts, likes]);
+    }, [myPosts, likes, isDeleted]);
 
     const clickDeleteHandler = (postId) => {
         setShowDeleteModal(previousState => previousState = true);
@@ -65,7 +66,7 @@ export const MyProfile = () => {
         setShowDeleteModal(previousState => previousState = false);
         deletePost(currentPostDelete, auth.accessToken)
             .then((result) => {
-                console.log(result);
+                setIsDeleted(previousState => previousState = !previousState);
                 if (result.code === 403) throw new Error(result.message);
                 navigate('/my-profile');
             })
