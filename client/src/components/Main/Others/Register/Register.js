@@ -228,7 +228,7 @@ export const Register = () => {
                                                 invalidFeedback={registerInput.invalidFeedback}
                                             />)}
                                         <div className="form-check form-check-inline">
-                                            <input className="form-check-input" type="checkbox" id="inlineCheckbox1" value="clicked" onClick={showPassword} />
+                                            <input className="form-check-input" type="checkbox" id="inlineCheckbox1" value="clicked" onClick={showPassword} style={{ backgroundColor: "#adb5bd" }} />
                                             <label className="form-check-label" htmlFor="inlineCheckbox1">Show passwords</label>
                                         </div>
                                         <div className="d-flex justify-content-center">
