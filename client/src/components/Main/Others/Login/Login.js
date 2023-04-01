@@ -107,6 +107,15 @@ export const Login = () => {
         setLoginForm(previousState => previousState = loginInputs);
     }, [isClickEmail, isClickPassword, email, password]);
 
+    const showPassword = (e) => {
+        const password = document.querySelector('#passwordInput');
+        if (e.target.checked) {
+            password.type = 'text';
+        } else {
+            password.type = 'password';
+        }
+    };
+
     return (
         <section className="vh-100">
             <div className="container-fluid">
@@ -129,7 +138,10 @@ export const Login = () => {
                                 validFeedback={loginInput.validFeedback}
                                 invalidFeedback={loginInput.invalidFeedback}
                             />)}
-
+                            <div className="form-check form-check-inline mx-4 mb-4">
+                                <input className="form-check-input" type="checkbox" id="inlineCheckbox1" value="clicked" onClick={showPassword} />
+                                <label className="form-check-label" htmlFor="inlineCheckbox1">Show passwords</label>
+                            </div>
                             <div className="d-flex justify-content-center">
                                 <button type="submit" className={`btn btn-secondary btn-lg ${!(validEmail && validPassword) ? 'disabled' : ''}`}>Login</button>
                             </div>

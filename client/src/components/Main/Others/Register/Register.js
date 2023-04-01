@@ -188,6 +188,18 @@ export const Register = () => {
 
     }, [isClickName, isClickUsername, isClickEmail, isClickPassword, isClickRepeatPassword, name, username, email, password, repeatPassword]);
 
+    const showPassword = (e) => {
+        const password = document.querySelector('#passwordInput');
+        const repeatPassword = document.querySelector('#rePasswordInput');
+        if (e.target.checked) {
+            password.type = 'text';
+            repeatPassword.type = 'text';
+        } else {
+            password.type = 'password';
+            repeatPassword.type = 'password';
+        }
+    };
+
     return (
         <section className="vh-100 bg-image" style={{ backgroundImage: `url(${background})` }}>
             <div className="mask d-flex align-items-center h-100 gradient-custom-3">
@@ -215,7 +227,10 @@ export const Register = () => {
                                                 validFeedback={registerInput.validFeedback}
                                                 invalidFeedback={registerInput.invalidFeedback}
                                             />)}
-
+                                        <div className="form-check form-check-inline">
+                                            <input className="form-check-input" type="checkbox" id="inlineCheckbox1" value="clicked" onClick={showPassword} />
+                                            <label className="form-check-label" htmlFor="inlineCheckbox1">Show passwords</label>
+                                        </div>
                                         <div className="d-flex justify-content-center">
                                             <button type="submit" className={`btn btn-secondary btn-lg ${!(validName && validUsername && validEmail && validPassword && validRepeatPassword) ? 'disabled' : ''}`}>Register</button>
                                         </div>
