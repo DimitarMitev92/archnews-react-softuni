@@ -30,8 +30,6 @@ export const Login = () => {
     const [isClickEmail, setIsClickEmail] = useState(false);
     const [isClickPassword, setIsClickPassword] = useState(false);
 
-    const [showHidePasswords, setShowHidePasswords] = useState('password');
-
     const clickEmailHandler = (e) => {
         setIsClickEmail(previousState => previousState = true);
     };
@@ -111,11 +109,9 @@ export const Login = () => {
     const showPassword = (e) => {
         const password = document.querySelector('#passwordInput');
         if (e.target.checked) {
-            setShowHidePasswords(previousState => previousState = 'text');
-            password.type = showHidePasswords;
+            password.type = 'text';
         } else {
-            setShowHidePasswords(previousState => previousState = 'text');
-            password.type = showHidePasswords;
+            password.type = 'password';
         }
     };
 
@@ -144,7 +140,7 @@ export const Login = () => {
                             <div className="form-check form-check-inline mx-4 mb-4">
                                 <input className="form-check-input" type="checkbox" id="inlineCheckbox1" value="clicked" onClick={showPassword}
                                     style={{ backgroundColor: "#adb5bd" }} />
-                                <label className="form-check-label" htmlFor="inlineCheckbox1">Show passwords</label>
+                                <label className="form-check-label" htmlFor="inlineCheckbox1">Show password</label>
                             </div>
                             <div className="d-flex justify-content-center">
                                 <button type="submit" className={`btn btn-secondary btn-lg ${!(validEmail && validPassword) ? 'disabled' : ''}`}>Login</button>
