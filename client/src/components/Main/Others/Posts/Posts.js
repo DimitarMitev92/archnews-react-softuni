@@ -21,6 +21,8 @@ export const Posts = () => {
     const [myPostsWithLikes, setMyPostsWithLikes] = useState([]);
     const [searchName, setSearchName] = useState('');
     const [likes, setLikes] = useState([]);
+    const [sortBy, setSortBy] = useState('oldest');
+
 
     useEffect(() => {
         getAllPosts()
@@ -46,8 +48,15 @@ export const Posts = () => {
 
 
     useEffect(() => {
-        setMyPostsWithLikes(previousState => previousState = addLikesToCurrentPost(myPosts, likes));
-    }, [myPosts, likes]);
+        const posts = addLikesToCurrentPost(myPosts, likes);
+        if (sortBy === 'oldest') {
+            setMyPostsWithLikes(previousState => previousState = posts.sort((a, b) => a._createdOn - b._createdOn));
+        } else if (sortBy === 'newest') {
+            setMyPostsWithLikes(previousState => previousState = posts.sort((a, b) => b._createdOn - a._createdOn));
+        } else if (sortBy === 'mostLiked') {
+            setMyPostsWithLikes(previousState => previousState = posts.sort((a, b) => b.likes - a.likes));
+        }
+    }, [myPosts, likes, sortBy]);
 
     const searchViaNameHandler = (e) => {
         setSearchName(e.target.value);
@@ -56,6 +65,10 @@ export const Posts = () => {
     const searchSubmitHandler = (e) => {
         e.preventDefault();
         setPosts(searcherViaName(searchName, myPosts));
+    };
+
+    const sortClickHandler = (e) => {
+        setSortBy(previousState => previousState = e.target.value);
     };
 
     return (
@@ -67,6 +80,22 @@ export const Posts = () => {
                 <input className="form-control me-2" type="search" placeholder="Search by name" aria-label="Search" onChange={searchViaNameHandler} value={searchName} />
                 <button className="btn btn-light btn-lg" type="submit">Search</button>
             </form>
+
+            <div className="d-flex justify-content-center align-items-center m-3 bg-light" style={{ borderRadius: "5px" }}>
+                <p className="d-flex justify-content-center align-items-center m-2">Sort by: </p>
+                <div className="form-check form-check-inline">
+                    <input className="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="newest" onClick={sortClickHandler} style={{ backgroundColor: "#adb5bd" }} />
+                    <label className="form-check-label" htmlFor="inlineRadio1">Newest</label>
+                </div>
+                <div className="form-check form-check-inline">
+                    <input className="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="oldest" onClick={sortClickHandler} defaultChecked style={{ backgroundColor: "#adb5bd" }} />
+                    <label className="form-check-label" htmlFor="inlineRadio2">Oldest</label>
+                </div>
+                <div className="form-check form-check-inline">
+                    <input className="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="mostLiked" onClick={sortClickHandler} style={{ backgroundColor: "#adb5bd" }} />
+                    <label className="form-check-label" htmlFor="inlineRadio3">Most liked</label>
+                </div>
+            </div>
 
             {myPostsWithLikes.length !== 0 ?
                 myPostsWithLikes.map(post =>
