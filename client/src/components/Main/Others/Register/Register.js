@@ -37,6 +37,8 @@ export const Register = () => {
     const [isClickPassword, setIsClickPassword] = useState(false);
     const [isClickRepeatPassword, setIsClickRepeatPassword] = useState(false);
 
+    const [showHidePasswords, setShowHidePasswords] = useState('password');
+
     const clickNameHandler = (e) => {
         setIsClickName(previousState => previousState = true);
     };
@@ -192,11 +194,13 @@ export const Register = () => {
         const password = document.querySelector('#passwordInput');
         const repeatPassword = document.querySelector('#rePasswordInput');
         if (e.target.checked) {
-            password.type = 'text';
-            repeatPassword.type = 'text';
+            setShowHidePasswords(previousState => previousState = 'text');
+            password.type = showHidePasswords;
+            repeatPassword.type = showHidePasswords;
         } else {
-            password.type = 'password';
-            repeatPassword.type = 'password';
+            setShowHidePasswords(previousState => previousState = 'password');
+            password.type = showHidePasswords;
+            repeatPassword.type = showHidePasswords;
         }
     };
 

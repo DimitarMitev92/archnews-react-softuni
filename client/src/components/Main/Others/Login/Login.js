@@ -30,6 +30,7 @@ export const Login = () => {
     const [isClickEmail, setIsClickEmail] = useState(false);
     const [isClickPassword, setIsClickPassword] = useState(false);
 
+    const [showHidePasswords, setShowHidePasswords] = useState('password');
 
     const clickEmailHandler = (e) => {
         setIsClickEmail(previousState => previousState = true);
@@ -110,9 +111,11 @@ export const Login = () => {
     const showPassword = (e) => {
         const password = document.querySelector('#passwordInput');
         if (e.target.checked) {
-            password.type = 'text';
+            setShowHidePasswords(previousState => previousState = 'text');
+            password.type = showHidePasswords;
         } else {
-            password.type = 'password';
+            setShowHidePasswords(previousState => previousState = 'text');
+            password.type = showHidePasswords;
         }
     };
 
