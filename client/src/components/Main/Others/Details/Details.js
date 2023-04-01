@@ -3,6 +3,7 @@ import { useEffect, useState, useContext } from 'react';
 //REACT COMPONENTS
 import { Button } from '../../../UI/Button.js';
 import { ModalDelete } from '../../../UI/ModalDelete.js';
+import { Comments } from '../../../UI/Comments.js';
 //REACT HOOKS
 //REACT CONTEXT
 import { AuthContext } from '../../../../contexts/authContext.js';
@@ -92,6 +93,16 @@ export const Details = () => {
             }).catch(error => alert(error.message));
     };
 
+    const comments = [{
+        author: 'Dimitar',
+        comment: 'Mnogo qko prodaljavai'
+    }, {
+        author: 'Kondio',
+        comment: 'Pisna mi da se zanimawam s prostotii'
+    }];
+
+
+
     return (
         <>
             {showDeleteModal && <ModalDelete
@@ -141,6 +152,9 @@ export const Details = () => {
                         </div>
                     </div>
                 </div>
+                <Comments
+                    comments={comments}
+                />
             </section>
         </>
     );
