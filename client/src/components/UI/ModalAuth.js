@@ -8,7 +8,7 @@ export const ModalAuth = ({
     return (
         <div className="d-flex justify-content-center align-items-center min-vh-100 modal bg-secondary bg-opacity-75">
             <div className="modal-dialog">
-                <div className="modal-content">
+                <div className="modal-content m-3">
                     <div className="modal-header">
                         <h5 className="modal-title">ERROR</h5>
                         <Button
@@ -16,7 +16,7 @@ export const ModalAuth = ({
                             onClick={onClickClose}
                         />
                     </div>
-                    <div className="modal-body">
+                    <div className="modal-body m-3">
                         <p>{error}</p>
                     </div>
                     <div className="modal-footer">
