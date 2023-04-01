@@ -4,6 +4,7 @@ import background from '../../../../assets/images/register/register-imageNew.png
 import { useContext, useEffect, useState } from 'react';
 //REACT COMPONENTS
 import { InputField } from '../../../UI/InputField.js';
+import { ModalAuth } from '../../../UI/ModalAuth.js';
 //REACT HOOKS
 //REACT CONTEXT
 import { AuthContext } from '../../../../contexts/authContext.js';
@@ -36,6 +37,9 @@ export const Register = () => {
     const [isClickEmail, setIsClickEmail] = useState(false);
     const [isClickPassword, setIsClickPassword] = useState(false);
     const [isClickRepeatPassword, setIsClickRepeatPassword] = useState(false);
+
+    const [showModalAuth, setShowModalAuth] = useState(false);
+    const [modalAuthError, setModalAuthError] = useState('');
 
     const clickNameHandler = (e) => {
         setIsClickName(previousState => previousState = true);
@@ -112,7 +116,10 @@ export const Register = () => {
                 loginUser(user);
                 navigate('/');
             })
-            .catch(error => alert(error.message));
+            .catch(error => {
+                setShowModalAuth(previousState => previousState = true);
+                setModalAuthError(previousState => previousState = `${error.message}`);
+            });
 
         setName(previousState => previousState = '');
         setUsername(previousState => previousState = '');
@@ -120,6 +127,20 @@ export const Register = () => {
         setPassword(previousState => previousState = '');
         setRepeatPassword(previousState => previousState = '');
     };
+
+    useEffect(() => {
+        setValidName(previousState => previousState = false);
+        setValidUsername(previousState => previousState = false);
+        setValidEmail(previousState => previousState = false);
+        setValidPassword(previousState => previousState = false);
+        setValidRepeatPassword(previousState => previousState = false);
+
+        setIsClickName(previousState => previousState = false);
+        setIsClickUsername(previousState => previousState = false);
+        setIsClickEmail(previousState => previousState = false);
+        setIsClickPassword(previousState => previousState = false);
+        setIsClickRepeatPassword(previousState => previousState = false);
+    }, [modalAuthError, showModalAuth]);
 
     const registerInputs = [{
         title: "Your Name",
@@ -200,52 +221,62 @@ export const Register = () => {
         }
     };
 
+    const showModalHandler = () => {
+        setShowModalAuth(previousState => previousState = false);
+    };
+
     return (
-        <section className="vh-100 bg-image" style={{ backgroundImage: `url(${background})` }}>
-            <div className="mask d-flex align-items-center h-100 gradient-custom-3">
-                <div className="container h-100">
-                    <div className="row d-flex justify-content-center align-items-center h-100">
-                        <div className="col-12 col-md-9 col-lg-7 col-xl-6">
-                            <div className="card" style={{ borderRadius: "15px" }}>
-                                <div className="card-body p-5">
-                                    <h2 className="text-uppercase text-center mb-5">CREATE AN ACCOUNT</h2>
+        <>
+            {showModalAuth && <ModalAuth
+                error={modalAuthError}
+                onClickClose={showModalHandler}
+            />}
+            <section className="vh-100 bg-image" style={{ backgroundImage: `url(${background})` }}>
+                <div className="mask d-flex align-items-center h-100 gradient-custom-3">
+                    <div className="container h-100">
+                        <div className="row d-flex justify-content-center align-items-center h-100">
+                            <div className="col-12 col-md-9 col-lg-7 col-xl-6">
+                                <div className="card" style={{ borderRadius: "15px" }}>
+                                    <div className="card-body p-5">
+                                        <h2 className="text-uppercase text-center mb-5">CREATE AN ACCOUNT</h2>
 
-                                    <form onSubmit={registerSubmitHandler}>
+                                        <form onSubmit={registerSubmitHandler}>
 
-                                        {registerForm.map((registerInput, index) =>
-                                            <InputField
-                                                key={index}
-                                                title={registerInput.title}
-                                                htmlFor={registerInput.htmlFor}
-                                                type={registerInput.type}
-                                                validItem={registerInput.validItem}
-                                                value={registerInput.value}
-                                                onChange={registerInput.onChange}
-                                                onBlur={registerInput.onBlur}
-                                                onClick={registerInput.onClick}
-                                                isClicked={registerInput.isClicked}
-                                                validFeedback={registerInput.validFeedback}
-                                                invalidFeedback={registerInput.invalidFeedback}
-                                            />)}
-                                        <div className="form-check form-check-inline">
-                                            <input className="form-check-input" type="checkbox" id="inlineCheckbox1" value="clicked" onClick={showPassword} style={{ backgroundColor: "#adb5bd" }} />
-                                            <label className="form-check-label" htmlFor="inlineCheckbox1">Show passwords</label>
-                                        </div>
-                                        <div className="d-flex justify-content-center">
-                                            <button type="submit" className={`btn btn-secondary btn-lg ${!(validName && validUsername && validEmail && validPassword && validRepeatPassword) ? 'disabled' : ''}`}>Register</button>
-                                        </div>
+                                            {registerForm.map((registerInput, index) =>
+                                                <InputField
+                                                    key={index}
+                                                    title={registerInput.title}
+                                                    htmlFor={registerInput.htmlFor}
+                                                    type={registerInput.type}
+                                                    validItem={registerInput.validItem}
+                                                    value={registerInput.value}
+                                                    onChange={registerInput.onChange}
+                                                    onBlur={registerInput.onBlur}
+                                                    onClick={registerInput.onClick}
+                                                    isClicked={registerInput.isClicked}
+                                                    validFeedback={registerInput.validFeedback}
+                                                    invalidFeedback={registerInput.invalidFeedback}
+                                                />)}
+                                            <div className="form-check form-check-inline">
+                                                <input className="form-check-input" type="checkbox" id="inlineCheckbox1" value="clicked" onClick={showPassword} style={{ backgroundColor: "#adb5bd" }} />
+                                                <label className="form-check-label" htmlFor="inlineCheckbox1">Show passwords</label>
+                                            </div>
+                                            <div className="d-flex justify-content-center">
+                                                <button type="submit" className={`btn btn-secondary btn-lg ${!(validName && validUsername && validEmail && validPassword && validRepeatPassword) ? 'disabled' : ''}`}>Register</button>
+                                            </div>
 
-                                        <p className="text-center text-muted m-3">Have already an account? <a
-                                            href="/login" className="fw-bold text-body"><u>Login here</u></a></p>
+                                            <p className="text-center text-muted m-3">Have already an account? <a
+                                                href="/login" className="fw-bold text-body"><u>Login here</u></a></p>
 
-                                    </form>
+                                        </form>
 
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </div >
-        </section >
+                </div >
+            </section >
+        </>
     );
 };;

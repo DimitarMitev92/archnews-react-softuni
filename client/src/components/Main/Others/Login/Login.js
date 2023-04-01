@@ -4,6 +4,7 @@ import background from '../../../../assets/images/login/login-imageNew.jpg';
 import { useState, useContext, useEffect } from 'react';
 //REACT COMPONENTS
 import { LoginInput } from './LoginInput.js';
+import { ModalAuth } from '../../../UI/ModalAuth.js';
 //REACT HOOKS
 //REACT CONTEXT
 import { AuthContext } from '../../../../contexts/authContext.js';
@@ -29,6 +30,9 @@ export const Login = () => {
 
     const [isClickEmail, setIsClickEmail] = useState(false);
     const [isClickPassword, setIsClickPassword] = useState(false);
+
+    const [showModalAuth, setShowModalAuth] = useState(false);
+    const [modalAuthError, setModalAuthError] = useState('');
 
     const clickEmailHandler = (e) => {
         setIsClickEmail(previousState => previousState = true);
@@ -59,6 +63,7 @@ export const Login = () => {
         e.preventDefault();
         login(email, password)
             .then(user => {
+                console.log(user);
                 if (user === undefined) {
                     throw new Error('Email or password is not valid');
                 }
@@ -68,13 +73,21 @@ export const Login = () => {
                 loginUser(user);
                 navigate('/');
             }).catch(error => {
-                alert(error.message);
+                setShowModalAuth(previousState => previousState = true);
+                setModalAuthError(previousState => previousState = `${error.message}`);
             });
 
         setEmail(previousState => previousState = '');
         setPassword(previousState => previousState = '');
 
     };
+
+    useEffect(() => {
+        setValidEmail(previousState => previousState = false);
+        setValidPassword(previousState => previousState = false);
+        setIsClickEmail(previousState => previousState = false);
+        setIsClickPassword(previousState => previousState = false);
+    }, [modalAuthError, showModalAuth]);
 
     const loginInputs = [{
         title: "Your Email",
@@ -115,48 +128,58 @@ export const Login = () => {
         }
     };
 
+    const showModalHandler = () => {
+        setShowModalAuth(previousState => previousState = false);
+    };
+
     return (
-        <section className="vh-100">
-            <div className="container-fluid">
-                <div className="row">
-                    <div className="col-sm-6 text-black d-flex justify-content-center align-items-center flex-md-column">
-                        <h2 className="text-uppercase text-center m-5">LOGIN</h2>
-                        <form onSubmit={loginSubmitHandler}>
+        <>
+            {showModalAuth && <ModalAuth
+                error={modalAuthError}
+                onClickClose={showModalHandler}
+            />}
+            <section className="vh-100">
+                <div className="container-fluid">
+                    <div className="row">
+                        <div className="col-sm-6 text-black d-flex justify-content-center align-items-center flex-md-column">
+                            <h2 className="text-uppercase text-center m-5">LOGIN</h2>
+                            <form onSubmit={loginSubmitHandler}>
 
-                            {loginForm.map((loginInput, index) => <LoginInput
-                                key={index}
-                                title={loginInput.title}
-                                htmlFor={loginInput.htmlFor}
-                                type={loginInput.type}
-                                validItem={loginInput.validItem}
-                                value={loginInput.value}
-                                onChange={loginInput.onChange}
-                                onBlur={loginInput.onBlur}
-                                onClick={loginInput.onClick}
-                                isClicked={loginInput.isClicked}
-                                validFeedback={loginInput.validFeedback}
-                                invalidFeedback={loginInput.invalidFeedback}
-                            />)}
-                            <div className="form-check form-check-inline mx-4 mb-4">
-                                <input className="form-check-input" type="checkbox" id="inlineCheckbox1" value="clicked" onClick={showPassword}
-                                    style={{ backgroundColor: "#adb5bd" }} />
-                                <label className="form-check-label" htmlFor="inlineCheckbox1">Show password</label>
-                            </div>
-                            <div className="d-flex justify-content-center">
-                                <button type="submit" className={`btn btn-secondary btn-lg ${!(validEmail && validPassword) ? 'disabled' : ''}`}>Login</button>
-                            </div>
+                                {loginForm.map((loginInput, index) => <LoginInput
+                                    key={index}
+                                    title={loginInput.title}
+                                    htmlFor={loginInput.htmlFor}
+                                    type={loginInput.type}
+                                    validItem={loginInput.validItem}
+                                    value={loginInput.value}
+                                    onChange={loginInput.onChange}
+                                    onBlur={loginInput.onBlur}
+                                    onClick={loginInput.onClick}
+                                    isClicked={loginInput.isClicked}
+                                    validFeedback={loginInput.validFeedback}
+                                    invalidFeedback={loginInput.invalidFeedback}
+                                />)}
+                                <div className="form-check form-check-inline mx-4 mb-4">
+                                    <input className="form-check-input" type="checkbox" id="inlineCheckbox1" value="clicked" onClick={showPassword}
+                                        style={{ backgroundColor: "#adb5bd" }} />
+                                    <label className="form-check-label" htmlFor="inlineCheckbox1">Show password</label>
+                                </div>
+                                <div className="d-flex justify-content-center">
+                                    <button type="submit" className={`btn btn-secondary btn-lg ${!(validEmail && validPassword) ? 'disabled' : ''}`}>Login</button>
+                                </div>
 
-                            <p className="text-center text-muted mt-5 mb-0">Don't have an account? <Link to="/register"
-                                className="fw-bold text-body"><u>Register here</u></Link></p>
+                                <p className="text-center text-muted mt-5 mb-0">Don't have an account? <Link to="/register"
+                                    className="fw-bold text-body"><u>Register here</u></Link></p>
 
-                        </form>
-                    </div>
-                    <div className="col-sm-6 px-0 d-none d-sm-block">
-                        <img src={background} alt="Login" className="w-100 vh-100"
-                            style={{ objectFit: "cover", objectPosition: "left" }} />
+                            </form>
+                        </div>
+                        <div className="col-sm-6 px-0 d-none d-sm-block">
+                            <img src={background} alt="Login" className="w-100 vh-100"
+                                style={{ objectFit: "cover", objectPosition: "left" }} />
+                        </div>
                     </div>
                 </div>
-            </div>
-        </section>
+            </section>
+        </>
     );
 };
