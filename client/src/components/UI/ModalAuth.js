@@ -21,9 +21,9 @@ export const ModalAuth = ({
                     </div>
                     <div className="modal-footer">
                         <Button
-                            className="btn btn-secondary"
+                            className="btn btn-danger"
                             onClick={onClickClose}
-                            title="Close"
+                            title="Okay"
                         />
                     </div>
                 </div>

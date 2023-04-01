@@ -19,7 +19,6 @@ export const CardProfile = ({
 
 }) => {
     const clickDeletePost = (e) => {
-        console.log(postId);
         clickDelete(postId);
     };
     return (
