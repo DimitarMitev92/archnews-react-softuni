@@ -15,6 +15,7 @@ import { createLikes, getAllLikesForPost } from '../../../../services/likes.js';
 import { createComments, getAllCommentsForPost } from '../../../../services/comments.js';
 //UTILS
 import { dateParser } from '../../../../utils/dateParser.js';
+import { FullScreenImage } from '../../../UI/FullScreenImage.js';
 
 
 export const Details = () => {
@@ -34,6 +35,8 @@ export const Details = () => {
     const [commentText, setCommentText] = useState('');
     const [isComment, setIsComment] = useState(false);
     const [commentsPost, setCommentPost] = useState([]);
+
+    const [isClickedImage, setIsClickImage] = useState(false);
 
     const [post, setPost] = useState({});
 
@@ -138,8 +141,17 @@ export const Details = () => {
         setCommentText(previousState => previousState = '');
     };
 
+    const fullScreenHandler = () => {
+        setIsClickImage(previousState => previousState = true);
+    };
+
+    const closeFullScreenHandler = () => {
+        setIsClickImage(previousState => previousState = false);
+    };
+
     return (
         <>
+            {isClickedImage && <FullScreenImage imageUrl={post.imageUrl} onClick={closeFullScreenHandler} />}
             {showDeleteModal && <ModalDelete
                 onClickClose={closeModalHandler}
                 onClickDelete={deletePostHandler} />}
@@ -183,7 +195,7 @@ export const Details = () => {
                         </div>
                         <div className="col-sm-6 px-0 d-none d-sm-block">
                             <img className="img-fluid" src={post.imageUrl} alt="post"
-                                style={{ objectFit: "cover", objectPosition: "left" }} />
+                                style={{ objectFit: "cover", objectPosition: "left" }} onClick={fullScreenHandler} />
                         </div>
                     </div>
                 </div>
