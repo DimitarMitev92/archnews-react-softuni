@@ -3,7 +3,7 @@ import { useEffect, useState, useContext } from 'react';
 //REACT COMPONENTS
 import { Button } from '../../../UI/Button.js';
 import { ModalDelete } from '../../../UI/ModalDelete.js';
-import { Comments } from '../../../UI/Comments.js';
+import { CommentLine } from '../../../UI/CommentLine.js';
 //REACT HOOKS
 //REACT CONTEXT
 import { AuthContext } from '../../../../contexts/authContext.js';
@@ -12,6 +12,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 //SERVICES
 import { getPostByPostId, deletePost } from '../../../../services/posts.js';
 import { createLikes, getAllLikesForPost } from '../../../../services/likes.js';
+import { createComments, getAllCommentsForPost } from '../../../../services/comments.js';
 //UTILS
 import { dateParser } from '../../../../utils/dateParser.js';
 
@@ -29,6 +30,10 @@ export const Details = () => {
     const [isLogIn, setIsLogIn] = useState(false);
 
     const [showDeleteModal, setShowDeleteModal] = useState(false);
+
+    const [commentText, setCommentText] = useState('');
+    const [isComment, setIsComment] = useState(false);
+    const [commentsPost, setCommentPost] = useState([]);
 
     const [post, setPost] = useState({});
 
@@ -94,14 +99,44 @@ export const Details = () => {
     };
 
     const comments = [{
+        _id: '0',
         author: 'Dimitar',
         comment: 'Mnogo qko prodaljavai'
     }, {
+        _id: '1',
         author: 'Kondio',
         comment: 'Pisna mi da se zanimawam s prostotii'
     }];
 
+    const changeCommentHandler = (e) => {
+        setCommentText(previousState => previousState = e.target.value);
+    };
 
+    useEffect(() => {
+        console.log(postId);
+        getAllCommentsForPost(postId)
+            .then(result => {
+                setCommentPost(previousState => previousState = result);
+            }).catch((error) => console.log(error.message));
+    }, [auth, postId, isComment]);
+
+    const onSubmitComment = async (e) => {
+        e.preventDefault();
+        const comment = commentText;
+        const author = auth.email.split("@")[0];
+        const _id = auth._id;
+        const accessToken = auth.accessToken;
+
+        const commentData = {
+            postId,
+            comment,
+            author
+        };
+
+        await createComments(commentData, accessToken);
+        setIsComment(previousState => previousState = !previousState);
+        setCommentText(previousState => previousState = '');
+    };
 
     return (
         <>
@@ -152,9 +187,22 @@ export const Details = () => {
                         </div>
                     </div>
                 </div>
-                <Comments
-                    comments={comments}
-                />
+                <form className='row d-flex justify-content-center align-items-center m-5' onSubmit={onSubmitComment}>
+                    <div className="col-6 text-light d-flex justify-content-center align-items-center flex-md-column bg-secondary p-3" style={{ borderRadius: "5px" }}>
+                        {commentsPost.length !== 0 ? commentsPost.map((comment) =>
+                            <CommentLine
+                                key={comment._id}
+                                author={comment.author}
+                                comment={comment.comment}
+                                _createdOn={comment._createdOn}
+                            />) :
+                            <h5 className='d-flex justify-content-center align-items-center border-bottom border-light border-2 w-100 p-2'>No one has commented yet.</h5>}
+                        {isLogIn && !isOwner ? <>
+                            <textarea className='form-control w-75 m-3' value={commentText} onChange={changeCommentHandler}></textarea>
+                            <button type="submit" className="btn btn-light btn">Comment</button>
+                        </> : ''}
+                    </div>
+                </form>
             </section>
         </>
     );
