@@ -11,7 +11,7 @@ import { AuthContext } from '../../../../contexts/authContext.js';
 import { useParams, useNavigate } from 'react-router-dom';
 //SERVICES
 import { getPostByPostId, deletePost } from '../../../../services/posts.js';
-import { createLikes, getAllLikesForPost } from '../../../../services/likes.js';
+import { createLikes, deleteLike, getAllLikesForPost } from '../../../../services/likes.js';
 import { createComments, getAllCommentsForPost } from '../../../../services/comments.js';
 //UTILS
 import { dateParser } from '../../../../utils/dateParser.js';
@@ -26,9 +26,13 @@ export const Details = () => {
     const { auth } = useContext(AuthContext);
 
     const [isOwner, setIsOwner] = useState(false);
-    const [isLiked, setIsLiked] = useState(false);
-    const [likes, setLikes] = useState(0);
     const [isLogIn, setIsLogIn] = useState(false);
+
+    const [post, setPost] = useState({});
+
+    const [likes, setLikes] = useState(0);
+    const [isLiked, setIsLiked] = useState(false);
+    const [likeId, setLikeId] = useState('');
 
     const [showDeleteModal, setShowDeleteModal] = useState(false);
 
@@ -38,7 +42,52 @@ export const Details = () => {
 
     const [isClickedImage, setIsClickImage] = useState(false);
 
-    const [post, setPost] = useState({});
+
+    // -----> START: LIKES <------
+
+    useEffect(() => {
+        getAllLikesForPost(postId)
+            .then((result) => {
+                if (result.code === 404) {
+                    result = [];
+                }
+                setLikes(previousState => previousState = result.length);
+                const currentLike = result.filter(like => like._ownerId === auth._id);
+                if (currentLike.length != 0) {
+
+                    setIsLiked(previousState => previousState = true);
+                    setLikeId(previousState => previousState = currentLike[0]._id);
+                }
+            }).catch(error => alert(error.message));
+
+    }, [auth, postId, isLiked]);
+
+    const likeHandler = () => {
+        const dataLike = {
+            likedUser: auth._id,
+            postId
+        };
+        createLikes(dataLike, auth.accessToken)
+            .then((result) => {
+                setIsLiked(previousState => previousState = true);
+            }).catch(error => {
+                alert(error.message);
+            });
+        console.log('Like');
+    };
+
+    const dislikeHandler = () => {
+        console.log(likeId);
+        console.log(auth.accessToken);
+        deleteLike(likeId, auth.accessToken)
+            .then(result => {
+                console.log(result);
+                setIsLiked(previousState => previousState = false);
+            }).catch(error => alert(error.message));
+    };
+
+    // -----> END: LIKES <------
+
 
     useEffect(() => {
         getPostByPostId(postId)
@@ -50,6 +99,8 @@ export const Details = () => {
             }).catch(error => alert(error.message));
     }, [postId, auth._id]);
 
+    // -----> START: LogIn <------
+
     useEffect(() => {
         if (auth._id) {
             setIsLogIn(previousState => previousState = true);
@@ -58,17 +109,9 @@ export const Details = () => {
         }
     }, [auth._id]);
 
-    useEffect(() => {
-        getAllLikesForPost(postId)
-            .then((result) => {
-                if (result.code === 404) {
-                    return setLikes(0);
-                }
-                setLikes(result.length);
-                const isCurrentUserLikedPost = Boolean(result.filter(x => x.likedUser === auth._id).length);
-                setIsLiked(isCurrentUserLikedPost);
-            }).catch(error => alert(error.message));
-    }, [auth._id, likes, postId]);
+    // -----> END: LogIn <------
+
+    // -----> START: DELETE <------
 
     const clickDeleteHandler = () => {
         setShowDeleteModal(previousState => previousState = true);
@@ -87,40 +130,21 @@ export const Details = () => {
             .catch((error) => alert(error.message));
     };
 
-    const likeHandle = async () => {
-        const likeData = {
-            likedUser: auth._id,
-            postId: postId
-        };
-        createLikes(likeData, auth.accessToken)
-            .then((result) => {
-                getAllLikesForPost(postId)
-                    .then((result) => {
-                        setLikes(result.length);
-                    });
-            }).catch(error => alert(error.message));
-    };
+    // -----> END: DELETE <------
 
-    const comments = [{
-        _id: '0',
-        author: 'Dimitar',
-        comment: 'Mnogo qko prodaljavai'
-    }, {
-        _id: '1',
-        author: 'Kondio',
-        comment: 'Pisna mi da se zanimawam s prostotii'
-    }];
 
+
+
+    // -----> START: COMMENTS <------
     const changeCommentHandler = (e) => {
         setCommentText(previousState => previousState = e.target.value);
     };
 
     useEffect(() => {
-        console.log(postId);
         getAllCommentsForPost(postId)
             .then(result => {
                 setCommentPost(previousState => previousState = result);
-            }).catch((error) => console.log(error.message));
+            }).catch((error) => alert(error.message));
     }, [auth, postId, isComment]);
 
     const onSubmitComment = async (e) => {
@@ -141,6 +165,10 @@ export const Details = () => {
         setCommentText(previousState => previousState = '');
     };
 
+    // -----> END: COMMENTS <------
+
+    // -----> START: FULL SCREEN IMAGE <------
+
     const fullScreenHandler = () => {
         setIsClickImage(previousState => previousState = true);
     };
@@ -148,6 +176,8 @@ export const Details = () => {
     const closeFullScreenHandler = () => {
         setIsClickImage(previousState => previousState = false);
     };
+
+    // -----> END: FULL SCREEN IMAGE <------
 
     return (
         <>
@@ -181,13 +211,21 @@ export const Details = () => {
                                                     title={"Delete"}
                                                 />
                                             </> :
-                                            <Button
-                                                onClick={likeHandle}
-                                                className={"btn btn-success m-2"}
-                                                title={"Like"}
-                                                disabled={isLiked}
-                                            />
-
+                                            <>
+                                                {isLiked ?
+                                                    <Button
+                                                        onClick={dislikeHandler}
+                                                        className={"btn btn-danger m-2"}
+                                                        title={"Dislike"}
+                                                    />
+                                                    :
+                                                    < Button
+                                                        onClick={likeHandler}
+                                                        className={"btn btn-success m-2"}
+                                                        title={"Like"}
+                                                    />
+                                                }
+                                            </>
                                         }
                                     </>
                                 }
