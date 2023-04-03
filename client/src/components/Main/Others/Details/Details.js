@@ -5,6 +5,7 @@ import { Button } from '../../../UI/Button.js';
 import { ModalDelete } from '../../../UI/ModalDelete.js';
 import { CommentLine } from '../../../UI/CommentLine.js';
 import { Image } from '../../../UI/Image.js';
+import { Loading } from '../../../UI/Loading.js';
 //REACT HOOKS
 //REACT CONTEXT
 import { AuthContext } from '../../../../contexts/authContext.js';
@@ -43,6 +44,8 @@ export const Details = () => {
     const [commentsPost, setCommentPost] = useState([]);
 
     const [isClickedImage, setIsClickImage] = useState(false);
+
+    const [showLoading, setShowLoading] = useState(true);
 
 
     // -----> START: LIKES <------
@@ -94,6 +97,7 @@ export const Details = () => {
                 if (post._ownerId === auth._id) {
                     setIsOwner(previousState => previousState = true);
                 }
+                setShowLoading(previousState => previousState = false);
             }).catch(error => alert(error.message));
     }, [postId, auth._id]);
 
@@ -178,86 +182,90 @@ export const Details = () => {
 
     return (
         <>
-            {isClickedImage && <FullScreenImage imageUrl={post.imageUrl} onClick={closeFullScreenHandler} />}
-            {showDeleteModal && <ModalDelete
-                onClickClose={closeModalHandler}
-                onClickDelete={deletePostHandler} />}
-            <section className="vh-auto overflow-hidden mt-5">
-                <div className="d-flex justify-content-center align-content-center">
-                    <div className="row">
-                        <div className="col-sm-6 text-black d-flex justify-content-center align-items-center flex-md-column">
-                            <h2 className="text-uppercase text-center m-5">{post.title}</h2>
-                            <h5 className="text-dark"><i><ion-icon name="location-outline"></ion-icon></i> {post.location}</h5>
-                            <h5 className="text-dark"><i><ion-icon name="calendar-outline"></ion-icon></i> {dateParser(post._createdOn)}</h5>
-                            <h5 className="text-dark">LIKES: {likes}</h5>
-                            <article style={{ textIndent: "50px" }} className="text-dark p-4 ">{post.post}
-                            </article>
-                            <div className="d-flex justify-content-center">
-                                {isLogIn &&
-                                    <>
-                                        {isOwner ?
+            {showLoading ? <Loading /> :
+                <>
+                    {isClickedImage && <FullScreenImage imageUrl={post.imageUrl} onClick={closeFullScreenHandler} />}
+                    {showDeleteModal && <ModalDelete
+                        onClickClose={closeModalHandler}
+                        onClickDelete={deletePostHandler} />}
+                    <section className="vh-auto overflow-hidden mt-5">
+                        <div className="d-flex justify-content-center align-content-center">
+                            <div className="row">
+                                <div className="col-sm-6 text-black d-flex justify-content-center align-items-center flex-md-column">
+                                    <h2 className="text-uppercase text-center m-5">{post.title}</h2>
+                                    <h5 className="text-dark"><i><ion-icon name="location-outline"></ion-icon></i> {post.location}</h5>
+                                    <h5 className="text-dark"><i><ion-icon name="calendar-outline"></ion-icon></i> {dateParser(post._createdOn)}</h5>
+                                    <h5 className="text-dark">LIKES: {likes}</h5>
+                                    <article style={{ textIndent: "50px" }} className="text-dark p-4 ">{post.post}
+                                    </article>
+                                    <div className="d-flex justify-content-center">
+                                        {isLogIn &&
                                             <>
-                                                <Button
-                                                    to={`/edit/${post._id}`}
-                                                    className={"btn btn-success m-2"}
-                                                    title={"Edit"}
-                                                />
-                                                <Button
-                                                    onClick={clickDeleteHandler}
-                                                    className={"btn btn-danger m-2"}
-                                                    title={"Delete"}
-                                                />
-                                            </> :
-                                            <>
-                                                {isLiked ?
-                                                    <Button
-                                                        onClick={dislikeHandler}
-                                                        className={"btn btn-danger m-2"}
-                                                        title={"Dislike"}
-                                                    />
-                                                    :
-                                                    < Button
-                                                        onClick={likeHandler}
-                                                        className={"btn btn-success m-2"}
-                                                        title={"Like"}
-                                                    />
+                                                {isOwner ?
+                                                    <>
+                                                        <Button
+                                                            to={`/edit/${post._id}`}
+                                                            className={"btn btn-success m-2"}
+                                                            title={"Edit"}
+                                                        />
+                                                        <Button
+                                                            onClick={clickDeleteHandler}
+                                                            className={"btn btn-danger m-2"}
+                                                            title={"Delete"}
+                                                        />
+                                                    </> :
+                                                    <>
+                                                        {isLiked ?
+                                                            <Button
+                                                                onClick={dislikeHandler}
+                                                                className={"btn btn-danger m-2"}
+                                                                title={"Dislike"}
+                                                            />
+                                                            :
+                                                            < Button
+                                                                onClick={likeHandler}
+                                                                className={"btn btn-success m-2"}
+                                                                title={"Like"}
+                                                            />
+                                                        }
+                                                    </>
                                                 }
                                             </>
                                         }
-                                    </>
-                                }
+                                    </div>
+                                </div>
+                                <div className="col-sm-6 px-0 d-none d-sm-block">
+                                    <Image
+                                        src={post.imageUrl}
+                                        alt="post"
+                                        className="img-fluid"
+                                        style={{ objectFit: "cover", objectPosition: "left", cursor: "pointer" }}
+                                        onClick={fullScreenHandler}
+                                    />
+                                </div>
                             </div>
                         </div>
-                        <div className="col-sm-6 px-0 d-none d-sm-block">
-                            <Image
-                                src={post.imageUrl}
-                                alt="post"
-                                className="img-fluid"
-                                style={{ objectFit: "cover", objectPosition: "left", cursor: "pointer" }}
-                                onClick={fullScreenHandler}
-                            />
-                        </div>
-                    </div>
-                </div>
-                <form className='row d-flex justify-content-center align-items-center m-5' onSubmit={onSubmitComment}>
-                    <div className="col-6 text-light d-flex justify-content-center align-items-center flex-md-column bg-secondary p-3" style={{ borderRadius: "5px" }}>
-                        {commentsPost.length !== 0 ? commentsPost.map((comment) =>
-                            <CommentLine
-                                key={comment._id}
-                                author={comment.author}
-                                comment={comment.comment}
-                            />) :
-                            <h5 className='d-flex justify-content-center align-items-center border-bottom border-light border-2 w-100 p-2'>No one has commented yet.</h5>}
-                        {isLogIn && !isOwner ? <>
-                            <textarea className='form-control w-75 m-3' value={commentText} onChange={changeCommentHandler}></textarea>
-                            <ButtonSubmit
-                                className="btn btn-light btn"
-                                title="Comment"
-                            />
-                        </> : ''}
-                    </div>
-                </form>
-            </section>
+                        <form className='row d-flex justify-content-center align-items-center m-5' onSubmit={onSubmitComment}>
+                            <div className="col-6 text-light d-flex justify-content-center align-items-center flex-md-column bg-secondary p-3" style={{ borderRadius: "5px" }}>
+                                {commentsPost.length !== 0 ? commentsPost.map((comment) =>
+                                    <CommentLine
+                                        key={comment._id}
+                                        author={comment.author}
+                                        comment={comment.comment}
+                                    />) :
+                                    <h5 className='d-flex justify-content-center align-items-center border-bottom border-light border-2 w-100 p-2'>No one has commented yet.</h5>}
+                                {isLogIn && !isOwner ? <>
+                                    <textarea className='form-control w-75 m-3' value={commentText} onChange={changeCommentHandler}></textarea>
+                                    <ButtonSubmit
+                                        className="btn btn-light btn"
+                                        title="Comment"
+                                    />
+                                </> : ''}
+                            </div>
+                        </form>
+                    </section>
+                </>
+            }
         </>
     );
 };

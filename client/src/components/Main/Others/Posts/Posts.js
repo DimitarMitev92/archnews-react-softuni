@@ -2,6 +2,7 @@
 import { useContext, useEffect, useState } from "react";
 //REACT COMPONENTS
 import { CardPost } from "../../../UI/Card.js";
+import { Loading } from '../../../UI/Loading.js';
 //REACT HOOKS
 //REACT CONTEXT
 import { AuthContext } from "../../../../contexts/authContext.js";
@@ -25,6 +26,8 @@ export const Posts = () => {
     const [likes, setLikes] = useState([]);
     const [sortBy, setSortBy] = useState('oldest');
 
+    const [showLoading, setShowLoading] = useState(true);
+
 
     useEffect(() => {
         getAllPosts()
@@ -34,6 +37,7 @@ export const Posts = () => {
                 } else {
                     setPosts(allPosts);
                 }
+                setShowLoading(previousState => previousState = false);
             }).catch((error) => alert(error));
     }, [searchName]);
 
@@ -117,54 +121,59 @@ export const Posts = () => {
     }];
 
     return (
-        <section className="container bg-secondary  m-5 mx-auto p-5">
-            <div className="row bg-black">
-                <h2 className="text-center p-4 text-light">ARCHITECTURE NEWS</h2>
-            </div>
-            <form className="d-flex m-3" role="search" onSubmit={searchSubmitHandler}>
-                <input className="form-control me-2" type="search" placeholder="Search by name" aria-label="Search" onChange={searchViaNameHandler} value={searchName} />
-                <ButtonSubmit
-                    className="btn btn-light btn-lg"
-                    title="Search"
-                />
-            </form>
+        <>
+            {showLoading ? <Loading /> :
 
-            <div className="d-flex justify-content-center align-items-center m-3 bg-light" style={{ borderRadius: "5px" }}>
-                <p className="d-flex justify-content-center align-items-center m-2">Sort by: </p>
+                <section className="container bg-secondary  m-5 mx-auto p-5">
+                    <div className="row bg-black">
+                        <h2 className="text-center p-4 text-light">ARCHITECTURE NEWS</h2>
+                    </div>
+                    <form className="d-flex m-3" role="search" onSubmit={searchSubmitHandler}>
+                        <input className="form-control me-2" type="search" placeholder="Search by name" aria-label="Search" onChange={searchViaNameHandler} value={searchName} />
+                        <ButtonSubmit
+                            className="btn btn-light btn-lg"
+                            title="Search"
+                        />
+                    </form>
 
-                {radioButtons.map(radioButton => <RadioButton
-                    key={radioButton.key}
-                    classNameDiv={radioButton.classNameDiv}
-                    classNameInput={radioButton.classNameInput}
-                    classNameLabel={radioButton.classNameLabel}
-                    nameInput={radioButton.nameInput}
-                    idInput={radioButton.idInput}
-                    valueInput={radioButton.valueInput}
-                    onClick={radioButton.onClick}
-                    style={radioButton.style}
-                    htmlFor={radioButton.htmlFor}
-                    titleLabel={radioButton.titleLabel}
-                    defaultChecked={radioButton.defaultChecked}
-                />)}
+                    <div className="d-flex justify-content-center align-items-center m-3 bg-light" style={{ borderRadius: "5px" }}>
+                        <p className="d-flex justify-content-center align-items-center m-2">Sort by: </p>
 
-            </div>
+                        {radioButtons.map(radioButton => <RadioButton
+                            key={radioButton.key}
+                            classNameDiv={radioButton.classNameDiv}
+                            classNameInput={radioButton.classNameInput}
+                            classNameLabel={radioButton.classNameLabel}
+                            nameInput={radioButton.nameInput}
+                            idInput={radioButton.idInput}
+                            valueInput={radioButton.valueInput}
+                            onClick={radioButton.onClick}
+                            style={radioButton.style}
+                            htmlFor={radioButton.htmlFor}
+                            titleLabel={radioButton.titleLabel}
+                            defaultChecked={radioButton.defaultChecked}
+                        />)}
 
-            {myPostsWithLikes.length !== 0 ?
-                myPostsWithLikes.map(post =>
-                    <CardPost
-                        key={post._id}
-                        imageUrl={post.imageUrl}
-                        title={post.title}
-                        location={post.location}
-                        date={post._createdOn}
-                        likes={post.likes}
-                        info={post.post}
-                        postId={post._id}
-                    />) :
-                (searchName ?
-                    <h3 className="text-center p-4 text-light">Posts with this name doesn't exists.</h3> :
-                    <h3 className="text-center p-4 text-light">There are no posts yet.</h3>)
+                    </div>
+
+                    {myPostsWithLikes.length !== 0 ?
+                        myPostsWithLikes.map(post =>
+                            <CardPost
+                                key={post._id}
+                                imageUrl={post.imageUrl}
+                                title={post.title}
+                                location={post.location}
+                                date={post._createdOn}
+                                likes={post.likes}
+                                info={post.post}
+                                postId={post._id}
+                            />) :
+                        (searchName ?
+                            <h3 className="text-center p-4 text-light">Posts with this name doesn't exists.</h3> :
+                            <h3 className="text-center p-4 text-light">There are no posts yet.</h3>)
+                    }
+                </section>
             }
-        </section>
+        </>
     );
 };

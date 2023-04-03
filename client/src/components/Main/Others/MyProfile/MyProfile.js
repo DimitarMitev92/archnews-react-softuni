@@ -3,6 +3,7 @@ import { useEffect, useState, useContext } from 'react';
 //REACT COMPONENTS
 import { CardProfile } from './CardProfile.js';
 import { ModalDelete } from '../../../UI/ModalDelete.js';
+import { Loading } from '../../../UI/Loading.js';
 //REACT HOOKS
 //REACT CONTEXT
 import { AuthContext } from '../../../../contexts/authContext.js';
@@ -30,6 +31,8 @@ export const MyProfile = () => {
     const [currentPostDelete, setCurrentPostDelete] = useState('');
     const [isDeleted, setIsDeleted] = useState(false);
 
+    const [showLoading, setShowLoading] = useState(true);
+
     const currentUser = auth.name;
 
     useEffect(() => {
@@ -39,6 +42,7 @@ export const MyProfile = () => {
                     result = [];
                 }
                 setMyPosts(previousState => previousState = result);
+                setShowLoading(previousState => previousState = false);
             }).catch(error => alert(error.message));
     }, [auth._id, isDeleted]);
 
@@ -76,37 +80,41 @@ export const MyProfile = () => {
 
     return (
         <>
-            {showDeleteModal && <ModalDelete
-                postId={currentPostDelete}
-                onClickClose={closeModalHandler}
-                onClickDelete={deletePostHandler} />};
-            <section className="container bg-secondary  m-5 mx-auto p-5">
-                <div className="row bg-black">
-                    <h2 className="text-center pt-4 text-light ">YOUR PROFILE</h2>
-                    <h3 className="text-center pb-1 pt-4 text-light ">{currentUser}</h3>
-                    <h4 className="text-center p-1 text-light">Posts: {myPosts.length}</h4>
-                </div>
+            {showLoading ? <Loading /> :
+                <>
+                    {showDeleteModal && <ModalDelete
+                        postId={currentPostDelete}
+                        onClickClose={closeModalHandler}
+                        onClickDelete={deletePostHandler} />};
+                    <section className="container bg-secondary  m-5 mx-auto p-5">
+                        <div className="row bg-black">
+                            <h2 className="text-center pt-4 text-light ">YOUR PROFILE</h2>
+                            <h3 className="text-center pb-1 pt-4 text-light ">{currentUser}</h3>
+                            <h4 className="text-center p-1 text-light">Posts: {myPosts.length}</h4>
+                        </div>
 
 
-                {myPostsWithLikes.length !== 0 ?
-                    myPostsWithLikes.map(post =>
-                        <CardProfile
-                            key={post._id}
-                            postId={post._id}
-                            imageUrl={post.imageUrl}
-                            title={post.title}
-                            location={post.location}
-                            date={dateParser(post._createdOn)}
-                            likes={post.likes}
-                            info={post.post}
-                            clickDelete={clickDeleteHandler}
-                            clickClose={closeModalHandler}
-                            deleteHandler={deletePostHandler}
-                        />) :
-                    <h3 className="text-center p-4 text-light">There are no posts yet.</h3>
-                }
+                        {myPostsWithLikes.length !== 0 ?
+                            myPostsWithLikes.map(post =>
+                                <CardProfile
+                                    key={post._id}
+                                    postId={post._id}
+                                    imageUrl={post.imageUrl}
+                                    title={post.title}
+                                    location={post.location}
+                                    date={dateParser(post._createdOn)}
+                                    likes={post.likes}
+                                    info={post.post}
+                                    clickDelete={clickDeleteHandler}
+                                    clickClose={closeModalHandler}
+                                    deleteHandler={deletePostHandler}
+                                />) :
+                            <h3 className="text-center p-4 text-light">There are no posts yet.</h3>
+                        }
 
-            </section>
+                    </section>
+                </>
+            }
         </>
     );
 };

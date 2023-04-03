@@ -1,6 +1,7 @@
 //REACT
 import React, { useState } from 'react';
 //REACT COMPONENTS
+
 import { Header } from './components/Header/Header.js';
 import { Main } from './components/Main/Main.js';
 import { Footer } from './components/Footer/Footer.js';
