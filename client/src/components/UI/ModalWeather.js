@@ -22,7 +22,7 @@ export const ModalWeather = ({
                         <p>Max temperature: {weatherInfo.main.temp_max}°C</p>
                         <p>Feels like: {weatherInfo.main.feels_like}°C</p>
                         <p>Humidity: {weatherInfo.main.humidity}g/m3</p>
-                        <p>Pressure: {weatherInfo.main.pressure / 100}hPa</p>
+                        <p>Pressure: {weatherInfo.main.pressure}hPa</p>
                         <p>Wind speed: {weatherInfo.wind.speed}km/h</p>
                         <p>{weatherInfo.weather[0].main} - {weatherInfo.weather[0].description}</p>
                         <Image
