@@ -10,6 +10,7 @@ import owner1 from '../../../../assets/images/about-us/members/owner1.png';
 //REACT COMPONENTS
 import { CardMember } from './CardMember.js';
 import { Button } from '../../../UI/Button.js';
+import { Image } from '../../../UI/Image.js';
 //REACT HOOKS
 //REACT CONTEXT
 //REACT ROUTER
@@ -59,7 +60,11 @@ export const AboutUs = () => {
 
     return (
         <section className="position-relative" id="aboutUs">
-            <img src={background} alt="background" className="w-100" />
+            <Image
+                src={background}
+                alt="aboutUs"
+                className="w-100"
+            />
             <div className="position-absolute top-50 start-50 translate-middle text-center">
                 <h1>OUR TEAM</h1>
                 <Button

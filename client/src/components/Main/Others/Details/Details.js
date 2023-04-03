@@ -4,6 +4,7 @@ import { useEffect, useState, useContext } from 'react';
 import { Button } from '../../../UI/Button.js';
 import { ModalDelete } from '../../../UI/ModalDelete.js';
 import { CommentLine } from '../../../UI/CommentLine.js';
+import { Image } from '../../../UI/Image.js';
 //REACT HOOKS
 //REACT CONTEXT
 import { AuthContext } from '../../../../contexts/authContext.js';
@@ -146,7 +147,7 @@ export const Details = () => {
     const onSubmitComment = async (e) => {
         e.preventDefault();
         const comment = commentText;
-        const author = auth.email.split("@")[0];
+        const author = auth.name;
         const _id = auth._id;
         const accessToken = auth.accessToken;
 
@@ -228,8 +229,13 @@ export const Details = () => {
                             </div>
                         </div>
                         <div className="col-sm-6 px-0 d-none d-sm-block">
-                            <img className="img-fluid" src={post.imageUrl} alt="post"
-                                style={{ objectFit: "cover", objectPosition: "left", cursor: "pointer" }} onClick={fullScreenHandler} />
+                            <Image
+                                src={post.imageUrl}
+                                alt="post"
+                                className="img-fluid"
+                                style={{ objectFit: "cover", objectPosition: "left", cursor: "pointer" }}
+                                onClick={fullScreenHandler}
+                            />
                         </div>
                     </div>
                 </div>

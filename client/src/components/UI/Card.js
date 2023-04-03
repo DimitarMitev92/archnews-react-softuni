@@ -1,6 +1,7 @@
 //REACT
 //REACT COMPONENTS
 import { Button } from './Button.js';
+import { Image } from '../UI/Image.js';
 //REACT HOOKS
 //REACT CONTEXT
 //REACT ROUTER
@@ -23,8 +24,11 @@ export const CardPost = ({
     return (
         < div className="row p-5 border-top border-light border-2" >
             <div className="col zoom-in">
-                <img className="img-fluid  border border-2 border-light" src={imageUrl}
-                    alt={title} />
+                <Image
+                    src={imageUrl}
+                    alt={title}
+                    className="img-fluid  border border-2 border-light"
+                />
             </div>
             <div className="col">
                 <h3 className="text-light">{title}</h3>

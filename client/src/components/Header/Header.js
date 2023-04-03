@@ -4,6 +4,7 @@ import logo from '../../assets/logos/main-icon/ArchNews-1.png';
 import React, { useContext, useEffect, useState } from 'react';
 //REACT COMPONENTS
 import { HeaderLink } from './HeaderLink.js';
+import { Image } from '../UI/Image.js';
 //REACT HOOKS
 //REACT CONTEXT
 import { AuthContext } from '../../contexts/authContext.js';
@@ -36,8 +37,12 @@ export const Header = () => {
             <nav className="navbar fixed-top bg-white border-bottom border-1 border-dark">
                 <div className="container-fluid">
                     <Link className="navbar-brand" to="/">
-                        <img src={logo} alt="Logo" height="40"
-                            className="d-inline-block align-text-center" />
+                        <Image
+                            src={logo}
+                            alt="Logo"
+                            className="d-inline-block align-text-center"
+                            style={{ height: "40px" }}
+                        />
                     </Link>
                     <ul className="nav nav-pills ">
 
@@ -84,7 +89,12 @@ export const Header = () => {
 
                     </ul>
                     {currentWeather ?
-                        <button className="btn btn-secondary" style={{ margin: '0', padding: '0' }}>{currentWeather.name} - {currentWeather.main.temp}°C - <img className="w-25 h-25 m-0" src="https://openweathermap.org/img/wn/10d@2x.png" alt="weather-icon" /></button> :
+                        <button className="btn btn-secondary" style={{ margin: '0', padding: '0' }}>{currentWeather.name} - {currentWeather.main.temp}°C -
+                            <Image
+                                src={`https://openweathermap.org/img/wn/${currentWeather.weather[0].icon}@2x.png`}
+                                alt="weather"
+                                className="w-25 h-25 m-0"
+                            /></button> :
                         ''
                     }
                 </div>

@@ -5,6 +5,7 @@ import { useState, useContext, useEffect } from 'react';
 //REACT COMPONENTS
 import { LoginInput } from './LoginInput.js';
 import { ModalAuth } from '../../../UI/ModalAuth.js';
+import { Image } from '../../../UI/Image.js';
 //REACT HOOKS
 //REACT CONTEXT
 import { AuthContext } from '../../../../contexts/authContext.js';
@@ -173,8 +174,12 @@ export const Login = () => {
                             </form>
                         </div>
                         <div className="col-sm-6 px-0 d-none d-sm-block">
-                            <img src={background} alt="Login" className="w-100 vh-100"
-                                style={{ objectFit: "cover", objectPosition: "left" }} />
+                            <Image
+                                src={background}
+                                alt="Login"
+                                className="w-100 vh-100"
+                                style={{ objectFit: "cover", objectPosition: "left" }}
+                            />
                         </div>
                     </div>
                 </div>

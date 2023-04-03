@@ -1,5 +1,6 @@
 //REACT
 //REACT COMPONENTS
+import { Image } from '../../../UI/Image.js';
 //REACT HOOKS
 //REACT CONTEXT
 //REACT ROUTER
@@ -13,7 +14,11 @@ export const PartnerItem = ({
 }) => {
     return (
         <div className={classNameDiv}>
-            <img className={classNameImg} src={imageUrl} alt={title} />
+            <Image
+                src={imageUrl}
+                alt={title}
+                className={classNameImg}
+            />
         </div>
     );
 };
