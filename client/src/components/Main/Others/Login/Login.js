@@ -1,5 +1,5 @@
 //IMAGES AND LOGOS
-import background from '../../../../assets/images/login/login-imageNew.jpg';
+import background from '../../../../assets/images/login/login-imageNew.png';
 //REACT
 import { useState, useContext, useEffect } from 'react';
 //REACT COMPONENTS
