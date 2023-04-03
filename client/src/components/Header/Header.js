@@ -25,7 +25,6 @@ export const Header = () => {
             fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${position.coords.latitude}&lon=${position.coords.longitude}&units=metric&appid=${API_KEY}`)
                 .then(response => response.json())
                 .then(result => {
-                    console.log(result);
                     setCurrentWeather(previousState => previousState = result);
                 })
                 .catch(error => console.log(error));

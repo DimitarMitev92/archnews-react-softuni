@@ -73,15 +73,11 @@ export const Details = () => {
             }).catch(error => {
                 alert(error.message);
             });
-        console.log('Like');
     };
 
     const dislikeHandler = () => {
-        console.log(likeId);
-        console.log(auth.accessToken);
         deleteLike(likeId, auth.accessToken)
             .then(result => {
-                console.log(result);
                 setIsLiked(previousState => previousState = false);
             }).catch(error => alert(error.message));
     };
