@@ -13,6 +13,7 @@ import { getAllLikes } from "../../../../services/likes.js";
 import { searcherViaName } from '../../../../utils/searchViaName.js';
 import { addLikesToCurrentPost } from "../../../../utils/addLikesToPost.js";
 import { ButtonSubmit } from "../../../UI/ButtonSubmit.js";
+import { RadioButton } from "../../../UI/RadioButton.js";
 
 export const Posts = () => {
 
@@ -72,6 +73,49 @@ export const Posts = () => {
         setSortBy(previousState => previousState = e.target.value);
     };
 
+    const radioButtons = [{
+        key: "0",
+        classNameDiv: "form-check form-check-inline",
+        classNameInput: "form-check-input",
+        classNameLabel: "form-check-label",
+        nameInput: "inlineRadioOptions",
+        idInput: "inlineRadio1",
+        valueInput: "newest",
+        onClick: sortClickHandler,
+        style: { backgroundColor: "#adb5bd" },
+        htmlFor: "inlineRadio1",
+        titleLabel: "Newest",
+        defaultChecked: false,
+    }, {
+        key: "1",
+        classNameDiv: "form-check form-check-inline",
+        classNameInput: "form-check-input",
+        classNameLabel: "form-check-label",
+        nameInput: "inlineRadioOptions",
+        idInput: "inlineRadio2",
+        valueInput: "oldest",
+        onClick: sortClickHandler,
+        style: { backgroundColor: "#adb5bd" },
+        htmlFor: "inlineRadio2",
+        titleLabel: "Oldest",
+        defaultChecked: true,
+
+    }, {
+        key: "2",
+        classNameDiv: "form-check form-check-inline",
+        classNameInput: "form-check-input",
+        classNameLabel: "form-check-label",
+        nameInput: "inlineRadioOptions",
+        idInput: "inlineRadio3",
+        valueInput: "mostLiked",
+        onClick: sortClickHandler,
+        style: { backgroundColor: "#adb5bd" },
+        htmlFor: "inlineRadio3",
+        titleLabel: "Most liked",
+        defaultChecked: false,
+
+    }];
+
     return (
         <section className="container bg-secondary  m-5 mx-auto p-5">
             <div className="row bg-black">
@@ -87,18 +131,22 @@ export const Posts = () => {
 
             <div className="d-flex justify-content-center align-items-center m-3 bg-light" style={{ borderRadius: "5px" }}>
                 <p className="d-flex justify-content-center align-items-center m-2">Sort by: </p>
-                <div className="form-check form-check-inline">
-                    <input className="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="newest" onClick={sortClickHandler} style={{ backgroundColor: "#adb5bd" }} />
-                    <label className="form-check-label" htmlFor="inlineRadio1">Newest</label>
-                </div>
-                <div className="form-check form-check-inline">
-                    <input className="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="oldest" onClick={sortClickHandler} defaultChecked style={{ backgroundColor: "#adb5bd" }} />
-                    <label className="form-check-label" htmlFor="inlineRadio2">Oldest</label>
-                </div>
-                <div className="form-check form-check-inline">
-                    <input className="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="mostLiked" onClick={sortClickHandler} style={{ backgroundColor: "#adb5bd" }} />
-                    <label className="form-check-label" htmlFor="inlineRadio3">Most liked</label>
-                </div>
+
+                {radioButtons.map(radioButton => <RadioButton
+                    key={radioButton.key}
+                    classNameDiv={radioButton.classNameDiv}
+                    classNameInput={radioButton.classNameInput}
+                    classNameLabel={radioButton.classNameLabel}
+                    nameInput={radioButton.nameInput}
+                    idInput={radioButton.idInput}
+                    valueInput={radioButton.valueInput}
+                    onClick={radioButton.onClick}
+                    style={radioButton.style}
+                    htmlFor={radioButton.htmlFor}
+                    titleLabel={radioButton.titleLabel}
+                    defaultChecked={radioButton.defaultChecked}
+                />)}
+
             </div>
 
             {myPostsWithLikes.length !== 0 ?
