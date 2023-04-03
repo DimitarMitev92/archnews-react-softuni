@@ -36,7 +36,7 @@ export const PartnersSection = () => {
 
 
     return (
-        <section className="container-fluid p-3 mt-3">
+        <section className="container-fluid p-5 mt-3">
             <div className="row">
                 <h5 className="text-center">OUR PARTNERS</h5>
             </div>

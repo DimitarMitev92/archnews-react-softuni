@@ -233,7 +233,7 @@ export const Details = () => {
                         </div>
                         <div className="col-sm-6 px-0 d-none d-sm-block">
                             <img className="img-fluid" src={post.imageUrl} alt="post"
-                                style={{ objectFit: "cover", objectPosition: "left" }} onClick={fullScreenHandler} />
+                                style={{ objectFit: "cover", objectPosition: "left", cursor: "pointer" }} onClick={fullScreenHandler} />
                         </div>
                     </div>
                 </div>
@@ -244,7 +244,6 @@ export const Details = () => {
                                 key={comment._id}
                                 author={comment.author}
                                 comment={comment.comment}
-                                _createdOn={comment._createdOn}
                             />) :
                             <h5 className='d-flex justify-content-center align-items-center border-bottom border-light border-2 w-100 p-2'>No one has commented yet.</h5>}
                         {isLogIn && !isOwner ? <>

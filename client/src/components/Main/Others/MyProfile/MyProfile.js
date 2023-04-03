@@ -80,7 +80,7 @@ export const MyProfile = () => {
                 postId={currentPostDelete}
                 onClickClose={closeModalHandler}
                 onClickDelete={deletePostHandler} />};
-            <section className="container bg-secondary  m-5 mx-auto">
+            <section className="container bg-secondary  m-5 mx-auto p-5">
                 <div className="row bg-black">
                     <h2 className="text-center pt-4 text-light ">YOUR PROFILE</h2>
                     <h3 className="text-center pb-1 pt-4 text-light ">{currentUser}</h3>

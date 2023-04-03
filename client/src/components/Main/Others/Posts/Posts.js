@@ -72,7 +72,7 @@ export const Posts = () => {
     };
 
     return (
-        <section className="container bg-secondary  m-5 mx-auto">
+        <section className="container bg-secondary  m-5 mx-auto p-5">
             <div className="row bg-black">
                 <h2 className="text-center p-4 text-light">ARCHITECTURE NEWS</h2>
             </div>

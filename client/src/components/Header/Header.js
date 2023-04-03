@@ -1,7 +1,7 @@
 //IMAGES AND LOGOS
 import logo from '../../assets/logos/main-icon/ArchNews-1.png';
 //REACT
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 //REACT COMPONENTS
 import { HeaderLink } from './HeaderLink.js';
 //REACT HOOKS
@@ -11,10 +11,26 @@ import { AuthContext } from '../../contexts/authContext.js';
 import { Link } from 'react-router-dom';
 //SERVICES
 
+const API_KEY = '77a9d5510293493818c19ab7105d0811';
 
 export const Header = () => {
 
     const { auth } = useContext(AuthContext);
+
+    const [currentWeather, setCurrentWeather] = useState(null);
+
+
+    useEffect(() => {
+        navigator.geolocation.getCurrentPosition(position => {
+            fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${position.coords.latitude}&lon=${position.coords.longitude}&units=metric&appid=${API_KEY}`)
+                .then(response => response.json())
+                .then(result => {
+                    console.log(result);
+                    setCurrentWeather(previousState => previousState = result);
+                })
+                .catch(error => console.log(error));
+        });
+    }, []);
 
     return (
         <header>
@@ -68,8 +84,12 @@ export const Header = () => {
                         />
 
                     </ul>
+                    {currentWeather ?
+                        <button className="btn btn-secondary" style={{ margin: '0', padding: '0' }}>{currentWeather.name} - {currentWeather.main.temp}°C - <img className="w-25 h-25 m-0" src="https://openweathermap.org/img/wn/10d@2x.png" alt="weather-icon" /></button> :
+                        ''
+                    }
                 </div>
             </nav>
-        </header>
+        </header >
     );
 };
