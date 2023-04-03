@@ -12,6 +12,7 @@ import { getAllLikes } from "../../../../services/likes.js";
 //UTILS
 import { searcherViaName } from '../../../../utils/searchViaName.js';
 import { addLikesToCurrentPost } from "../../../../utils/addLikesToPost.js";
+import { ButtonSubmit } from "../../../UI/ButtonSubmit.js";
 
 export const Posts = () => {
 
@@ -78,7 +79,10 @@ export const Posts = () => {
             </div>
             <form className="d-flex m-3" role="search" onSubmit={searchSubmitHandler}>
                 <input className="form-control me-2" type="search" placeholder="Search by name" aria-label="Search" onChange={searchViaNameHandler} value={searchName} />
-                <button className="btn btn-light btn-lg" type="submit">Search</button>
+                <ButtonSubmit
+                    className="btn btn-light btn-lg"
+                    title="Search"
+                />
             </form>
 
             <div className="d-flex justify-content-center align-items-center m-3 bg-light" style={{ borderRadius: "5px" }}>

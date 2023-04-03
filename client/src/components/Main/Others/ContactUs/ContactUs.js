@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 //REACT COMPONENTS
 import { InputField } from '../../../UI/InputField.js';
 import { InputTextarea } from '../../../UI/InputTextarea.js';
+import { ButtonSubmit } from '../../../UI/ButtonSubmit.js';
 //REACT HOOKS
 //REACT CONTEXT
 //REACT ROUTER
@@ -181,9 +182,11 @@ export const ContactUs = () => {
                                         />
 
                                         <div className="d-flex justify-content-center">
-                                            <button type="submit"
+                                            <ButtonSubmit
                                                 className={`btn btn-secondary btn-lg m-3 ${!(validName && validEmail && validPhoneNumber && validMessage) ? 'disabled' : ''}`}
-                                            >Send</button>
+                                                title="Send"
+                                            />
+
                                         </div>
                                     </form>
 

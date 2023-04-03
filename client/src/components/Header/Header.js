@@ -89,12 +89,15 @@ export const Header = () => {
 
                     </ul>
                     {currentWeather ?
-                        <button className="btn btn-secondary" style={{ margin: '0', padding: '0' }}>{currentWeather.name} - {currentWeather.main.temp}°C -
+
+
+                        <article className="btn btn-secondary" style={{ margin: '0', padding: '0' }}>{currentWeather.name} - {currentWeather.main.temp}°C -
                             <Image
                                 src={`https://openweathermap.org/img/wn/${currentWeather.weather[0].icon}@2x.png`}
                                 alt="weather"
                                 className="w-25 h-25 m-0"
-                            /></button> :
+                            /></article>
+                        :
                         ''
                     }
                 </div>

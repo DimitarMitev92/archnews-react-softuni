@@ -13,6 +13,7 @@ import { AuthContext } from '../../../../contexts/authContext.js';
 import { useNavigate, Link } from 'react-router-dom';
 //SERVICES
 import { login } from '../../../../services/auth.js';
+import { ButtonSubmit } from '../../../UI/ButtonSubmit.js';
 
 
 export const Login = () => {
@@ -165,7 +166,10 @@ export const Login = () => {
                                     <label className="form-check-label" htmlFor="inlineCheckbox1">Show password</label>
                                 </div>
                                 <div className="d-flex justify-content-center">
-                                    <button type="submit" className={`btn btn-secondary btn-lg ${!(validEmail && validPassword) ? 'disabled' : ''}`}>Login</button>
+                                    <ButtonSubmit
+                                        className={`btn btn-secondary btn-lg ${!(validEmail && validPassword) ? 'disabled' : ''}`}
+                                        title="Login"
+                                    />
                                 </div>
 
                                 <p className="text-center text-muted mt-5 mb-0">Don't have an account? <Link to="/register"

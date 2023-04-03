@@ -9,12 +9,14 @@ import { Link } from "react-router-dom";
 
 export const Button = ({
     to,
+    type,
     className,
     onClick,
     title,
+    style,
     disabled
 }) => {
     return (
-        <Link to={to} className={`${className} ${disabled ? 'disabled' : ''}`} onClick={onClick}>{title}</Link>
+        <Link to={to} className={`${className} ${disabled ? 'disabled' : ''}`} onClick={onClick} style={style}>{title}</Link>
     );
 };

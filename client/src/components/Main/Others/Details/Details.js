@@ -17,6 +17,7 @@ import { createComments, getAllCommentsForPost } from '../../../../services/comm
 //UTILS
 import { dateParser } from '../../../../utils/dateParser.js';
 import { FullScreenImage } from '../../../UI/FullScreenImage.js';
+import { ButtonSubmit } from '../../../UI/ButtonSubmit.js';
 
 
 export const Details = () => {
@@ -54,7 +55,7 @@ export const Details = () => {
                 }
                 setLikes(previousState => previousState = result.length);
                 const currentLike = result.filter(like => like._ownerId === auth._id);
-                if (currentLike.length != 0) {
+                if (currentLike.length !== 0) {
 
                     setIsLiked(previousState => previousState = true);
                     setLikeId(previousState => previousState = currentLike[0]._id);
@@ -148,7 +149,6 @@ export const Details = () => {
         e.preventDefault();
         const comment = commentText;
         const author = auth.name;
-        const _id = auth._id;
         const accessToken = auth.accessToken;
 
         const commentData = {
@@ -250,7 +250,10 @@ export const Details = () => {
                             <h5 className='d-flex justify-content-center align-items-center border-bottom border-light border-2 w-100 p-2'>No one has commented yet.</h5>}
                         {isLogIn && !isOwner ? <>
                             <textarea className='form-control w-75 m-3' value={commentText} onChange={changeCommentHandler}></textarea>
-                            <button type="submit" className="btn btn-light btn">Comment</button>
+                            <ButtonSubmit
+                                className="btn btn-light btn"
+                                title="Comment"
+                            />
                         </> : ''}
                     </div>
                 </form>

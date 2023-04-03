@@ -12,6 +12,7 @@ import { AuthContext } from '../../../../contexts/authContext.js';
 import { useNavigate } from 'react-router-dom';
 //SERVICES
 import { createPost } from '../../../../services/posts.js';
+import { ButtonSubmit } from '../../../UI/ButtonSubmit.js';
 
 
 export const Create = () => {
@@ -196,7 +197,10 @@ export const Create = () => {
                                         />
 
                                         <div className="d-flex justify-content-center">
-                                            <button type="submit" className={`btn btn-secondary btn-lg m-3 ${!(validTitle && validLocation && validImageUrl && validPost) ? "disabled" : ""}`}>Create</button>
+                                            <ButtonSubmit
+                                                className={`btn btn-secondary btn-lg m-3 ${!(validTitle && validLocation && validImageUrl && validPost) ? "disabled" : ""}`}
+                                                title="Create"
+                                            />
                                         </div>
 
                                     </form>
