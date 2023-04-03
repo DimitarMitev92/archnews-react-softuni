@@ -52,7 +52,6 @@ export const BlogSection = () => {
     }, [myPosts, likes]);
 
 
-
     return (
         < section className="container bg-secondary  m-5 mx-auto" >
             <div className="row bg-black">

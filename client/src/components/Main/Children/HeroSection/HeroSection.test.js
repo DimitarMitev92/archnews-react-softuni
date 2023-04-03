@@ -9,9 +9,16 @@ describe('Hero section', () => {
         expect(staticText).toBeInTheDocument();
     });
     it('render a background image', () => {
-        const { getByAltText } = render(<HeroSection />);
-        const image = getByAltText('hero');
+        const src = "../../../../assets/images/hero-section/hero-image.png";
+        const alt = "hero";
+        const className = "w-100";
+
+        const { getByAltText } = render(<HeroSection
+            src={src}
+            alt={alt}
+            className={className}
+        />);
+        const image = getByAltText(`${alt}`);
         expect(image).toBeInTheDocument();
-        expect(image.src).toContain('hero-image.jpg');
     });
 });

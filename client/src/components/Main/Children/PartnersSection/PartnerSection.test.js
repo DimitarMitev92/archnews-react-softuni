@@ -1,26 +1,21 @@
-import React from 'react';
 import { render } from '@testing-library/react';
-import { PartnerItem } from '../PartnersSection/PartnerItem.js';
+import { PartnersSection } from './PartnersSection.js';
 
 describe('Partner section tests', () => {
 
-    it('Render partner', () => {
-        const key = 0;
-        const title = 'partner1';
-        const classNameDiv = "col text-center";
-        const classNameImg = "img-fluid";
-        const imageUrl = "../../../../assets/logos/partners/partner1.png";
-
-        const { getByAltText } = render(<PartnerItem
-            key={key}
-            title={title}
-            classNameDiv={classNameDiv}
-            classNameImg={classNameImg}
-            imageUrl={imageUrl}
-        />);
-
-        const altText = getByAltText(`${title}`);
-        expect(altText).toBeInTheDocument();
+    it('Render partner1', () => {
+        const { getByAltText } = render(<PartnersSection />);
+        const image = getByAltText(`partner1`);
+        expect(image).toBeInTheDocument();
     });
-
+    it('Render partner2', () => {
+        const { getByAltText } = render(<PartnersSection />);
+        const image = getByAltText(`partner2`);
+        expect(image).toBeInTheDocument();
+    });
+    it('Render partner3', () => {
+        const { getByAltText } = render(<PartnersSection />);
+        const image = getByAltText(`partner3`);
+        expect(image).toBeInTheDocument();
+    });
 });
