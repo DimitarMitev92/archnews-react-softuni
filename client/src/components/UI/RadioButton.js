@@ -11,8 +11,6 @@ export const RadioButton = ({
     titleLabel,
     defaultChecked
 }) => {
-    console.log(defaultChecked);
-    console.log(defaultChecked ? 'defaultChecked' : '');
     return (
         <div className={classNameDiv}>
             <input className={classNameInput} type="radio" name={nameInput} id={idInput} value={valueInput} onClick={onClick} style={style} defaultChecked={defaultChecked ? 'defaultChecked' : ''} />
