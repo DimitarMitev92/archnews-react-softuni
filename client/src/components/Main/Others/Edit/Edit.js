@@ -22,97 +22,97 @@ export const Edit = () => {
 
     const [editForm, setEditForm] = useState([]);
 
-    const [title, setTitle] = useState('');
-    const [location, setLocation] = useState('');
-    const [imageUrl, setImageUrl] = useState('');
-    const [post, setPost] = useState('');
+    const [editUserData, setEditUserData] = useState({
+        title: '',
+        location: '',
+        imageUrl: '',
+        post: ''
+    });
 
-    const [likes, setLikes] = useState(0);
-    const [usersLiked, setUsersLiked] = useState([]);
+    const [likesData, setLikesData] = useState({
+        likes: 0,
+        usersLiked: []
+    });
 
-    const [validTitle, setValidTitle] = useState(true);
-    const [validLocation, setValidLocation] = useState(true);
-    const [validImageUrl, setValidImageUrl] = useState(true);
-    const [validPost, setValidPost] = useState(true);
+    const [validEditData, setValidEditData] = useState({
+        title: true,
+        location: true,
+        imageUrl: true,
+        post: true
+    });
 
-    const [isClickTitle, setIsClickTitle] = useState(false);
-    const [isClickLocation, setIsClickLocation] = useState(false);
-    const [isClickImageLink, setIsClickImageLink] = useState(false);
-    const [isClickPost, setIsClickPost] = useState(false);
+    const [isClickEdit, setIsClickEdit] = useState({
+        title: false,
+        location: false,
+        imageUrl: false,
+        post: false
+    });
 
-    const clickTitleHandler = (e) => {
-        setIsClickTitle(previousState => previousState = true);
+    const clickEditHandler = (e) => {
+        setIsClickEdit({ ...isClickEdit, [e.target.name]: true });
     };
-
-    const clickLocationHandler = (e) => {
-        setIsClickLocation(previousState => previousState = true);
-    };
-
-    const clickImageLinkHandler = (e) => {
-        setIsClickImageLink(previousState => previousState = true);
-    };
-
-    const clickPostHandler = (e) => {
-        setIsClickPost(previousState => previousState = true);
-    };
-
-
 
     useEffect(() => {
         getPostByPostId(postId)
             .then(post => {
-                setTitle(post.title);
-                setLocation(post.location);
-                setImageUrl(post.imageUrl);
-                setPost(post.post);
-                setLikes(post.likes);
-                setUsersLiked(post.usersLiked);
+                setEditUserData({
+                    title: post.title,
+                    location: post.location,
+                    imageUrl: post.imageUrl,
+                    post: post.post
+                });
+                setLikesData({
+                    likes: post.likes,
+                    usersLiked: post.usersLiked
+                });
             }).catch(error => alert(error.message));
     }, [postId]);
 
 
     const changeTitleHandler = (e) => {
-        setTitle(e.target.value);
+        setEditUserData({ ...editUserData, [e.target.name]: e.target.value });
         if (e.target.value.trim().length > 0) {
-            setValidTitle(previousState => previousState = true);
+            setValidEditData({ ...validEditData, [e.target.name]: true });
         } else {
-            setValidTitle(previousState => previousState = false);
+            setValidEditData({ ...validEditData, [e.target.name]: false });
+
         }
     };
 
     const changeLocationHandler = (e) => {
-        setLocation(e.target.value);
+        setEditUserData({ ...editUserData, [e.target.name]: e.target.value });
         if (e.target.value.trim().length > 0) {
-            setValidLocation(previousState => previousState = true);
+            setValidEditData({ ...validEditData, [e.target.name]: true });
         } else {
-            setValidLocation(previousState => previousState = false);
+            setValidEditData({ ...validEditData, [e.target.name]: false });
         }
     };
 
     const changeImageUrlHandler = (e) => {
-        setImageUrl(e.target.value);
+        setEditUserData({ ...editUserData, [e.target.name]: e.target.value });
         const regex = /^https?:\/\//;
-        setValidImageUrl(previousState => previousState = regex.test(e.target.value.trim()));
+        setValidEditData({ ...validEditData, [e.target.name]: regex.test(e.target.value.trim()) });
+
     };
 
     const changePostHandler = (e) => {
-        setPost(e.target.value);
+        setEditUserData({ ...editUserData, [e.target.name]: e.target.value });
         if (e.target.value.trim().length > 20) {
-            setValidPost(previousState => previousState = true);
+            setValidEditData({ ...validEditData, [e.target.name]: true });
         } else {
-            setValidPost(previousState => previousState = false);
+            setValidEditData({ ...validEditData, [e.target.name]: false });
         }
     };
 
     const submitEditHandler = (e) => {
         e.preventDefault();
         const postData = {
-            title,
-            location,
-            imageUrl,
-            post,
-            likes,
-            usersLiked
+            title: editUserData.title,
+            location: editUserData.location,
+            imageUrl: editUserData.imageUrl,
+            post: editUserData.post,
+            likes: likesData.likes,
+            usersLiked: likesData.usersLiked
         };
         updatePost(postId, postData, auth.accessToken)
             .then(result => {
@@ -122,10 +122,12 @@ export const Edit = () => {
             })
             .catch(error => alert(error.message));
 
-        setTitle(previousState => previousState = '');
-        setLocation(previousState => previousState = '');
-        setImageUrl(previousState => previousState = '');
-        setPost(previousState => previousState = '');
+        setEditUserData({
+            title: '',
+            location: '',
+            imageUrl: '',
+            post: ''
+        });
 
     };
 
@@ -133,43 +135,54 @@ export const Edit = () => {
         title: "Title",
         htmlFor: "titleInput",
         type: "text",
-        validItem: validTitle,
-        value: title,
+        validItem: validEditData.title,
+        value: editUserData.title,
+        name: "title",
         onChange: changeTitleHandler,
         onBlur: changeTitleHandler,
-        onClick: clickTitleHandler,
-        isClicked: isClickTitle,
+        onClick: clickEditHandler,
+        isClicked: isClickEdit.title,
         validFeedback: "Right title.",
         invalidFeedback: "Enter post's title.",
     }, {
         title: "Location",
         htmlFor: "locationInput",
         type: "text",
-        validItem: validLocation,
-        value: location,
+        validItem: validEditData.location,
+        value: editUserData.location,
+        name: "location",
         onChange: changeLocationHandler,
         onBlur: changeLocationHandler,
-        onClick: clickLocationHandler,
-        isClicked: isClickLocation,
+        onClick: clickEditHandler,
+        isClicked: isClickEdit.location,
         validFeedback: "Right location.",
         invalidFeedback: "Enter post's location.",
     }, {
         title: "Image Link",
         htmlFor: "imageInput",
         type: "url",
-        validItem: validImageUrl,
-        value: imageUrl,
+        validItem: validEditData.imageUrl,
+        value: editUserData.imageUrl,
+        name: "imageUrl",
         onChange: changeImageUrlHandler,
         onBlur: changeImageUrlHandler,
-        onClick: clickImageLinkHandler,
-        isClicked: isClickImageLink,
+        onClick: clickEditHandler,
+        isClicked: isClickEdit.imageUrl,
         validFeedback: "Right image link.",
         invalidFeedback: "Enter post's image link.",
     }];
 
     useEffect(() => {
         setEditForm(previousState => previousState = editInputs);
-    }, [isClickTitle, isClickLocation, isClickImageLink, isClickPost, title, location, imageUrl, post]);
+    }, [
+        isClickEdit.title,
+        isClickEdit.location,
+        isClickEdit.imageUrl,
+        isClickEdit.post,
+        editUserData.title,
+        editUserData.location,
+        editUserData.imageUrl,
+        editUserData.post]);
 
     return (
         <section className="vh-100 bg-image" style={{ backgroundImage: `url(${background})` }}>
@@ -189,6 +202,7 @@ export const Edit = () => {
                                             type={editInput.type}
                                             validItem={editInput.validItem}
                                             value={editInput.value}
+                                            name={editInput.name}
                                             onChange={editInput.onChange}
                                             onBlur={editInput.onBlur}
                                             onClick={editInput.onClick}
@@ -200,12 +214,13 @@ export const Edit = () => {
                                         <InputTextarea
                                             title={"Your Post"}
                                             htmlFor={"editTextarea"}
-                                            validItem={validPost}
-                                            value={post}
+                                            validItem={validEditData.post}
+                                            value={editUserData.post}
+                                            name="post"
                                             onChange={changePostHandler}
                                             onBlur={changePostHandler}
-                                            onClick={clickPostHandler}
-                                            isClicked={isClickPost}
+                                            onClick={clickEditHandler}
+                                            isClicked={isClickEdit.post}
                                             validFeedback={"Right post."}
                                             invalidFeedback={"Enter your post."}
 
@@ -213,7 +228,8 @@ export const Edit = () => {
 
                                         <div className="d-flex justify-content-center">
                                             <ButtonSubmit
-                                                className={`btn btn-secondary btn-lg m-3 ${!(validTitle && validLocation && validImageUrl && validPost) ? "disabled" : ""}`}
+                                                className={`btn btn-secondary btn-lg m-3 ${!(
+                                                    validEditData.title && validEditData.location && validEditData.imageUrl && validEditData.post) ? "disabled" : ""}`}
                                                 title="Edit"
                                             />
                                         </div>
