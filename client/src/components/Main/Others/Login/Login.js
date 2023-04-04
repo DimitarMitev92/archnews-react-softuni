@@ -24,46 +24,50 @@ export const Login = () => {
 
     const [loginForm, setLoginForm] = useState([]);
 
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
+    const [loginUserData, setLoginUserData] = useState({
+        email: '',
+        password: ''
+    });
 
-    const [validEmail, setValidEmail] = useState(false);
-    const [validPassword, setValidPassword] = useState(false);
+    const [validLoginData, setValidLoginData] = useState({
+        email: false,
+        password: false
+    });
 
-    const [isClickEmail, setIsClickEmail] = useState(false);
-    const [isClickPassword, setIsClickPassword] = useState(false);
+    const [isClickLoginUser, setIsClickLoginUser] = useState({
+        email: false,
+        password: false
+    });
+
+    // const [isClickEmail, setIsClickEmail] = useState(false);
+    // const [isClickPassword, setIsClickPassword] = useState(false);
 
     const [showModalAuth, setShowModalAuth] = useState(false);
     const [modalAuthError, setModalAuthError] = useState('');
 
-    const clickEmailHandler = (e) => {
-        setIsClickEmail(previousState => previousState = true);
+    const clickLoginUserHandler = (e) => {
+        setIsClickLoginUser({ ...isClickLoginUser, [e.target.name]: true });
     };
-
-    const clickPasswordHandler = (e) => {
-        setIsClickPassword(previousState => previousState = true);
-    };
-
 
     const changeEmailHandler = (e) => {
-        setEmail(e.target.value);
+        setLoginUserData({ ...loginUserData, [e.target.name]: e.target.value });
         const regex = /^[a-z]{3,}@[a-z]{2,}\.[a-z]{2,}$/;
-        setValidEmail(previousState => previousState = regex.test(e.target.value.trim()));
+        setValidLoginData({ ...validLoginData, [e.target.name]: regex.test(e.target.value.trim()) });
     };
 
     const changePasswordHandler = (e) => {
-        setPassword(e.target.value);
+        setLoginUserData({ ...loginUserData, [e.target.name]: e.target.value });
         if (e.target.value.trim().length > 4) {
-            setValidPassword(previousState => previousState = true);
+            setValidLoginData({ ...validLoginData, [e.target.name]: true });
         } else {
-            setValidPassword(previousState => previousState = false);
+            setValidLoginData({ ...validLoginData, [e.target.name]: false });
         }
     };
 
 
     const loginSubmitHandler = (e) => {
         e.preventDefault();
-        login(email, password)
+        login(loginUserData.email, loginUserData.password)
             .then(user => {
                 if (user === undefined) {
                     throw new Error('Email or password is not valid');
@@ -78,47 +82,57 @@ export const Login = () => {
                 setModalAuthError(previousState => previousState = `${error.message}`);
             });
 
-        setEmail(previousState => previousState = '');
-        setPassword(previousState => previousState = '');
-
+        setLoginUserData({
+            email: '',
+            password: ''
+        });
     };
 
     useEffect(() => {
-        setValidEmail(previousState => previousState = false);
-        setValidPassword(previousState => previousState = false);
-        setIsClickEmail(previousState => previousState = false);
-        setIsClickPassword(previousState => previousState = false);
+        setValidLoginData({
+            title: false,
+            password: false
+        });
+        setIsClickLoginUser({
+            title: false,
+            password: false
+        });
     }, [modalAuthError, showModalAuth]);
 
     const loginInputs = [{
         title: "Your Email",
         htmlFor: "emailInput",
         type: "email",
-        validItem: validEmail,
-        value: email,
+        validItem: validLoginData.email,
+        value: loginUserData.email,
+        name: "email",
         onChange: changeEmailHandler,
         onBlur: changeEmailHandler,
-        onClick: clickEmailHandler,
-        isClicked: isClickEmail,
+        onClick: clickLoginUserHandler,
+        isClicked: isClickLoginUser.email,
         validFeedback: "Right email.",
         invalidFeedback: "Enter your email.",
     }, {
         title: "Password",
         htmlFor: "passwordInput",
         type: "password",
-        validItem: validPassword,
-        value: password,
+        validItem: validLoginData.password,
+        value: loginUserData.password,
+        name: "password",
         onChange: changePasswordHandler,
         onBlur: changePasswordHandler,
-        onClick: clickPasswordHandler,
-        isClicked: isClickPassword,
+        onClick: clickLoginUserHandler,
+        isClicked: isClickLoginUser.password,
         validFeedback: "Valid password.",
         invalidFeedback: "Enter your password.",
     }];
 
     useEffect(() => {
         setLoginForm(previousState => previousState = loginInputs);
-    }, [isClickEmail, isClickPassword, email, password]);
+    }, [isClickLoginUser.email,
+    isClickLoginUser.password,
+    loginUserData.email,
+    loginUserData.password]);
 
     const showPassword = (e) => {
         const password = document.querySelector('#passwordInput');
@@ -153,6 +167,7 @@ export const Login = () => {
                                     type={loginInput.type}
                                     validItem={loginInput.validItem}
                                     value={loginInput.value}
+                                    name={loginInput.name}
                                     onChange={loginInput.onChange}
                                     onBlur={loginInput.onBlur}
                                     onClick={loginInput.onClick}
@@ -167,7 +182,9 @@ export const Login = () => {
                                 </div>
                                 <div className="d-flex justify-content-center">
                                     <ButtonSubmit
-                                        className={`btn btn-secondary btn-lg ${!(validEmail && validPassword) ? 'disabled' : ''}`}
+                                        className={`btn btn-secondary btn-lg ${!(
+                                            validLoginData.email && validLoginData.password) ?
+                                            'disabled' : ''}`}
                                         title="Login"
                                     />
                                 </div>

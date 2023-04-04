@@ -11,6 +11,7 @@ export const LoginInput = ({
     type,
     validItem,
     value,
+    name,
     onChange,
     onBlur,
     onClick,
@@ -25,6 +26,7 @@ export const LoginInput = ({
             <input type={type} id={htmlFor}
                 className={`form-control form-control-lg ${isClicked ? validItem ? 'is-valid' : 'is-invalid' : ''}`}
                 value={value}
+                name={name}
                 onChange={onChange}
                 onBlur={onBlur}
                 onClick={onClick} />
