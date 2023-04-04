@@ -23,70 +23,64 @@ export const Create = () => {
 
     const [createForm, setCreateForm] = useState([]);
 
-    const [title, setTitle] = useState('');
-    const [location, setLocation] = useState('');
-    const [imageUrl, setImageUrl] = useState('');
-    const [post, setPost] = useState('');
+    const [createUserData, setCreateUserData] = useState({
+        title: '',
+        location: '',
+        imageUrl: '',
+        post: ''
+    });
 
-    const [validTitle, setValidTitle] = useState(false);
-    const [validLocation, setValidLocation] = useState(false);
-    const [validImageUrl, setValidImageUrl] = useState(false);
-    const [validPost, setValidPost] = useState(false);
+    const [validCreateData, setValidCreateData] = useState({
+        title: false,
+        location: false,
+        imageUrl: false,
+        post: false
+    });
 
-    const [isClickTitle, setIsClickTitle] = useState(false);
-    const [isClickLocation, setIsClickLocation] = useState(false);
-    const [isClickImageLink, setIsClickImageLink] = useState(false);
-    const [isClickPost, setIsClickPost] = useState(false);
+    const [isClickCreateUser, setIsClickCreateUser] = useState({
+        title: false,
+        location: false,
+        imageUrl: false,
+        post: false
+    });
 
-    const clickTitleHandler = (e) => {
-        setIsClickTitle(previousState => previousState = true);
+    const clickCreateUserHandler = (e) => {
+        setIsClickCreateUser({ ...isClickCreateUser, [e.target.name]: true });
     };
-
-    const clickLocationHandler = (e) => {
-        setIsClickLocation(previousState => previousState = true);
-    };
-
-    const clickImageLinkHandler = (e) => {
-        setIsClickImageLink(previousState => previousState = true);
-    };
-
-    const clickPostHandler = (e) => {
-        setIsClickPost(previousState => previousState = true);
-    };
-
-
-
 
     const changeTitleHandler = (e) => {
-        setTitle(e.target.value);
+        setCreateUserData({ ...createUserData, [e.target.name]: e.target.value });
         if (e.target.value.trim().length > 0) {
-            setValidTitle(previousState => previousState = true);
+            setValidCreateData({ ...validCreateData, [e.target.name]: true });
         } else {
-            setValidTitle(previousState => previousState = false);
+            setValidCreateData({ ...validCreateData, [e.target.name]: false });
+
         }
     };
 
     const changeLocationHandler = (e) => {
-        setLocation(e.target.value);
+        setCreateUserData({ ...createUserData, [e.target.name]: e.target.value });
         if (e.target.value.trim().length > 0) {
-            setValidLocation(previousState => previousState = true);
+            setValidCreateData({ ...validCreateData, [e.target.name]: true });
         } else {
-            setValidLocation(previousState => previousState = false);
+            setValidCreateData({ ...validCreateData, [e.target.name]: false });
         }
     };
 
     const changeImageUrlHandler = (e) => {
-        setImageUrl(e.target.value);
+        setCreateUserData({ ...createUserData, [e.target.name]: e.target.value });
         const regex = /^https?:\/\//;
-        setValidImageUrl(previousState => previousState = regex.test(e.target.value.trim()));
+        setValidCreateData({ ...validCreateData, [e.target.name]: regex.test(e.target.value.trim()) });
+
     };
 
     const changePostHandler = (e) => {
-        setPost(e.target.value);
+        setCreateUserData({ ...createUserData, [e.target.name]: e.target.value });
+
         if (e.target.value.trim().length > 20) {
-            setValidPost(previousState => previousState = true);
+            setValidCreateData({ ...validCreateData, [e.target.name]: true });
         } else {
-            setValidPost(previousState => previousState = false);
+            setValidCreateData({ ...validCreateData, [e.target.name]: false });
         }
     };
 
@@ -94,10 +88,10 @@ export const Create = () => {
         e.preventDefault();
 
         const postData = {
-            title,
-            location,
-            imageUrl,
-            post,
+            title: createUserData.title,
+            location: createUserData.location,
+            imageUrl: createUserData.imageUrl,
+            post: createUserData.post,
         };
 
         createPost(auth.accessToken, postData)
@@ -106,10 +100,13 @@ export const Create = () => {
             })
             .catch(() => navigate('/404'));
 
-        setTitle(preventDefault => preventDefault = '');
-        setLocation(preventDefault => preventDefault = '');
-        setImageUrl(preventDefault => preventDefault = '');
-        setPost(preventDefault => preventDefault = '');
+        setCreateUserData({
+            title: '',
+            location: '',
+            imageUrl: '',
+            post: ''
+        });
+
     };
 
     const createInputs = [
@@ -117,43 +114,55 @@ export const Create = () => {
             title: "Title",
             htmlFor: "titleInput",
             type: "text",
-            validItem: validTitle,
-            value: title,
+            validItem: validCreateData.title,
+            value: createUserData.title,
+            name: "title",
             onChange: changeTitleHandler,
             onBlur: changeTitleHandler,
-            onClick: clickTitleHandler,
-            isClicked: isClickTitle,
+            onClick: clickCreateUserHandler,
+            isClicked: isClickCreateUser.title,
             validFeedback: "Right title.",
             invalidFeedback: "Enter post's title.",
         }, {
             title: "Location",
             htmlFor: "locationInput",
             type: "text",
-            validItem: validLocation,
-            value: location,
+            validItem: validCreateData.location,
+            value: createUserData.location,
+            name: 'location',
             onChange: changeLocationHandler,
             onBlur: changeLocationHandler,
-            onClick: clickLocationHandler,
-            isClicked: isClickLocation,
+            onClick: clickCreateUserHandler,
+            isClicked: isClickCreateUser.location,
             validFeedback: "Right location.",
             invalidFeedback: "Enter post's location.",
         }, {
             title: "Image Link",
             htmlFor: "imageInput",
             type: "url",
-            validItem: validImageUrl,
-            value: imageUrl,
+            validItem: validCreateData.imageUrl,
+            value: createUserData.imageUrl,
+            name: "imageUrl",
             onChange: changeImageUrlHandler,
             onBlur: changeImageUrlHandler,
-            onClick: clickImageLinkHandler,
-            isClicked: isClickImageLink,
+            onClick: clickCreateUserHandler,
+            isClicked: isClickCreateUser.imageUrl,
             validFeedback: "Right image link",
             invalidFeedback: "Enter post's image link.",
         }];
 
     useEffect(() => {
         setCreateForm(previousState => previousState = createInputs);
-    }, [isClickTitle, isClickLocation, isClickImageLink, isClickPost, title, location, imageUrl, post]);
+    }, [
+        isClickCreateUser.title,
+        isClickCreateUser.location,
+        isClickCreateUser.imageUrl,
+        isClickCreateUser.post,
+        createUserData.title,
+        createUserData.location,
+        createUserData.imageUrl,
+        createUserData.post
+    ]);
 
 
     return (
@@ -175,6 +184,7 @@ export const Create = () => {
                                             type={createInput.type}
                                             validItem={createInput.validItem}
                                             value={createInput.value}
+                                            name={createInput.name}
                                             onChange={createInput.onChange}
                                             onBlur={createInput.onBlur}
                                             onClick={createInput.onClick}
@@ -186,19 +196,24 @@ export const Create = () => {
                                         <InputTextarea
                                             title={"Your Post"}
                                             htmlFor={"createTextarea"}
-                                            validItem={validPost}
-                                            value={post}
+                                            validItem={validCreateData.post}
+                                            value={createUserData.post}
+                                            name="post"
                                             onChange={changePostHandler}
                                             onBlur={changePostHandler}
-                                            onClick={clickPostHandler}
-                                            isClicked={isClickPost}
+                                            onClick={clickCreateUserHandler}
+                                            isClicked={isClickCreateUser.post}
                                             validFeedback={"Right post."}
                                             invalidFeedback={"Enter your post."}
                                         />
 
                                         <div className="d-flex justify-content-center">
                                             <ButtonSubmit
-                                                className={`btn btn-secondary btn-lg m-3 ${!(validTitle && validLocation && validImageUrl && validPost) ? "disabled" : ""}`}
+                                                className={`btn btn-secondary btn-lg m-3 ${!(
+                                                    validCreateData.title && validCreateData.location &&
+                                                    validCreateData.imageUrl &&
+                                                    validCreateData.post) ?
+                                                    "disabled" : ""}`}
                                                 title="Create"
                                             />
                                         </div>
