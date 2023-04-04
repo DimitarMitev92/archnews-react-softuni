@@ -1,4 +1,3 @@
-//TODO:FIXXXXXXXXXXXXX
 const baseUrl = 'http://localhost:3030/jsonstore';
 
 export const contact = async (name, email, phoneNumber, message) => {

@@ -11,6 +11,7 @@ export const InputField = ({
     type,
     validItem,
     value,
+    name,
     onChange,
     onBlur,
     onClick,
@@ -27,6 +28,7 @@ export const InputField = ({
                 id={htmlFor}
                 className={`form-control form-control-lg ${isClicked ? validItem ? 'is-valid' : 'is-invalid' : ''}`}
                 value={value}
+                name={name}
                 onChange={onChange}
                 onBlur={onBlur}
                 onClick={onClick} />

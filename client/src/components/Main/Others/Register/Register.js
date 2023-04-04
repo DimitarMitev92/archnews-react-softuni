@@ -19,97 +19,92 @@ export const Register = () => {
 
     const navigate = useNavigate();
 
+    const { loginUser } = useContext(AuthContext);
+
     const [registerForm, setRegisterForm] = useState([]);
 
-    const [name, setName] = useState('');
-    const [username, setUsername] = useState('');
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [repeatPassword, setRepeatPassword] = useState('');
+    const [registerUserData, setRegisterUserData] = useState({
+        name: '',
+        username: '',
+        email: '',
+        password: '',
+        repeatPassword: ''
+    });
 
-    const [validName, setValidName] = useState(false);
-    const [validUsername, setValidUsername] = useState(false);
-    const [validEmail, setValidEmail] = useState(false);
-    const [validPassword, setValidPassword] = useState(false);
-    const [validRepeatPassword, setValidRepeatPassword] = useState(false);
+    const [validRegisterData, setValidRegisterData] = useState({
+        name: false,
+        username: false,
+        email: false,
+        password: false,
+        repeatPassword: false
+    });
 
-    const [isClickName, setIsClickName] = useState(false);
-    const [isClickUsername, setIsClickUsername] = useState(false);
-    const [isClickEmail, setIsClickEmail] = useState(false);
-    const [isClickPassword, setIsClickPassword] = useState(false);
-    const [isClickRepeatPassword, setIsClickRepeatPassword] = useState(false);
+    const [isClickRegisterUser, setIsClickRegisterUser] = useState({
+        name: false,
+        username: false,
+        email: false,
+        password: false,
+        repeatPassword: false
+    });
 
     const [showModalAuth, setShowModalAuth] = useState(false);
     const [modalAuthError, setModalAuthError] = useState('');
 
-    const clickNameHandler = (e) => {
-        setIsClickName(previousState => previousState = true);
+    const clickRegisterUserHandler = (e) => {
+        setIsClickRegisterUser({ ...isClickRegisterUser, [e.target.name]: true });
     };
-
-    const clickUsernameHandler = (e) => {
-        setIsClickUsername(previousState => previousState = true);
-    };
-
-    const clickEmailHandler = (e) => {
-        setIsClickEmail(previousState => previousState = true);
-    };
-
-    const clickPasswordHandler = (e) => {
-        setIsClickPassword(previousState => previousState = true);
-    };
-
-    const clickRepeatPasswordHandler = (e) => {
-        setIsClickRepeatPassword(previousState => previousState = true);
-    };
-
-    const { loginUser } = useContext(AuthContext);
 
     const changeNameHandler = (e) => {
-        setName(e.target.value);
+        setRegisterUserData({ ...registerUserData, [e.target.name]: e.target.value });
         if (e.target.value.trim().length > 3) {
-            setValidName(previousState => previousState = true);
+            setValidRegisterData({ ...validRegisterData, [e.target.name]: true });
         } else {
-            setValidName(previousState => previousState = false);
+            setValidRegisterData({ ...validRegisterData, [e.target.name]: false });
         }
     };
 
     const changeUsernameHandler = (e) => {
-        setUsername(e.target.value);
+        setRegisterUserData({ ...registerUserData, [e.target.name]: e.target.value });
         if (e.target.value.trim().length > 3) {
-            setValidUsername(previousState => previousState = true);
+            setValidRegisterData({ ...validRegisterData, [e.target.name]: true });
         } else {
-            setValidUsername(previousState => previousState = false);
+            setValidRegisterData({ ...validRegisterData, [e.target.name]: false });
         }
     };
 
     const changeEmailHandler = (e) => {
-        setEmail(e.target.value);
+        setRegisterUserData({ ...registerUserData, [e.target.name]: e.target.value });
         const regex = /^[a-z]{3,}@[a-z]{2,}\.[a-z]{2,}$/;
-        setValidEmail(previousState => previousState = regex.test(e.target.value.trim()));
+        setValidRegisterData({ ...validRegisterData, [e.target.name]: regex.test(e.target.value.trim()) });
     };
 
     const changePasswordHandler = (e) => {
-        setPassword(e.target.value);
+        setRegisterUserData({ ...registerUserData, [e.target.name]: e.target.value });
+
         if (e.target.value.trim().length > 4) {
-            setValidPassword(previousState => previousState = true);
+            setValidRegisterData({ ...validRegisterData, [e.target.name]: true });
         } else {
-            setValidPassword(previousState => previousState = false);
+            setValidRegisterData({ ...validRegisterData, [e.target.name]: false });
         }
     };
 
     const changeRepeatPasswordHandler = (e) => {
-        setRepeatPassword(e.target.value);
-        if (e.target.value === password) {
-            setValidRepeatPassword(previousState => previousState = true);
+        setRegisterUserData({ ...registerUserData, [e.target.name]: e.target.value });
+        if (e.target.value === registerUserData.password) {
+            setValidRegisterData({ ...validRegisterData, [e.target.name]: true });
         } else {
-            setValidRepeatPassword(previousState => previousState = false);
+            setValidRegisterData({ ...validRegisterData, [e.target.name]: false });
         }
 
     };
 
     const registerSubmitHandler = (e) => {
         e.preventDefault();
-        register(name, username, email, password)
+        register(
+            registerUserData.name,
+            registerUserData.username,
+            registerUserData.email,
+            registerUserData.password)
             .then(user => {
                 if (user.code === 409) {
                     throw new Error("A user with the same email already exists");
@@ -122,85 +117,99 @@ export const Register = () => {
                 setModalAuthError(previousState => previousState = `${error.message}`);
             });
 
-        setName(previousState => previousState = '');
-        setUsername(previousState => previousState = '');
-        setEmail(previousState => previousState = '');
-        setPassword(previousState => previousState = '');
-        setRepeatPassword(previousState => previousState = '');
+        setRegisterUserData(previousState =>
+            previousState = {
+                name: '',
+                username: '',
+                email: '',
+                password: '',
+                repeatPassword: ''
+            });
     };
 
     useEffect(() => {
-        setValidName(previousState => previousState = false);
-        setValidUsername(previousState => previousState = false);
-        setValidEmail(previousState => previousState = false);
-        setValidPassword(previousState => previousState = false);
-        setValidRepeatPassword(previousState => previousState = false);
 
-        setIsClickName(previousState => previousState = false);
-        setIsClickUsername(previousState => previousState = false);
-        setIsClickEmail(previousState => previousState = false);
-        setIsClickPassword(previousState => previousState = false);
-        setIsClickRepeatPassword(previousState => previousState = false);
+        setValidRegisterData({
+            name: false,
+            username: false,
+            email: false,
+            password: false,
+            repeatPassword: false
+        });
+
+        setIsClickRegisterUser({
+            name: false,
+            username: false,
+            email: false,
+            password: false,
+            repeatPassword: false
+        });
+
     }, [modalAuthError, showModalAuth]);
 
     const registerInputs = [{
         title: "Your Name",
         htmlFor: "nameInput",
         type: "text",
-        validItem: validName,
-        value: name,
+        validItem: validRegisterData.name,
+        value: registerUserData.name,
+        name: 'name',
         onChange: changeNameHandler,
         onBlur: changeNameHandler,
-        onClick: clickNameHandler,
-        isClicked: isClickName,
+        onClick: clickRegisterUserHandler,
+        isClicked: isClickRegisterUser.name,
         validFeedback: "Right name.",
         invalidFeedback: "Enter your name.",
     }, {
         title: "Your Username",
         htmlFor: "usernameInput",
         type: "text",
-        validItem: validUsername,
-        value: username,
+        validItem: validRegisterData.username,
+        value: registerUserData.username,
+        name: 'username',
         onChange: changeUsernameHandler,
         onBlur: changeUsernameHandler,
-        onClick: clickUsernameHandler,
-        isClicked: isClickUsername,
+        onClick: clickRegisterUserHandler,
+        isClicked: isClickRegisterUser.username,
         validFeedback: "Right username.",
         invalidFeedback: "Enter your username.",
     }, {
         title: "Your Email",
         htmlFor: "emailInput",
         type: "email",
-        validItem: validEmail,
-        value: email,
+        validItem: validRegisterData.email,
+        value: registerUserData.email,
+        name: 'email',
         onChange: changeEmailHandler,
         onBlur: changeEmailHandler,
-        onClick: clickEmailHandler,
-        isClicked: isClickEmail,
+        onClick: clickRegisterUserHandler,
+        isClicked: isClickRegisterUser.email,
         validFeedback: "Right email.",
         invalidFeedback: "Enter your email.",
     }, {
         title: "Password",
         htmlFor: "passwordInput",
         type: "password",
-        validItem: validPassword,
-        value: password,
+        validItem: validRegisterData.password,
+        value: registerUserData.password,
+        name: 'password',
         onChange: changePasswordHandler,
         onBlur: changePasswordHandler,
-        onClick: clickPasswordHandler,
-        isClicked: isClickPassword,
+        onClick: clickRegisterUserHandler,
+        isClicked: isClickRegisterUser.password,
         validFeedback: "Valid password.",
         invalidFeedback: "Enter your password.",
     }, {
         title: "Repeat your password",
         htmlFor: "rePasswordInput",
         type: "password",
-        validItem: validRepeatPassword,
-        value: repeatPassword,
+        validItem: validRegisterData.repeatPassword,
+        value: registerUserData.repeatPassword,
+        name: 'repeatPassword',
         onChange: changeRepeatPasswordHandler,
         onBlur: changeRepeatPasswordHandler,
-        onClick: clickRepeatPasswordHandler,
-        isClicked: isClickRepeatPassword,
+        onClick: clickRegisterUserHandler,
+        isClicked: isClickRegisterUser.repeatPassword,
         validFeedback: "Passwords match.",
         invalidFeedback: "Passwords mismatch.",
     }];
@@ -208,7 +217,16 @@ export const Register = () => {
     useEffect(() => {
         setRegisterForm(previousState => previousState = registerInputs);
 
-    }, [isClickName, isClickUsername, isClickEmail, isClickPassword, isClickRepeatPassword, name, username, email, password, repeatPassword]);
+    }, [isClickRegisterUser.name,
+    isClickRegisterUser.username,
+    isClickRegisterUser.email,
+    isClickRegisterUser.password,
+    isClickRegisterUser.repeatPassword,
+    registerUserData.name,
+    registerUserData.username,
+    registerUserData.email,
+    registerUserData.password,
+    registerUserData.repeatPassword]);
 
     const showPassword = (e) => {
         const password = document.querySelector('#passwordInput');
@@ -251,6 +269,7 @@ export const Register = () => {
                                                     type={registerInput.type}
                                                     validItem={registerInput.validItem}
                                                     value={registerInput.value}
+                                                    name={registerInput.name}
                                                     onChange={registerInput.onChange}
                                                     onBlur={registerInput.onBlur}
                                                     onClick={registerInput.onClick}
@@ -264,7 +283,13 @@ export const Register = () => {
                                             </div>
                                             <div className="d-flex justify-content-center">
                                                 <ButtonSubmit
-                                                    className={`btn btn-secondary btn-lg ${!(validName && validUsername && validEmail && validPassword && validRepeatPassword) ? 'disabled' : ''}`}
+                                                    className={`btn btn-secondary btn-lg 
+                                                    ${!(validRegisterData.name &&
+                                                            validRegisterData.username &&
+                                                            validRegisterData.email &&
+                                                            validRegisterData.password &&
+                                                            validRegisterData.repeatPassword) ?
+                                                            'disabled' : ''}`}
                                                     title="Register"
                                                 />
                                             </div>
