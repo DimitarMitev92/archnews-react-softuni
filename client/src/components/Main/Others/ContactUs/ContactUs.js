@@ -19,79 +19,79 @@ export const ContactUs = () => {
 
     const [contactsForm, setContactForm] = useState([]);
 
-    const [name, setName] = useState('');
-    const [email, setEmail] = useState('');
-    const [phoneNumber, setPhoneNumber] = useState('');
-    const [message, setMessage] = useState('');
+    const [contactUserData, setContactUserData] = useState({
+        name: '',
+        email: '',
+        phoneNumber: '',
+        message: ''
+    });
 
-    const [validName, setValidName] = useState(false);
-    const [validEmail, setValidEmail] = useState(false);
-    const [validPhoneNumber, setValidPhoneNumber] = useState(false);
-    const [validMessage, setValidMessage] = useState(false);
+    const [validContactData, setValidContactData] = useState({
+        name: false,
+        email: false,
+        phoneNumber: false,
+        message: false
+    });
 
-    const [isClickName, setIsClickName] = useState(false);
-    const [isClickEmail, setIsClickEmail] = useState(false);
-    const [isClickPhoneNumber, setIsClickPhoneNumber] = useState(false);
-    const [isClickMessage, setIsClickMessage] = useState(false);
+    const [isClickContactUser, setIsClickContactUser] = useState({
+        name: false,
+        email: false,
+        phoneNumber: false,
+        message: false
+    });
 
-    const clickNameHandler = (e) => {
-        setIsClickName(previousState => previousState = true);
-    };
-    const clickEmailHandler = (e) => {
-        setIsClickEmail(previousState => previousState = true);
-
-    };
-    const clickPhoneNumber = (e) => {
-        setIsClickPhoneNumber(previousState => previousState = true);
-    };
-
-    const clickMessage = (e) => {
-        setIsClickMessage(previousState => previousState = true);
+    const clickContactUserHandler = (e) => {
+        setIsClickContactUser({ ...isClickContactUser, [e.target.name]: true });
     };
 
     const changeNameHandler = (e) => {
-        setName(e.target.value);
+        setContactUserData({ ...contactUserData, [e.target.name]: e.target.value });
         if (e.target.value.trim().length > 0) {
-            setValidName(previousState => previousState = true);
+            setValidContactData({ ...validContactData, [e.target.name]: true });
         } else {
-            setValidName(previousState => previousState = false);
+            setValidContactData({ ...validContactData, [e.target.name]: false });
         }
     };
 
     const changeEmailHandler = (e) => {
-        setEmail(e.target.value);
+        setContactUserData({ ...contactUserData, [e.target.name]: e.target.value });
         const regex = /^[a-z_\-0-9]{3,}@[a-z]{2,}\.[a-z]{2,}$/;
-        setValidEmail(previousState => previousState = regex.test(e.target.value.trim()));
+        setValidContactData({ ...validContactData, [e.target.name]: regex.test(e.target.value.trim()) });
     };
 
     const changePhoneNumberHandler = (e) => {
-        setPhoneNumber(e.target.value);
+        setContactUserData({ ...contactUserData, [e.target.name]: e.target.value });
         const regex = /^[0]{1}[0-9]{9}$/;
-        setValidPhoneNumber(previousState => previousState = regex.test(e.target.value.trim()));
+        setValidContactData({ ...validContactData, [e.target.name]: regex.test(e.target.value.trim()) });
     };
 
     const changeMessageHandler = (e) => {
-        setMessage(e.target.value);
+        setContactUserData({ ...contactUserData, [e.target.name]: e.target.value });
         if (e.target.value.trim().length > 10) {
-            setValidMessage(previousState => previousState = true);
+            setValidContactData({ ...validContactData, [e.target.name]: true });
         } else {
-            setValidMessage(previousState => previousState = false);
+            setValidContactData({ ...validContactData, [e.target.name]: false });
         }
     };
 
     const contactSubmitHandler = (e) => {
         e.preventDefault();
-        contact(name, email, phoneNumber, message)
+        contact(contactUserData.name,
+            contactUserData.email,
+            contactUserData.phoneNumber,
+            contactUserData.message)
             .then(result => {
                 console.log(result);
                 navigate('/');
             })
             .catch(error => alert(error.message));
 
-        setName(previousState => previousState = '');
-        setEmail(previousState => previousState = '');
-        setPhoneNumber(previousState => previousState = '');
-        setMessage(previousState => previousState = '');
+        setContactUserData({
+            name: '',
+            email: '',
+            phoneNumber: '',
+            message: ''
+        });
     };
 
     const contactsInputs = [
@@ -99,36 +99,39 @@ export const ContactUs = () => {
             title: "Your Name",
             htmlFor: "nameInput",
             type: "text",
-            validItem: validName,
-            value: name,
+            validItem: validContactData.name,
+            value: contactUserData.name,
+            name: 'name',
             onChange: changeNameHandler,
             onBlur: changeNameHandler,
-            onClick: clickNameHandler,
-            isClicked: isClickName,
+            onClick: clickContactUserHandler,
+            isClicked: isClickContactUser.name,
             validFeedback: "Right name.",
             invalidFeedback: "Enter your name.",
         }, {
             title: "Your Email",
             htmlFor: "emailInput",
             type: "email",
-            validItem: validEmail,
-            value: email,
+            validItem: validContactData.email,
+            value: contactUserData.email,
+            name: 'email',
             onChange: changeEmailHandler,
             onBlur: changeEmailHandler,
-            onClick: clickEmailHandler,
-            isClicked: isClickEmail,
+            onClick: clickContactUserHandler,
+            isClicked: isClickContactUser.email,
             validFeedback: "Right email.",
             invalidFeedback: "Enter your email.",
         }, {
             title: "Your Phone",
             htmlFor: "phoneInput",
             type: "text",
-            validItem: validPhoneNumber,
-            value: phoneNumber,
+            validItem: validContactData.phoneNumber,
+            value: contactUserData.phoneNumber,
+            name: 'phoneNumber',
             onChange: changePhoneNumberHandler,
             onBlur: changePhoneNumberHandler,
-            onClick: clickPhoneNumber,
-            isClicked: isClickPhoneNumber,
+            onClick: clickContactUserHandler,
+            isClicked: isClickContactUser.phoneNumber,
             validFeedback: "Right phone number.",
             invalidFeedback: "Enter your phone number.",
         }
@@ -136,7 +139,14 @@ export const ContactUs = () => {
 
     useEffect(() => {
         setContactForm(preventDefault => preventDefault = contactsInputs);
-    }, [isClickName, isClickEmail, isClickPhoneNumber, name, email, phoneNumber, message]);
+    }, [isClickContactUser.name,
+    isClickContactUser.email,
+    isClickContactUser.phoneNumber,
+    isClickContactUser.message,
+    contactUserData.name,
+    contactUserData.email,
+    contactUserData.phoneNumber,
+    contactUserData.message]);
 
     return (
         <section className="vh-100 bg-image" style={{ backgroundImage: `url(${background})` }}>
@@ -160,6 +170,7 @@ export const ContactUs = () => {
                                             htmlFor={contact.htmlFor}
                                             validItem={contact.validItem}
                                             value={contact.value}
+                                            name={contact.name}
                                             onChange={contact.onChange}
                                             onBlur={contact.onBlur}
                                             onClick={contact.onClick}
@@ -171,19 +182,21 @@ export const ContactUs = () => {
                                         <InputTextarea
                                             title={"Your Message"}
                                             htmlFor={"messageTextarea"}
-                                            validItem={validMessage}
-                                            value={message}
+                                            validItem={validContactData.message}
+                                            value={contactUserData.message}
+                                            name="message"
                                             onChange={changeMessageHandler}
                                             onBlur={changeMessageHandler}
-                                            onClick={clickMessage}
-                                            isClicked={isClickMessage}
+                                            onClick={clickContactUserHandler}
+                                            isClicked={isClickContactUser.message}
                                             validFeedback={"Right message."}
                                             invalidFeedback={"Enter your message."}
                                         />
 
                                         <div className="d-flex justify-content-center">
                                             <ButtonSubmit
-                                                className={`btn btn-secondary btn-lg m-3 ${!(validName && validEmail && validPhoneNumber && validMessage) ? 'disabled' : ''}`}
+                                                className={`btn btn-secondary btn-lg m-3 ${!(validContactData.name && validContactData.email && validContactData.phoneNumber && validContactData.message) ?
+                                                    'disabled' : ''}`}
                                                 title="Send"
                                             />
 

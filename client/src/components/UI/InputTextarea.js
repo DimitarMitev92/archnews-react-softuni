@@ -10,6 +10,7 @@ export const InputTextarea = ({
     htmlFor,
     validItem,
     value,
+    name,
     onChange,
     onBlur,
     onClick,
@@ -26,6 +27,7 @@ export const InputTextarea = ({
                     className={`form-control ${isClicked ? validItem ? "is-valid" : "is-invalid" : ''}`} id={htmlFor}
                     rows="3"
                     value={value}
+                    name={name}
                     onChange={onChange}
                     onBlur={onBlur}
                     onClick={onClick}
