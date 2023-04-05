@@ -19,7 +19,17 @@ import { createComments, getAllCommentsForPost, deleteComment } from '../../../.
 import { dateParser } from '../../../../utils/dateParser.js';
 import { FullScreenImage } from '../../../UI/FullScreenImage.js';
 import { ButtonSubmit } from '../../../UI/ButtonSubmit.js';
-
+//THIRD-PARTY LIBS
+import {
+    FacebookShareButton,
+    FacebookIcon,
+    LinkedinShareButton,
+    LinkedinIcon,
+    TwitterShareButton,
+    TwitterIcon,
+    ViberShareButton,
+    ViberIcon,
+} from "react-share";
 
 export const Details = () => {
 
@@ -188,7 +198,7 @@ export const Details = () => {
     };
 
     // -----> END: FULL SCREEN IMAGE <------
-
+    console.log(window.location.href);
     return (
         <>
             {showLoading ? <Loading /> :
@@ -207,6 +217,26 @@ export const Details = () => {
                                     <h5 className="text-dark">LIKES: {likes}</h5>
                                     <article style={{ textIndent: "50px" }} className="text-dark p-4 ">{post.post}
                                     </article>
+                                    {!isOwner &&
+                                        <div>
+                                            <FacebookShareButton className='p-1' url={window.location.href
+                                            } quote={`${post.title} - ${post.location} ${post.post}`} hashtag='#details'>
+                                                <FacebookIcon size={40} round={true} />
+                                            </FacebookShareButton>
+                                            <LinkedinShareButton className='p-1' url={window.location.href
+                                            } quote={`${post.title} - ${post.location} ${post.post}`} hashtag='#details'>
+                                                <LinkedinIcon size={40} round={true} />
+                                            </LinkedinShareButton>
+                                            <TwitterShareButton className='p-1' url={window.location.href
+                                            } quote={`${post.title} - ${post.location} ${post.post}`} hashtag='#details'>
+                                                <TwitterIcon size={40} round={true} />
+                                            </TwitterShareButton>
+                                            <ViberShareButton className='p-1' url={window.location.href
+                                            } quote={`${post.title} - ${post.location} ${post.post}`} hashtag='#details'>
+                                                <ViberIcon size={40} round={true} />
+                                            </ViberShareButton>
+                                        </div>
+                                    }
                                     <div className="d-flex justify-content-center">
                                         {isLogIn &&
                                             <>
