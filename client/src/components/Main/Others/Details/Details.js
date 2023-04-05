@@ -48,7 +48,6 @@ export const Details = () => {
     const [showLoading, setShowLoading] = useState(true);
 
     const [clickDeleteComment, setClickDeleteComment] = useState(false);
-    const [showDeleteCommentModal, setShowDeleteCommentModal] = useState(false);
 
     useEffect(() => {
         getPostByPostId(postId)
@@ -169,7 +168,6 @@ export const Details = () => {
     };
 
     const clickDeleteCommentHandler = (e) => {
-        setShowDeleteCommentModal(previousState => previousState = true);
         deleteComment(e.target.parentElement.id, auth.accessToken)
             .then(result => {
                 setClickDeleteComment(previousState => previousState = !previousState);

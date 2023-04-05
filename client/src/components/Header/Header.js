@@ -105,7 +105,7 @@ export const Header = () => {
                             <button
                                 className="btn btn-secondary"
                                 style={{ margin: '0', padding: '0' }}
-                                onClick={clickModalWeatherHandler}>{currentWeather.name} {currentWeather.main.temp}°C
+                                onClick={clickModalWeatherHandler}>{currentWeather.main.temp}°C
                                 <Image
                                     src={`https://openweathermap.org/img/wn/${currentWeather.weather[0].icon}@2x.png`}
                                     alt="weather"
