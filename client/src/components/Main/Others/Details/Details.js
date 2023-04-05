@@ -14,7 +14,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 //SERVICES
 import { getPostByPostId, deletePost } from '../../../../services/posts.js';
 import { createLikes, deleteLike, getAllLikesForPost } from '../../../../services/likes.js';
-import { createComments, getAllCommentsForPost } from '../../../../services/comments.js';
+import { createComments, getAllCommentsForPost, deleteComment } from '../../../../services/comments.js';
 //UTILS
 import { dateParser } from '../../../../utils/dateParser.js';
 import { FullScreenImage } from '../../../UI/FullScreenImage.js';
@@ -47,6 +47,19 @@ export const Details = () => {
 
     const [showLoading, setShowLoading] = useState(true);
 
+    const [clickDeleteComment, setClickDeleteComment] = useState(false);
+    const [showDeleteCommentModal, setShowDeleteCommentModal] = useState(false);
+
+    useEffect(() => {
+        getPostByPostId(postId)
+            .then(post => {
+                setPost(previousState => previousState = post);
+                if (post._ownerId === auth._id) {
+                    setIsOwner(previousState => previousState = true);
+                }
+                setShowLoading(previousState => previousState = false);
+            }).catch(error => alert(error.message));
+    }, [postId, auth._id]);
 
     // -----> START: LIKES <------
 
@@ -89,18 +102,6 @@ export const Details = () => {
 
     // -----> END: LIKES <------
 
-
-    useEffect(() => {
-        getPostByPostId(postId)
-            .then(post => {
-                setPost(previousState => previousState = post);
-                if (post._ownerId === auth._id) {
-                    setIsOwner(previousState => previousState = true);
-                }
-                setShowLoading(previousState => previousState = false);
-            }).catch(error => alert(error.message));
-    }, [postId, auth._id]);
-
     // -----> START: LogIn <------
 
     useEffect(() => {
@@ -134,20 +135,21 @@ export const Details = () => {
 
     // -----> END: DELETE <------
 
-
-
-
     // -----> START: COMMENTS <------
+
     const changeCommentHandler = (e) => {
         setCommentText(previousState => previousState = e.target.value);
+
+
     };
 
     useEffect(() => {
         getAllCommentsForPost(postId)
             .then(result => {
+                result = result.map((comment) => comment = { ...comment, isOwnerComment: auth._id === comment._ownerId ? true : false });
                 setCommentPost(previousState => previousState = result);
             }).catch((error) => alert(error.message));
-    }, [auth, postId, isComment]);
+    }, [auth, postId, isComment, clickDeleteComment]);
 
     const onSubmitComment = async (e) => {
         e.preventDefault();
@@ -164,6 +166,15 @@ export const Details = () => {
         await createComments(commentData, accessToken);
         setIsComment(previousState => previousState = !previousState);
         setCommentText(previousState => previousState = '');
+    };
+
+    const clickDeleteCommentHandler = (e) => {
+        setShowDeleteCommentModal(previousState => previousState = true);
+        deleteComment(e.target.parentElement.id, auth.accessToken)
+            .then(result => {
+                setClickDeleteComment(previousState => previousState = !previousState);
+            })
+            .catch(error => console.log(error.message));
     };
 
     // -----> END: COMMENTS <------
@@ -250,8 +261,13 @@ export const Details = () => {
                                 {commentsPost.length !== 0 ? commentsPost.map((comment) =>
                                     <CommentLine
                                         key={comment._id}
+                                        id={comment._id}
                                         author={comment.author}
                                         comment={comment.comment}
+                                        onClick={clickDeleteCommentHandler}
+                                        title="Delete"
+                                        className="btn btn-danger m-2"
+                                        isOwnerComment={comment.isOwnerComment}
                                     />) :
                                     <h5 className='d-flex justify-content-center align-items-center border-bottom border-light border-2 w-100 p-2'>No one has commented yet.</h5>}
                                 {isLogIn && !isOwner ? <>
