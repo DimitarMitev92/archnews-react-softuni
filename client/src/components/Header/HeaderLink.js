@@ -3,7 +3,7 @@
 //REACT HOOKS
 //REACT CONTEXT
 //REACT ROUTER
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 //SERVICES
 
 
@@ -14,7 +14,12 @@ export const HeaderLink = ({
 }) => {
     return (
         <li className="nav-item p-1">
-            <Link className="btn btn-secondary" to={to}>{title}</Link>
+            <NavLink className="btn btn-secondary" style={({ isActive, isPending }) => {
+                return {
+                    backgroundColor: isActive ? "#545b62" : '',
+                    transform: `scale(${isActive ? "1.08" : "1"})`
+                };
+            }} to={to}>{title}</NavLink>
         </li>
     );
 };
