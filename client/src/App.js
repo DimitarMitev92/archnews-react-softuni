@@ -24,6 +24,7 @@ import { AuthContext } from './contexts/authContext.js';
 //REACT ROUTER
 import { Routes, Route } from 'react-router-dom';
 import { RouteGuard } from './components/RouteGuard/RouteGuard.js';
+import { ChatBot } from './components/Main/Others/ChatBot/ChatBot.js';
 //SERVICES
 
 function App() {
@@ -51,6 +52,7 @@ function App() {
           <Route path="/create" element={<Create />} />
           <Route path="/edit/:postId" element={<Edit />} />
           <Route path="/my-profile" element={<MyProfile />} />
+          <Route path="/chat-bot" element={<ChatBot />} />
         </Route>
         <Route path="/*" element={<NotFound />} />
       </Routes>

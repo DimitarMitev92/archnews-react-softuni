@@ -75,6 +75,10 @@ export const Header = () => {
                                         title={"My Profile"}
                                     />
                                     <HeaderLink
+                                        to={"/chat-bot"}
+                                        title={"Chat Bot"}
+                                    />
+                                    <HeaderLink
                                         to={"/logout"}
                                         title={"Logout"}
                                     />
