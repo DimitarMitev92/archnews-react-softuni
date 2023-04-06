@@ -13,8 +13,6 @@ import { Link } from 'react-router-dom';
 import { ModalWeather } from '../UI/ModalWeather.js';
 //SERVICES
 
-const API_KEY = '77a9d5510293493818c19ab7105d0811';
-
 export const Header = () => {
 
     const { auth } = useContext(AuthContext);
@@ -24,7 +22,7 @@ export const Header = () => {
 
     useEffect(() => {
         navigator.geolocation.getCurrentPosition(position => {
-            fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${position.coords.latitude}&lon=${position.coords.longitude}&units=metric&appid=${API_KEY}`)
+            fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${position.coords.latitude}&lon=${position.coords.longitude}&units=metric&appid=${process.env.REACT_APP_WEATHER_KEY}`)
                 .then(response => response.json())
                 .then(result => {
                     setCurrentWeather(previousState => previousState = result);

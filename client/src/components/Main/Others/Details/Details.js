@@ -198,7 +198,6 @@ export const Details = () => {
     };
 
     // -----> END: FULL SCREEN IMAGE <------
-    console.log(window.location.href);
     return (
         <>
             {showLoading ? <Loading /> :
