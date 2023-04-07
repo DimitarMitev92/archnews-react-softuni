@@ -4,7 +4,7 @@
 
 ## Introduction
 
-This is a React project for the course of _SoftUni - ReactJS - February 2023_. It is an **Architecture blog** ,where guest users can read various interesting articles about Architecture around the world. Registered users can **create, edit, delete** and **like posts**.
+This is a React project for the course of _SoftUni - ReactJS - February 2023_. It is an **Architecture blog** ,where guest users can read various interesting articles about Architecture around the world. Registered users can **create, edit, delete, like and comment posts**.
 
 ---
 
@@ -13,6 +13,10 @@ This is a React project for the course of _SoftUni - ReactJS - February 2023_. I
 -[ReactJS](https://react.dev/)
 
 -[Bootstrap](https://getbootstrap.com/)
+
+-[React-Router](https://reactrouter.com/en/main)
+
+-[React-Share](https://www.npmjs.com/package/react-share)
 
 -[SoftUni Practice Server](https://github.com/softuni-practice-server/softuni-practice-server)
 
@@ -47,7 +51,7 @@ This is a React project for the course of _SoftUni - ReactJS - February 2023_. I
     - The most recent three posts section
     - About Us section
 
-2. Posts page
+2. Posts page (Search by name , sorting by Oldest / Newest / Most Liked
 
     - All posts
 
@@ -59,9 +63,9 @@ This is a React project for the course of _SoftUni - ReactJS - February 2023_. I
 
     - Edit post only if you are an owner of current post
 
-5. Details (Like, Edit, Delete) page
+5. Details (Like, Comment, Share, Edit, Delete) page
 
-    -Any registered user can like posts as long as they are not the owner
+    -Any registered user can like, comment, share posts as long as they are not the owner
 
 6. My profile page
 
