@@ -128,17 +128,17 @@ This is a React project for the course of _SoftUni - ReactJS - February 2023_. I
 
 ![create-valid](https://github.com/DimitarMitev92/archnews-react-softuni/blob/main/screenshots/create-valid.png?raw=true)
 
-## Delete post.
+## Details page - owner.
 
-![delete-post](https://github.com/DimitarMitev92/archnews-react-softuni/blob/main/screenshots/delete-post.png?raw=true)
+![my-details-owner](https://github.com/DimitarMitev92/archnews-react-softuni/blob/main/screenshots/my-details-owner.png?raw=true)
 
 ## Edit page.
 
 ![edit](https://github.com/DimitarMitev92/archnews-react-softuni/blob/main/screenshots/edit.png?raw=true)
 
-## Details page - owner.
+## Delete post.
 
-![my-details-owner](https://github.com/DimitarMitev92/archnews-react-softuni/blob/main/screenshots/my-details-owner.png?raw=true)
+![delete-post](https://github.com/DimitarMitev92/archnews-react-softuni/blob/main/screenshots/delete-post.png?raw=true)
 
 ## Details page - show image.
 
