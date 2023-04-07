@@ -4,7 +4,7 @@
 
 ## Introduction
 
-This is a React project for the course of _SoftUni - ReactJS - February 2023_. It is an **Architecture blog** ,where guest users can read various interesting articles about Architecture around the world. Registered users can **create, edit, delete, like and comment posts**.
+This is a React project for the course of _SoftUni - ReactJS - February 2023_. It is an **Architecture blog** , where guest users can read various interesting articles about Architecture around the world. Registered users can **create, edit, delete, like and comment posts**.
 
 ---
 
