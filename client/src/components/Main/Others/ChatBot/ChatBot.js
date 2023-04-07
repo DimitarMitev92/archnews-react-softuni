@@ -49,8 +49,8 @@ export const ChatBot = (props) => {
                             </div>
                             <div className="card-body" data-mdb-perfect-scrollbar="true" style={{ position: "relative", height: "400px" }}>
 
-                                <ChatBotUserQuestion name="Dimitar" date="04. 05. 2023" message="Please tell me what is architecture" />
-                                <ChatBotAnswer date="04.05.2023" message="I don't know. You have more questions?" />
+                                <ChatBotUserQuestion name="Dimitar" date="04. 05. 2023" message="Please tell me what is architecture?" />
+                                <ChatBotAnswer date="04.05.2023" message="Architecture is the art and technique of designing and building." />
 
 
                             </div>
