@@ -193,7 +193,7 @@ This is a React project for the course of _SoftUni - ReactJS - February 2023_. I
 
 ![chatbot](https://github.com/DimitarMitev92/archnews-react-softuni/blob/main/screenshots/chatbot.png?raw=true)
 
-## Weatcher.
+## Weather.
 
 ![weather-modal](https://github.com/DimitarMitev92/archnews-react-softuni/blob/main/screenshots/weather-modal.png?raw=true)
 
