@@ -189,7 +189,7 @@ This is a React project for the course of _SoftUni - ReactJS - February 2023_. I
 
 ![contact-us-valid](https://github.com/DimitarMitev92/archnews-react-softuni/blob/main/screenshots/contact-us-valid.png?raw=true)
 
-## ChatBot static
+## ChatBot (static).
 
 ![chatbot](https://github.com/DimitarMitev92/archnews-react-softuni/blob/main/screenshots/chatbot.png?raw=true)
 
