@@ -84,94 +84,112 @@ This is a React project for the course of _SoftUni - ReactJS - February 2023_. I
 
 ## Screenshots
 
-## Home page logged out user.
+## Home page (logIn).
 
-![home-page-logout](https://raw.githubusercontent.com/DimitarMitev92/archnews-react-softuni/main/screenshots/home-logout.png)
+![home-logIn](https://github.com/DimitarMitev92/archnews-react-softuni/blob/main/screenshots/home-logIn.png?raw=true)
 
-## Home page logged in user.
+## Home page (logOut).
 
-![home-page--logIn](https://raw.githubusercontent.com/DimitarMitev92/archnews-react-softuni/main/screenshots/home-logIn.png)
+![home-logout](https://github.com/DimitarMitev92/archnews-react-softuni/blob/main/screenshots/home-logout.png?raw=true)
 
-## Home page without posts
+## Home page (without posts).
 
-![home-page-without-post](https://raw.githubusercontent.com/DimitarMitev92/archnews-react-softuni/main/screenshots/home-no-posts.png)
+![home-no-post](https://github.com/DimitarMitev92/archnews-react-softuni/blob/main/screenshots/home-no-post.png?raw=true)
 
-## Home page with posts
+## Home page (with posts).
 
-![home-page-with-post](https://raw.githubusercontent.com/DimitarMitev92/archnews-react-softuni/main/screenshots/home-with-posts.png)
+![home-post](https://github.com/DimitarMitev92/archnews-react-softuni/blob/main/screenshots/home-post.png?raw=true)
 
-### About us section in home page.
+## Home page about us section.
 
-![about-us](https://raw.githubusercontent.com/DimitarMitev92/archnews-react-softuni/main/screenshots/about-us.png)
+![about-us](https://github.com/DimitarMitev92/archnews-react-softuni/blob/main/screenshots/about-us.png?raw=true)
 
-## Login page without text.
+## Login page (invalid data).
 
-![login-without-text](https://raw.githubusercontent.com/DimitarMitev92/archnews-react-softuni/main/screenshots/login-without-text.png)
+![login-invalid](https://github.com/DimitarMitev92/archnews-react-softuni/blob/main/screenshots/login-invalid.png?raw=true)
 
-## Login page with text.
+## Login page (valid data).
 
-![login-with-text](https://raw.githubusercontent.com/DimitarMitev92/archnews-react-softuni/main/screenshots/login-with-text.png)
+![login-valid](https://github.com/DimitarMitev92/archnews-react-softuni/blob/main/screenshots/login-valid.png?raw=true)
 
-## Register page without text.
+## Register page (invalid data).
 
-![register-without-text](https://raw.githubusercontent.com/DimitarMitev92/archnews-react-softuni/main/screenshots/register-without-text.png)
+![register-invalid](https://github.com/DimitarMitev92/archnews-react-softuni/blob/main/screenshots/register-invalid.png?raw=true)
 
-## Register page with text.
+## Register page (valid data).
 
-![register-with-text](https://raw.githubusercontent.com/DimitarMitev92/archnews-react-softuni/main/screenshots/register-with-text.png)
+![register-valid](https://github.com/DimitarMitev92/archnews-react-softuni/blob/main/screenshots/register-valid.png?raw=true)
 
-## My profile page without posts.
+## Create page (invalid data).
 
-![my-profile-without-posts](https://raw.githubusercontent.com/DimitarMitev92/archnews-react-softuni/main/screenshots/my-profile-without-posts.png)
+![create-invalid](https://github.com/DimitarMitev92/archnews-react-softuni/blob/main/screenshots/create-invalid.png?raw=true)
 
-## My profile page with posts.
+## Create page (valid data).
 
-![my-profile-with-posts](https://raw.githubusercontent.com/DimitarMitev92/archnews-react-softuni/main/screenshots/my-profile-with-posts.png)
+![create-valid](https://github.com/DimitarMitev92/archnews-react-softuni/blob/main/screenshots/create-valid.png?raw=true)
 
-## Posts page without posts.
+## Delete post.
 
-![posts-page-without-posts](https://raw.githubusercontent.com/DimitarMitev92/archnews-react-softuni/main/screenshots/post-no-posts.png)
+![delete-post](https://github.com/DimitarMitev92/archnews-react-softuni/blob/main/screenshots/delete-post.png?raw=true)
 
-## Posts page with posts.
+## Edit page.
 
-![posts-page-with-posts](https://raw.githubusercontent.com/DimitarMitev92/archnews-react-softuni/main/screenshots/post-with-posts.png)
+![edit](https://github.com/DimitarMitev92/archnews-react-softuni/blob/main/screenshots/edit.png?raw=true)
 
-## Search not found posts.
+## Details page - owner.
 
-![search-not-found](https://raw.githubusercontent.com/DimitarMitev92/archnews-react-softuni/main/screenshots/search-without-find.png)
+![my-details-owner](https://github.com/DimitarMitev92/archnews-react-softuni/blob/main/screenshots/my-details-owner.png?raw=true)
 
-## Search found posts.
+## Details page - show image.
 
-![search-found](https://raw.githubusercontent.com/DimitarMitev92/archnews-react-softuni/main/screenshots/search-with-find.png)
+![my-details-photo](https://github.com/DimitarMitev92/archnews-react-softuni/blob/main/screenshots/my-details-photo.png?raw=true)
 
-## Details without like.
+## Details page - share.
 
-![details-with-like](https://raw.githubusercontent.com/DimitarMitev92/archnews-react-softuni/main/screenshots/details-without-like.png)
+![my-details-share](https://github.com/DimitarMitev92/archnews-react-softuni/blob/main/screenshots/my-details-share.png?raw=true)
 
-## Details with like.
+## Details page - register user 
 
-![details-without-like](https://raw.githubusercontent.com/DimitarMitev92/archnews-react-softuni/main/screenshots/details-with-like.png)
+![my-details-user](https://github.com/DimitarMitev92/archnews-react-softuni/blob/main/screenshots/my-details-user.png?raw=true)
+![my-details-user2](https://github.com/DimitarMitev92/archnews-react-softuni/blob/main/screenshots/my-details-user2.png?raw=true)
 
-### Details owner.
+## My Profile page (without posts).
 
-![details](https://raw.githubusercontent.com/DimitarMitev92/archnews-react-softuni/main/screenshots/details-post.png)
+![my-profile-no-post](https://github.com/DimitarMitev92/archnews-react-softuni/blob/main/screenshots/my-profile-no-post.png?raw=true)
 
-### Create without text.
+## My Profile page (with posts).
 
-![create-without-text](https://raw.githubusercontent.com/DimitarMitev92/archnews-react-softuni/main/screenshots/create-without-text.png)
+![my-profile-posts](https://github.com/DimitarMitev92/archnews-react-softuni/blob/main/screenshots/my-profile-posts.png?raw=true)
 
-### Create with text.
+## Posts page (without posts).
 
-![create-with-text](https://raw.githubusercontent.com/DimitarMitev92/archnews-react-softuni/main/screenshots/create-with-text.png)
+![posts-no-post](https://github.com/DimitarMitev92/archnews-react-softuni/blob/main/screenshots/posts-no-post.png?raw=true)
 
-## Edit Page.
+## Posts page (with posts).
 
-![edit](https://raw.githubusercontent.com/DimitarMitev92/archnews-react-softuni/main/screenshots/edit-post.png)
+![posts-post](https://github.com/DimitarMitev92/archnews-react-softuni/blob/main/screenshots/posts-post.png?raw=true)
 
-### Contact us without text.
+## Posts page (search by name).
 
-![contact-us-without-text](https://raw.githubusercontent.com/DimitarMitev92/archnews-react-softuni/main/screenshots/contact-us-without-text.png)
+![posts-search](https://github.com/DimitarMitev92/archnews-react-softuni/blob/main/screenshots/posts-search.png?raw=true)
 
-### Contact us with text.
+## Post page (sorting).
 
-![contact-us-with-text](https://raw.githubusercontent.com/DimitarMitev92/archnews-react-softuni/main/screenshots/contact-us-with-text.png)
+![posts-sorting](https://github.com/DimitarMitev92/archnews-react-softuni/blob/main/screenshots/posts-sorting.png?raw=true)
+
+## Contact us page (invalid data).
+
+![contact-us-invalid](https://github.com/DimitarMitev92/archnews-react-softuni/blob/main/screenshots/contact-us-invalid.png?raw=true)
+
+## Contact us page (valid data).
+
+![contact-us-valid](https://github.com/DimitarMitev92/archnews-react-softuni/blob/main/screenshots/contact-us-valid.png?raw=true)
+
+## ChatBot static
+
+![chatbot](https://github.com/DimitarMitev92/archnews-react-softuni/blob/main/screenshots/chatbot.png?raw=true)
+
+## Weatcher.
+
+![weather-modal](https://github.com/DimitarMitev92/archnews-react-softuni/blob/main/screenshots/weather-modal.png?raw=true)
+
