@@ -52,6 +52,7 @@ export const Details = () => {
     const [commentText, setCommentText] = useState('');
     const [isComment, setIsComment] = useState(false);
     const [commentsPost, setCommentPost] = useState([]);
+    const [isDisabledComment, setIsDisabledComment] = useState(true);
 
     const [isClickedImage, setIsClickImage] = useState(false);
 
@@ -148,8 +149,6 @@ export const Details = () => {
 
     const changeCommentHandler = (e) => {
         setCommentText(previousState => previousState = e.target.value);
-
-
     };
 
     useEffect(() => {
@@ -184,6 +183,18 @@ export const Details = () => {
             })
             .catch(error => console.log(error.message));
     };
+
+    useEffect(() => {
+        if (commentText === '') {
+            setIsDisabledComment(previousState => previousState = true);
+        } else {
+            setIsDisabledComment(previousState => previousState = false);
+        }
+        console.log('trigger');
+        console.log(commentText);
+        console.log(commentText.length);
+        console.log(isDisabledComment);
+    }, [commentText]);
 
     // -----> END: COMMENTS <------
 
@@ -302,6 +313,7 @@ export const Details = () => {
                                     <ButtonSubmit
                                         className="btn btn-light btn"
                                         title="Comment"
+                                        disabled={isDisabledComment}
                                     />
                                 </> : ''}
                             </div>

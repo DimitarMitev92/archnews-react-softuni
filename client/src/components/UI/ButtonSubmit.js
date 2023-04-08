@@ -1,8 +1,9 @@
 export const ButtonSubmit = ({
     className,
-    title
+    title,
+    disabled
 }) => {
     return (
-        <button type="submit" className={className}>{title}</button>
+        <button type="submit" className={className} disabled={disabled}>{title}</button>
     );
 };
