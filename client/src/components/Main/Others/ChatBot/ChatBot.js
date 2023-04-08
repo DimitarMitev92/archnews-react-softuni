@@ -24,9 +24,6 @@ export const ChatBot = (props) => {
 
 
         const date = new Date();
-        console.log(auth.name);
-        console.log(date);
-        console.log(messageUser);
     };
 
     return (

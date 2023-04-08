@@ -190,10 +190,6 @@ export const Details = () => {
         } else {
             setIsDisabledComment(previousState => previousState = false);
         }
-        console.log('trigger');
-        console.log(commentText);
-        console.log(commentText.length);
-        console.log(isDisabledComment);
     }, [commentText]);
 
     // -----> END: COMMENTS <------
